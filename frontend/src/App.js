@@ -1,16 +1,17 @@
-import { Container } from "react-bootstrap";
-import { Route, Routes } from "react-router-dom";
+import React, { Component } from 'react';
+import './App.scss';
+import Login from './pages/Login/Login.jsx';
 
-function App() {
-  return (
-    <>
-      <Container>
-        <Routes>
-          <Route path="/">{/* <Route path="" element={} /> */}</Route>
-        </Routes>
-      </Container>
-    </>
-  );
+
+class App extends Component{
+
+  render(){
+    return(
+      <div className="App">
+       <Login></Login>
+    </div>
+    );
+  }
 }
 
 export default App;
