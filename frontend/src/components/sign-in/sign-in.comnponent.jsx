@@ -1,56 +1,63 @@
 import React from 'react';
+
 import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
+import { Link } from 'react-router-dom';
+
 import './sign-in.styles.scss';
+
 class SignIn extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: ''
-        }
+  constructor(props) {
+    super(props);
 
-    }
-    handleSubmit = event => { 
-        event.preventDefault();
-        this.setState({ email: '',password: '' }); 
-    }
-    handleChange = event => { 
-        const { value, name } = event.target;
-        
-        this.setState({ [name]: value})
-    }
-    render() {
-        return (
-            <div className="sign-in">
-                <h2>I already have an Account</h2>
-                <span>Sign in with your email and Password</span>
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
 
-                <form onSubmit={this.handleSubmit}>
-                    <FormInput
-                        name="email"
-                        type="email"
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <label>Password</label>
-                    <FormInput
-                   
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        required
+  handleSubmit = event => {
+    event.preventDefault();
 
-                    />
-                    <input
-                        type="submit"
-                        value='Sign-In'
+    this.setState({ email: '', password: '' });
+  };
 
-                    />
-                </form>
-            </div>
-        )
-    }
+  handleChange = event => {
+    const { value, name } = event.target;
+
+    this.setState({ [name]: value });
+  };
+
+  render() {
+    return (
+        <div className='sign-in'>
+            <h1 className="Tittle">Hotel Manager</h1>
+        <span>Sign in with your email and password</span>
+
+        <form onSubmit={this.handleSubmit}>
+          <FormInput
+            name='email'
+            type='email'
+            handleChange={this.handleChange}
+            value={this.state.email}
+            placeholder= 'Email'
+            required
+          />
+          <FormInput
+            name='password'
+            type='password'
+            value={this.state.password}
+            handleChange={this.handleChange}
+            placeholder='Password'
+            required
+          />
+                <CustomButton type='submit'> Sign in </CustomButton>
+                <br />
+                <Link to="/signup"><p>I don't have an account</p></Link>
+        </form>
+      </div>
+    );
+  }
 }
-export default SignIn;
 
+export default SignIn;

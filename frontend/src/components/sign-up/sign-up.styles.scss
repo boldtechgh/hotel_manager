@@ -1,5 +1,4 @@
 .sign-in {
-    width: 30vw;
     display: flex;
     padding: 20px;
     flex-direction: column;
@@ -8,10 +7,11 @@
   padding: 50px;
   width: 500px;
   justify-content: center;
-  height: 500px;
+  height: auto;
   background-color: aliceblue;
   border: black solid;
   border-radius: 50px;
+  margin-bottom: 10px;
 }
 .Tittle{
     color: rgb(215, 156, 39);
@@ -19,4 +19,3 @@
     font-size: 55px;
     font-weight: bold;
 }
-  
