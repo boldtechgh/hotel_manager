@@ -4,7 +4,7 @@ import { useTokens } from "../context/TokensContext";
 
 const useRequestResource = ({ endpoint, tokens = null, label = "" }) => {
   const [resourceList, setResourceList] = useState({ results: [] });
-  const [resourceCounts, serResourceCounts] = useState(null);
+  const [resourceCounts, setResourceCounts] = useState(null);
   const { setTokens } = useTokens();
 
   const getTokens = useCallback(
