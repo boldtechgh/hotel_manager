@@ -1,19 +1,20 @@
-import { Container } from "react-bootstrap";
+import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "./pages/Login/Login";
+import "./App.scss";
+import Dashboard from "./components/dashboard/dashboard.component";
+import Login from "./pages/Login/Login.jsx";
 
-function App() {
-  return (
-    <>
-      <Container>
-        <Routes>
-          <Route path="/">
-            <Route path="" element={<Login />} />
-          </Route>
-        </Routes>
-      </Container>
-    </>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Routes>
+        <Route path="/">
+          <Route path="" element={<Login />} />
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
+      </Routes>
+    );
+  }
 }
 
 export default App;
