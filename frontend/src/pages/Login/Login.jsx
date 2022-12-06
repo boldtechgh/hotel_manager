@@ -29,7 +29,7 @@ const Login = () => {
 
     return (
     <AccountContext.Provider value={contextValue}>
-        <div className='sign-in-and-sign-up'>
+    <div className='sign-in-and-sign-up'>
     <BrandLogo hideLogo />
       {active.action === 'signin' && <SignIn />}
       {active.action === 'signup' && <SignUp />}

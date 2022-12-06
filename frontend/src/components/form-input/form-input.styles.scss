@@ -35,6 +35,10 @@ $main-color: black;
     &:hover {
       border-bottom: 2px solid #779341;
     }
+
+        @media only screen and (max-width: 600px) {
+          font-size: 12px;
+        }
   }
 
   // input[type='password'] {

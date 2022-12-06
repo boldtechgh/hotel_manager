@@ -13,6 +13,10 @@
         text-decoration: none;
         color: #4285F4;
         text-align: right;
+
+        @media only screen and (max-width: 600px) {
+            font-size: 11px;
+        }
     }
 
     & h2 {
@@ -22,6 +26,10 @@
             line-height: 12px;
             color: #000000;
             margin-top: 20px;
+
+            @media only screen and (max-width: 600px) {
+                    font-size: 38px;
+                }
     }
 
     & .title-container {
@@ -48,6 +56,11 @@
                 color: #779341;
                 margin: 0;
             }
+
+                        @media only screen and (max-width: 600px) {
+                            font-size: 10px;
+                            margin-top: 20px;
+                        }
         }
     }
 
@@ -72,11 +85,20 @@
         & img {
             width: 26px;
             height: 26px;
+
+            @media only screen and (max-width: 600px) {
+                    width: 18px;
+                    height: 19px;
+                }
         }
 
         &:hover {
             cursor: pointer;
         }
+
+                @media only screen and (max-width: 600px) {
+                    font-size: 12px;
+                }
     }
 
     & .merge-input {
@@ -84,6 +106,15 @@
         justify-content: space-between;
         gap: 10px;
     }
+
+        @media only screen and (max-width: 600px) {
+            float: none;
+            margin: 0;
+            width: 326px;
+            height: 741px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
 }
 .Tittle{
     text-align: left;
@@ -96,6 +127,10 @@
     & span {
         color: #779341;
     }
+
+        @media only screen and (max-width: 600px) {
+            font-size: 15px;
+        }
 }
 
   
