@@ -4,7 +4,10 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Link } from 'react-router-dom';
 
-import './sign-up.styles.scss';
+import GoogleIcon from '../../images/google.png';
+import { Marginer } from '../marginer';
+
+// import './sign-up.styles.scss';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -40,11 +43,22 @@ class SignUp extends React.Component {
   render() {
     return (
       <div className='sign-in'>
-        <h1 className="Tittle">Hotel Manager</h1>
-        <h2>Complete the form below</h2>
+       <div className='title-container'>
+            <h1 className="Tittle">Welcome to <span>Hotelica</span></h1>
+            <div className='account'>
+              <p>Have an Account?</p>
+              <a href="/signin">Sign in</a>
+            </div>
+          </div>
+            
+            <h2>Sign up</h2>
+
+            {/* <div>
+              <button className='google-btn'><img src={GoogleIcon} alt="Google icon" />Sign in with Google</button>
+            </div> */}
 
             <form onSubmit={this.handleSubmit}>
-            <div className='data1'>
+            <div className='merge-input'>
           <FormInput
             name='firstName'
             type='text'
@@ -68,7 +82,7 @@ class SignUp extends React.Component {
             type='email'
             handleChange={this.handleChange}
             value={this.state.email}
-            placeholder= 'Email'
+            placeholder= 'Email address'
             required
           />
           <FormInput
@@ -80,23 +94,8 @@ class SignUp extends React.Component {
             required
                     />
                     </div>
-          <FormInput
-            name='address'
-            type='text'
-            handleChange={this.handleChange}
-            value={this.state.address}
-            placeholder= 'Address'
-            required
-          />
-          <FormInput
-            name='phoneNumber'
-            type='number'
-            value={this.state.phoneNumber}
-            handleChange={this.handleChange}
-            placeholder= 'Phone Number'
-            required
-          />
-          <FormInput
+          <div className='merge-input'>
+            <FormInput
             name='password'
             type='password'
             value={this.state.password}
@@ -112,9 +111,10 @@ class SignUp extends React.Component {
             placeholder= 'Confirm Password'
             required
           />
+          </div>
+          <Marginer direction="vertical" margin={50} />
           <CustomButton type='submit'> Sign Up </CustomButton>
-          <br />
-          <Link to="/"><p>I don't have an account</p></Link>
+          
         </form>
       </div>
     );

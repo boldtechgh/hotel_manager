@@ -3,8 +3,10 @@ import React from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Link } from 'react-router-dom';
+import GoogleIcon from '../../images/google.png';
 
 import './sign-in.styles.scss';
+import { Marginer } from '../marginer';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -31,8 +33,19 @@ class SignIn extends React.Component {
   render() {
     return (
         <div className='sign-in'>
-            <h1 className="Tittle">Hotel Manager</h1>
-        <span>Sign in with your email and password</span>
+          <div className='title-container'>
+            <h1 className="Tittle">Welcome to <span>Hotelica</span></h1>
+            <div className='account'>
+              <p>No Account?</p>
+              <a href="/signup">Sign up</a>
+            </div>
+          </div>
+            
+            <h2>Sign in</h2>
+            <Marginer direction="vertical" margin={60} />
+            <div>
+              <button className='google-btn'><img src={GoogleIcon} alt="Google icon" />Sign in with Google</button>
+            </div>
 
         <form onSubmit={this.handleSubmit}>
           <FormInput
@@ -40,9 +53,10 @@ class SignIn extends React.Component {
             type='email'
             handleChange={this.handleChange}
             value={this.state.email}
-            placeholder= 'Email'
+            placeholder= 'Username or email address'
             required
           />
+          <Marginer direction='vertical' margin={20} />
           <FormInput
             name='password'
             type='password'
@@ -51,9 +65,12 @@ class SignIn extends React.Component {
             placeholder='Password'
             required
           />
-                <CustomButton type='submit'> Sign in </CustomButton>
-                <br />
-                <Link to="/signup"><p>I don't have an account</p></Link>
+
+          <Link to="/signup"><p>Forgot password?</p></Link>
+          <Marginer direction='vertical' margin={40} />
+          <CustomButton type='submit'> Sign in </CustomButton>
+               
+                
         </form>
       </div>
     );

@@ -1,22 +1,21 @@
 .custom-button {
-  min-width: 165px;
-  width: auto;
-  height: 50px;
-  letter-spacing: 0.5px;
-  line-height: 50px;
-  padding: 0 35px 0 35px;
-  font-size: 15px;
-  background-color: rgb(6, 138, 6);
-  color: white;
-  text-transform: uppercase;
-  font-family: 'Open Sans Condensed';
-  font-weight: bolder;
+  width: 236px;
+  height: 54px;
+  background: #779341;
+  color: #fff;
+  box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+  border-radius: 10px;
+  outline: none;
   border: none;
-  cursor: pointer;
+  float: right;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
 
   &:hover {
-    background-color: white;
-    color: rgb(6, 138, 6);
+    cursor: pointer;
+    font-size: 17px;
     border: 1px solid black;
   }
 }
