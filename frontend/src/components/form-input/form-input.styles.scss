@@ -9,32 +9,41 @@ $main-color: black;
 
 .group {
   position: relative;
-  margin: 45px 0;
+  margin-top: 50px;
 
   .form-input {
     background: none;
     color: $sub-color;
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px 10px 10px 5px;
     display: block;
     width: 100%;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $sub-color;
-    margin: 25px 0;
+    // margin: 25px 0;
 
     &:focus {
       outline: none;
+      border-bottom: 2px solid #779341;
     }
 
     &:focus ~ .form-input-label {
       @include shrinkLabel();
     }
+
+    &:hover {
+      border-bottom: 2px solid #779341;
+    }
+
+        @media only screen and (max-width: 600px) {
+          font-size: 12px;
+        }
   }
 
-  input[type='password'] {
-    letter-spacing: 0.3em;
-  }
+  // input[type='password'] {
+  //   letter-spacing: 0.3em;
+  // }
 
   .form-input-label {
     color: $sub-color;
