@@ -11,7 +11,6 @@ class Dashboard extends React.Component {
                 <NavBar />
                 <HotelSideBar />
                 <HotelRooms />
-                
             </div>
         );
     }
