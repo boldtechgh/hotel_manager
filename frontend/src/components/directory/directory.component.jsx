@@ -1,5 +1,5 @@
 import React from 'react';
-import HotelCard from '../../hotel-cards/hotel-card.component';
+import HotelCard from '../hotel-cards/hotel-card.component';
 import "./directory.styles.scss";
 
 class Directory extends React.Component {

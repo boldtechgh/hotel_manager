@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import "./App.scss";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
 import Login from "./pages/Login/Login.jsx";
 import { Route, Routes } from "react-router-dom";
-import SideNav from "./components/sideNav/side-nav.component";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import { Hotel_Setup } from "./pages/Hotel_Setup/hotel_setup";
 
 class App extends Component {
   render() {
     return (
       <Routes>
-        <Route path="/dashboard" element = {<Dashboard/>} />
         <Route exact path="/:action" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/setup/:action" element={<Hotel_Setup />} />
       </Routes>
     );
   }

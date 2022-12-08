@@ -1,0 +1,25 @@
+.hcmain {
+    width: 739px;
+    height: 741px;
+    margin-top: 70px;
+    padding: 50px 100px;
+
+    & h2 {
+        font-style: normal;
+            font-weight: 500;
+            font-size: 35px;
+            color: rgb(30, 30, 30);
+            margin-top: 20px;
+        
+            @media only screen and (max-width: 600px) {
+                font-size: 38px;
+            }
+    }
+
+    & p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
