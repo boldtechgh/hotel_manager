@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Link } from 'react-router-dom';
@@ -6,29 +6,24 @@ import GoogleIcon from '../../images/google.png';
 import './sign-in.styles.scss';
 import { Marginer } from '../marginer';
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+export function SignIn (){
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    this.state = {
-      email: '',
-      password: ''
-    };
-  }
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     this.setState({ email: '', password: '' });
   };
 
-  handleChange = event => {
+  const handleChange = event => {
     const { value, name } = event.target;
 
+    {name === 'email' && setEmail(value)}
+    {name === 'password' && setPassword(value)}
     this.setState({ [name]: value });
   };
 
-  render() {
     return (
         <div className='sign-in'>
           <div className='title-container'>
@@ -45,12 +40,12 @@ class SignIn extends React.Component {
               <button className='google-btn'><img src={GoogleIcon} alt="Google icon" />Sign in with Google</button>
             </div>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <FormInput
             name='email'
             type='email'
-            handleChange={this.handleChange}
-            value={this.state.email}
+            handleChange={handleChange}
+            value={email}
             placeholder= 'Username or email address'
             required
           />
@@ -58,8 +53,8 @@ class SignIn extends React.Component {
           <FormInput
             name='password'
             type='password'
-            value={this.state.password}
-            handleChange={this.handleChange}
+            value={password}
+            handleChange={handleChange}
             placeholder='Password'
             required
           />
@@ -72,7 +67,4 @@ class SignIn extends React.Component {
         </form>
       </div>
     );
-  }
 }
-
-export default SignIn;

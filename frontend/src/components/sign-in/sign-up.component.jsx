@@ -1,43 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Marginer } from '../marginer';
 
-// import './sign-up.styles.scss';
+export function SignUp(){
 
-class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordVerify, setPasswordVerify] = useState('');
 
-      this.state = {
-          firstName: '',
-          lastName: '',
-        username: '',
-          email: '',
-          address: '',
-          phoneNumber:'',
-        passwordVerify: '',
-        
-        password: '',
-
-      
-    };
-  }
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    this.setState({ email: '', password: '' });
   };
 
-  handleChange = event => {
+  const handleChange = event => {
     const { value, name } = event.target;
 
-    this.setState({ [name]: value });
+    {name === 'firstName' && setFirstName(value)}
+    {name === 'lastName' && setLastName(value)}
+    {name === 'userName' && setUserName(value)}
+    {name === 'email' && setEmail(value)}
+    {name === 'password' && setPassword(value)}
+    {name === 'passwordVerify' && setPasswordVerify(value)}
   };
 
-  render() {
     return (
       <div className='sign-in'>
        <div className='title-container'>
@@ -54,21 +45,21 @@ class SignUp extends React.Component {
               <button className='google-btn'><img src={GoogleIcon} alt="Google icon" />Sign in with Google</button>
             </div> */}
 
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={handleSubmit}>
             <div className='merge-input'>
           <FormInput
             name='firstName'
             type='text'
-            handleChange={this.handleChange}
-            value={this.state.firtName}
+            handleChange={handleChange}
+            value={firstName}
             placeholder= 'First Name'
             required
           />
           <FormInput
             name='lastName'
             type='text'
-            handleChange={this.handleChange}
-            value={this.state.lastName}
+            handleChange={handleChange}
+            value={lastName}
             placeholder= 'Last Name'
             required
                     />
@@ -77,16 +68,16 @@ class SignUp extends React.Component {
           <FormInput
             name='email'
             type='email'
-            handleChange={this.handleChange}
-            value={this.state.email}
+            handleChange={handleChange}
+            value={email}
             placeholder= 'Email address'
             required
           />
           <FormInput
             name='username'
             type='text'
-            handleChange={this.handleChange}
-            value={this.state.username}
+            handleChange={handleChange}
+            value={username}
             placeholder= 'Username'
             required
                     />
@@ -95,16 +86,16 @@ class SignUp extends React.Component {
             <FormInput
             name='password'
             type='password'
-            value={this.state.password}
-            handleChange={this.handleChange}
+            value={password}
+            handleChange={handleChange}
             placeholder= 'Password'
             required
           />
           <FormInput
             name='passwordVerify'
             type='passwordVerify'
-            value={this.state.passwordVerify}
-            handleChange={this.handleChange}
+            value={passwordVerify}
+            handleChange={handleChange}
             placeholder= 'Confirm Password'
             required
           />
@@ -115,7 +106,4 @@ class SignUp extends React.Component {
         </form>
       </div>
     );
-  }
 }
-
-export default SignUp;
