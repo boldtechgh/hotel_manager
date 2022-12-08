@@ -1,10 +1,8 @@
 import React from 'react';
-
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Link } from 'react-router-dom';
 import GoogleIcon from '../../images/google.png';
-
 import './sign-in.styles.scss';
 import { Marginer } from '../marginer';
 
