@@ -2,6 +2,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Logo from "./download.svg"
 import ListGroup from 'react-bootstrap/ListGroup';
+import HotelModal from './bookmodal';
 
 function HotelCard({description,name1, imageSrc}) {
     return (
@@ -20,7 +21,7 @@ function HotelCard({description,name1, imageSrc}) {
         <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
       </ListGroup>
       <Card.Body >
-      <Button variant="success">Book!</Button>
+      <Button variant="success" as={HotelModal}>Book!</Button>
       </Card.Body>
     </Card>
             </div>

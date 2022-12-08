@@ -42,7 +42,7 @@ function OffCanvasExample({ name, ...props }) {
   return (
     <>
       <Button variant="light" onClick={toggleShow} className="me-2">
-        
+      {name}
       <Navbar.Toggle aria-controls="navbarScroll" />
       </Button>
       <Offcanvas show={show} onHide={handleClose} {...props}>

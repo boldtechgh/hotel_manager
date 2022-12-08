@@ -1,19 +1,16 @@
 import React from 'react';
+import { Routes,Route } from 'react-router-dom'
 import NavBar from '../../components/navbar/nav-bar.component';
-import HotelSideBar from '../../components/sidebar/sidebar.component';
 import HotelRooms from '../hotel-rooms/hotel-rooms.page';
-class Dashboard extends React.Component { 
- 
-
-    render() { 
+import "./dashboard.styles.scss";
+const Dashboard = () => { 
         return (
-            <div>
+            <div className='dashboard'>
+                
                 <NavBar />
-                <HotelSideBar />
                 <HotelRooms />
             </div>
         );
-    }
 }
 
 export default Dashboard;
