@@ -1,4 +1,5 @@
 .hcmain {
+    // position: absolute;
     width: 739px;
     height: 741px;
     margin-top: 70px;
@@ -22,4 +23,9 @@
         font-size: 16px;
         line-height: 24px;
     }
+
+        @media only screen and (max-width: 600px) {
+            position: absolute;
+            width: 340px;
+        }
 }

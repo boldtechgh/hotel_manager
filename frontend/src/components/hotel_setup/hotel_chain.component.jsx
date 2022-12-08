@@ -26,9 +26,14 @@ export function HotelChain () {
         {name === 'name' && setName(value)}
         {name === 'phone' && setPhone(value)}
         {name === 'email' && setEmail(value)}
-        {name === 'website' && setWebsite(value)}    
+        {name === 'website' && setWebsite(value)}
+        {name === 'address' && setAddress(value)} 
+        {name === 'digitalAddress' && setDigitalAddress(value)} 
+        {name === 'city' && setCity(value)} 
+        {name === 'region' && setRegion(value)} 
+        {name === 'country' && setCountry(value)} 
+        {name === 'zipCode' && setZipCode(value)}     
     };
-    console.log(name, phone, email, website, active);
 
     const handleProceed = (event) => {
         event.preventDefault();
@@ -73,8 +78,8 @@ export function HotelChain () {
                 value={website}
                 onChange={handleChange}
                 required />
-                <Marginer direction="vertical" margin={50} />
-                <CustomButton type="Submit">Proceed <FontAwesomeIcon icon={faArrowRight} /></CustomButton>
+                <Marginer direction="vertical" margin={80} />
+                <CustomButton type="Submit">Next <FontAwesomeIcon icon={faArrowRight} /></CustomButton>
             </form>
             </>
             }
@@ -86,7 +91,7 @@ export function HotelChain () {
             <form onSubmit={handleSubmit}>
                 <FormInput name='address'
                 type='text'
-                placeholder= 'Address'
+                placeholder= 'Residential Address'
                 value={address}
                 onChange={handleChange}
                 required />
@@ -104,7 +109,7 @@ export function HotelChain () {
                 required />
                 <FormInput name='region'
                 type='text'
-                placeholder= "Region/State"
+                placeholder= "Region/State/Province"
                 value={region}
                 onChange={handleChange}
                 required />
@@ -120,8 +125,8 @@ export function HotelChain () {
                 value={zipCode}
                 onChange={handleChange}
                 required />
-                <Marginer direction="vertical" margin={50} />
-                <CustomButton type="Submit">Submit <FontAwesomeIcon icon={faFloppyDisk} /></CustomButton>
+                <Marginer direction="vertical" margin={80} />
+                <CustomButton type="Submit">Save <FontAwesomeIcon icon={faFloppyDisk} /></CustomButton>
             </form>
             </>
             }
