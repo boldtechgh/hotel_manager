@@ -32,8 +32,6 @@ export const Dashboard = () => {
     }
 
    
-
-const Dashboard = () => { 
         return (
             <div className='dashboard'>
                 <NavBar />
@@ -42,10 +40,7 @@ const Dashboard = () => {
                     {active.action === 'staff' && <StaffPage /> }
                 </DashboardContext.Provider>
             </div>
-        );
-            <div className=""></div>
-        </div>
-    )
+        );  
 }
 
 export default Dashboard;
