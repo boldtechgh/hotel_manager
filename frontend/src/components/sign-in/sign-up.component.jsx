@@ -48,6 +48,7 @@ export function SignUp(){
             <form onSubmit={handleSubmit}>
             <div className='merge-input'>
           <FormInput
+          inputType='input'
             name='firstName'
             type='text'
             handleChange={handleChange}
@@ -56,6 +57,7 @@ export function SignUp(){
             required
           />
           <FormInput
+          inputType='input'
             name='lastName'
             type='text'
             handleChange={handleChange}
@@ -66,6 +68,7 @@ export function SignUp(){
                 </div>
                 <div>
           <FormInput
+          inputType='input'
             name='email'
             type='email'
             handleChange={handleChange}
@@ -74,6 +77,7 @@ export function SignUp(){
             required
           />
           <FormInput
+          inputType='input'
             name='username'
             type='text'
             handleChange={handleChange}
@@ -84,6 +88,7 @@ export function SignUp(){
                     </div>
           <div className='merge-input'>
             <FormInput
+            inputType='input'
             name='password'
             type='password'
             value={password}
@@ -92,6 +97,7 @@ export function SignUp(){
             required
           />
           <FormInput
+          inputType='input'
             name='passwordVerify'
             type='passwordVerify'
             value={passwordVerify}

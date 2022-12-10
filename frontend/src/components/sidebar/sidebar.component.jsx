@@ -29,7 +29,7 @@ const options = [
   {
     name: 'Manager',
     scroll: true,
-    backdrop: true,
+    backdrop: false,
   },
 ];
 

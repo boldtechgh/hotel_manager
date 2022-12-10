@@ -17,8 +17,8 @@ export function HotelChain () {
     const [digitalAddress, setDigitalAddress] = useState('');
     const [city, setCity] = useState('');
     const [region, setRegion] = useState('');
-    const [country, setCountry] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [country, setCountry] = useState('Ghana');
+    const [zipCode, setZipCode] = useState('00233');
 
     const handleChange = (event) => {
         const { value, name } = event.target;
@@ -55,28 +55,36 @@ export function HotelChain () {
             <p>Fill in the form below with details of your umbrella company</p>
             <form onSubmit={handleProceed}>
                 <FormInput name='name'
+                inputType='input'
                 type='text'
-                placeholder= 'Company name'
+                placeholder= 'Enter hotel chain name'
                 value={name}
                 onChange={handleChange}
+                label='Name'
                 required />
                 <FormInput name='phone'
+                inputType='input'
                 type='tel'
-                placeholder= 'Phone number'
+                placeholder= 'Enter company contact number'
                 value={phone}
                 onChange={handleChange}
+                label="Contact"
                 required />
                 <FormInput name='email'
+                inputType='input'
                 type='email'
-                placeholder= 'Email address'
+                placeholder= "Enter the company's Email address"
                 value={email}
                 onChange={handleChange}
+                label="Email"
                 required />
                 <FormInput name='website'
+                inputType='input'
                 type='text'
-                placeholder= "Company's website"
+                placeholder= "Enter the URL to the company website (If any)"
                 value={website}
                 onChange={handleChange}
+                label="Website"
                 required />
                 <Marginer direction="vertical" margin={80} />
                 <CustomButton type="Submit">Next <FontAwesomeIcon icon={faArrowRight} /></CustomButton>
@@ -90,42 +98,75 @@ export function HotelChain () {
             <p>Please provide information about the location of your company</p>
             <form onSubmit={handleSubmit}>
                 <FormInput name='address'
+                inputType='input'
                 type='text'
                 placeholder= 'Residential Address'
                 value={address}
                 onChange={handleChange}
+                label="Address"
                 required />
                 <FormInput name='digitalAddress'
+                inputType='input'
                 type='tel'
                 placeholder= 'Digital Address'
                 value={digitalAddress}
                 onChange={handleChange}
+                label="Digital Address"
                 required />
                 <FormInput name='city'
+                inputType='input'
                 type='City'
                 placeholder= 'City'
                 value={city}
                 onChange={handleChange}
+                label="City"
                 required />
                 <FormInput name='region'
+                inputType='select'
                 type='text'
-                placeholder= "Region/State/Province"
+                placeholder= "Enter Region/State/Province"
                 value={region}
                 onChange={handleChange}
-                required />
+                label="Region/State/Province"
+                required>
+                    <option>Select region</option>
+                    <option>Ahafo</option>
+                    <option>Ashanti</option>
+                    <option>Bono East</option>
+                    <option>Brong Ahafo</option>
+                    <option>Central</option>
+                    <option>Eastern</option>
+                    <option>Greater Accra</option>
+                    <option>North East</option>
+                    <option>Northern</option>
+                    <option>Oti</option>
+                    <option>Savannah</option>
+                    <option>Upper East</option>
+                    <option>Upper West</option>
+                    <option>Western</option>                   
+                    <option>Western North</option>
+                    <option>Volta</option>
+                </FormInput>
+                <div className="merge-input">
                 <FormInput name='country'
+                inputType='input'
                 type='text'
-                placeholder= "Country"
+                placeholder= "Enter country"
                 value={country}
                 onChange={handleChange}
+                label="Country"
                 required />
                 <FormInput name='zipCode'
                 type='text'
-                placeholder= "Zip_Code"
+                placeholder= "Enter Zip Code"
+                inputType='input'
                 value={zipCode}
                 onChange={handleChange}
+                label="Zip Code"
                 required />
-                <Marginer direction="vertical" margin={80} />
+                </div>
+               
+                <Marginer direction="vertical" margin={50} />
                 <CustomButton type="Submit">Save <FontAwesomeIcon icon={faFloppyDisk} /></CustomButton>
             </form>
             </>
