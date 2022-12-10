@@ -7,7 +7,7 @@ import {
     onAuthStateChanged,
     signInWithRedirect
  } from "firebase/auth";
- import {auth} from '../components/firebase/firebase.utils';
+ import {auth} from './firebase.utils.js';
 
 
 

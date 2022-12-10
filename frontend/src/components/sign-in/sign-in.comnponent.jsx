@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GoogleIcon from '../../images/google.png';
 import './sign-in.styles.scss';
 import { Marginer } from '../marginer';
+import { UserAuth } from '../../components/firebase/AuthContext';
 
 export function SignIn (){
   const [email, setEmail] = useState('');
@@ -23,6 +24,21 @@ export function SignIn (){
     {name === 'password' && setPassword(value)}
     this.setState({ [name]: value });
   };
+  const {googleSignIn,user} = UserAuth();
+    const navigate = useNavigate();
+    const handleGoogleSignIn = async () => {
+        try {
+            await googleSignIn();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+             navigate('/account');
+        }
+    }, [user]);
 
     return (
         <div className='sign-in'>
@@ -37,7 +53,7 @@ export function SignIn (){
             <h2>Sign in</h2>
             <Marginer direction="vertical" margin={60} />
             <div>
-              <button className='google-btn'><img src={GoogleIcon} alt="Google icon" />Sign in with Google</button>
+              <button className='google-btn'><img src={GoogleIcon} alt="Google icon" onClick={handleGoogleSignIn} />Sign in with Google</button>
             </div>
 
         <form onSubmit={handleSubmit}>
