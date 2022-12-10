@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <Routes>
         <Route exact path="/:action" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route  path="/dashboard/:action" element = {<Dashboard/>} />
         <Route path="/setup/:action" element={<Hotel_Setup />} />
       </Routes>
     );
