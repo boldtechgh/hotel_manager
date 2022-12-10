@@ -2,7 +2,7 @@
     // position: absolute;
     width: 739px;
     height: 741px;
-    margin-top: 70px;
+    margin-top: 50px;
     padding: 50px 50px;
 
     & h2 {
@@ -23,6 +23,12 @@
         font-size: 16px;
         line-height: 24px;
     }
+
+        & .merge-input {
+            display: flex;
+            justify-content: space-between;
+            gap: 2px;
+        }
 
         @media only screen and (max-width: 600px) {
             position: absolute;
