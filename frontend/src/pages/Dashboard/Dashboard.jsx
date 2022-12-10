@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from '../../components/navbar/nav-bar.component';
 import HotelRooms from '../hotel-rooms/hotel-rooms.page';
 import "./dashboard.styles.scss";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { DashboardContext } from "./context";
 import StaffPage from '../../components/table/table.component';

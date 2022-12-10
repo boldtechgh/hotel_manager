@@ -53,7 +53,7 @@ export function BrandLogo(props) {
       {!isMobile && !hideLogoTitle && (
         <StyledLink to="/home">
           <LogoTitle size={textSize} color={color} float={float}>
-            GHANAHOTELS
+            Hotelica
           </LogoTitle>
         </StyledLink>
       )}
