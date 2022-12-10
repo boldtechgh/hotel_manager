@@ -42,6 +42,7 @@ export function SignIn (){
 
         <form onSubmit={handleSubmit}>
           <FormInput
+          inputType='input'
             name='email'
             type='email'
             handleChange={handleChange}
@@ -51,6 +52,7 @@ export function SignIn (){
           />
           <Marginer direction='vertical' margin={20} />
           <FormInput
+          inputType='input'
             name='password'
             type='password'
             value={password}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Routes,Route } from 'react-router-dom'
 import NavBar from '../../components/navbar/nav-bar.component';
 import HotelRooms from '../hotel-rooms/hotel-rooms.page';
 import "./dashboard.styles.scss";
@@ -32,9 +31,11 @@ export const Dashboard = () => {
         switchToRooms, switchToStaff
     }
 
-    return (
-        <div className="dashboard">
-            <div className="dashboard-content">
+   
+
+const Dashboard = () => { 
+        return (
+            <div className='dashboard'>
                 <NavBar />
                 <DashboardContext.Provider value={contextValue}>
                     {active.action === 'rooms' && <HotelRooms />}
