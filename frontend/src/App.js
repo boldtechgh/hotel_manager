@@ -11,8 +11,10 @@ class App extends Component {
     return (
       <Routes>
         <Route exact path="/:action" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+         shadow
+        <Route  path="/dashboard/:action" element = {<Dashboard/>} />
         <Route path="/dash" element={<TestDash />} />
+         master
         <Route path="/setup/:action" element={<Hotel_Setup />} />
       </Routes>
     );

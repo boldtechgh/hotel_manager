@@ -51,11 +51,11 @@ function OffCanvasExample({ name, ...props }) {
         </Offcanvas.Header>
         <Offcanvas.Body> 
     <ListGroup className='px-2' variant='warning' defaultActiveKey="#link1">
-      <ListGroup.Item  action  href="#link1">
+    <ListGroup.Item  action  href="rooms">
         Rooms
       </ListGroup.Item>
-      <ListGroup.Item action href="#link2">
-       Hotel Employess
+      <ListGroup.Item action href="staff">
+       Staff
       </ListGroup.Item>
       <ListGroup.Item action href="#link3">
         Hotel Department
