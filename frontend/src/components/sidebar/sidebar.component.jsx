@@ -48,7 +48,7 @@ const handleSignOut = async () => {
 
   return (
     <>
-      <Button variant="light" onClick={toggleShow} className="me-2">
+      <Button variant="light" onClick={toggleShow} as= "span" className="me-2">
       {name}
       <Navbar.Toggle aria-controls="navbarScroll" />
       </Button>
