@@ -6,8 +6,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import FormInput from '../form-input/form-input.component';
 import HotelSideBar from '../sidebar/sidebar.component';
+import { UserAuth } from '../firebase/AuthContext';
+
 
 function NavBar() {
+  const {logOut,user} = UserAuth();
+    const handleSignOut = async () => {
+        try {
+            await logOut();
+        } catch (error) {
+            console.log(error)
+        }
+    }
   return (
     <Navbar bg="light" variant='light' expand="lg" sticky='top'>
       <Container fluid>

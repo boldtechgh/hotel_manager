@@ -32,20 +32,17 @@ export const Dashboard = () => {
     }
 
    
-
-const Dashboard = () => { 
         return (
             <div className='dashboard'>
                 <NavBar />
                 <DashboardContext.Provider value={contextValue}>
                     {active.action === 'rooms' && <HotelRooms />}
-                    {active.action === 'staff' && <StaffPage /> }
+                    {active.action === 'staff' && <StaffPage />}
                 </DashboardContext.Provider>
             </div>
         );
-            <div className=""></div>
-        </div>
-    )
-}
+            
+    
+    };
 
 export default Dashboard;
