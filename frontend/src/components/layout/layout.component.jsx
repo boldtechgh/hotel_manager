@@ -1,14 +1,18 @@
-import { faArrowLeft, faArrowRight, faBuilding, faCogs, faDashboard, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faBuilding, faCogs, faDashboard, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, useProSidebar, menuClasses } from "react-pro-sidebar";
+
 import CustomButton from "../custom-button/custom-button.component";
 import { BrandLogo } from "../Logo";
 import "./layout.styles.scss";
 
+
 const Layout = (props) => {
     const {children} = props;
     const { toggleSidebar, collapseSidebar, broken, rtl } = useProSidebar();
+    
+
     return (
         <div style={{ display: 'flex', height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
             <Sidebar
@@ -60,7 +64,9 @@ const Layout = (props) => {
                     ) : null}  
                 </div>
                 <div>
+                    
                     {children}
+                    
                 </div>
             </main>
         

@@ -46,11 +46,6 @@ class Directory extends React.Component {
             return (
                 
                 <div className='all'>
-                    <input 
-                        type='search'
-                        placeholder='Search Room'
-                        onChange ={ e => this.setState({ searchField: e.target.value})}
-                    />
                     <div className="directory-menu">
                         
                      
