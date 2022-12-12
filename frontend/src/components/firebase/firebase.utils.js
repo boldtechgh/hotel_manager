@@ -6,14 +6,14 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA_MdkkbnxZ3sES11cnvQlg1FuCzsykJ8E",
-  authDomain: "auth-c4722.firebaseapp.com",
-  projectId: "auth-c4722",
-  storageBucket: "auth-c4722.appspot.com",
-  messagingSenderId: "1015586814039",
-  appId: "1:1015586814039:web:c7f43e4a53203e53124b12"
+  apiKey: "AIzaSyDp7-NvHlE3slvRinGIuJHhzUqVZxnrz_o",
+  authDomain: "hotel-manager-f1828.firebaseapp.com",
+  projectId: "hotel-manager-f1828",
+  storageBucket: "hotel-manager-f1828.appspot.com",
+  messagingSenderId: "330794851813",
+  appId: "1:330794851813:web:d20aed0957951353bf230c",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app)
+export const auth = getAuth(app);
