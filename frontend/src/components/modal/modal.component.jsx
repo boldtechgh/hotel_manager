@@ -57,9 +57,6 @@ function ModalComponent() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Close
-          </Button>
           <Button  variant="outline-success" onClick={handleClose}>
             Save Changes
           </Button>

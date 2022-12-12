@@ -20,13 +20,14 @@ export function SignUp(){
 
   const handleChange = event => {
     const { value, name } = event.target;
-
+    <>
     {name === 'firstName' && setFirstName(value)}
     {name === 'lastName' && setLastName(value)}
     {name === 'userName' && setUserName(value)}
     {name === 'email' && setEmail(value)}
     {name === 'password' && setPassword(value)}
     {name === 'passwordVerify' && setPasswordVerify(value)}
+    </>
   };
 
     return (

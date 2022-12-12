@@ -7,19 +7,19 @@ import {
     onAuthStateChanged,
     signInWithRedirect
  } from "firebase/auth";
- import {auth} from '../components/firebase/firebase.utils';
+ import {auth} from './firebase.utils.js';
 
 
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 export const AuthContextProvider = ({children}) => {
 
     const [user, setUser] = useState({});
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider(); 
-       // signInWithPopup(auth,provider);
-        signInWithRedirect(auth,provider);
+       signInWithPopup(auth,provider);
+       // signInWithRedirect(auth,provider);
     };
 
     const logOut = () => {
