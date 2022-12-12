@@ -22,7 +22,7 @@ export function HotelChain () {
 
     const handleChange = (event) => {
         const { value, name } = event.target;
-
+<>
         {name === 'name' && setName(value)}
         {name === 'phone' && setPhone(value)}
         {name === 'email' && setEmail(value)}
@@ -32,7 +32,8 @@ export function HotelChain () {
         {name === 'city' && setCity(value)} 
         {name === 'region' && setRegion(value)} 
         {name === 'country' && setCountry(value)} 
-        {name === 'zipCode' && setZipCode(value)}     
+    {name === 'zipCode' && setZipCode(value)}     
+    </>
     };
 
     const handleProceed = (event) => {

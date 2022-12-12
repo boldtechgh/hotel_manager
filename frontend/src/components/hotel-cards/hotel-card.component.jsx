@@ -1,6 +1,5 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Logo from "./download.svg"
 import ListGroup from 'react-bootstrap/ListGroup';
 import HotelModal from './bookmodal';
 
@@ -8,7 +7,6 @@ function HotelCard({description,name1, imageSrc}) {
     return (
       <div className='hotelroom'>
     <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src={Logo} />
       <Card.Body>
               <Card.Title>{ name1 }</Card.Title>
         <Card.Text>
