@@ -16,8 +16,8 @@ const Dashboard = (props) => {
     //     switchActive('dashboard')
     // }
 
-    const switchToRooms = () => {
-        switchActive('rooms')
+    const switchToCheckIn = () => {
+        switchActive('checkin')
     }
 
     const switchToStaff = () => {
@@ -25,12 +25,12 @@ const Dashboard = (props) => {
     }
 
     const contextValue = {
-        switchToRooms, switchToStaff
+        switchToCheckIn, switchToStaff
     }
     return (
         <Layout>
             <DashboardContext.Provider value={contextValue}>
-             {active.action === 'rooms' && <HotelRooms />} 
+             {active.action === 'checkin' && <HotelRooms />} 
             </DashboardContext.Provider>
         </Layout>
     )
