@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BrandLogo } from '../../components/Logo';
 import { SignIn } from '../../components/sign-in/sign-in.comnponent';
-import {SignUp} from '../../components/sign-in/sign-up.component';
+import { SignUp } from '../../components/sign-in/sign-up.component';
 import { AccountContext } from './context';
 import './Login.styles.scss';
 

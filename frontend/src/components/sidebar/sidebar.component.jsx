@@ -3,11 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Navbar from 'react-bootstrap/Navbar';
 import ListGroup from 'react-bootstrap/ListGroup';
-
-
-    const alertClicked = () => {
-        alert('Are You Sure You Want to Log-Out');
-    };
+import { UserAuth } from '../firebase/AuthContext';
 
 
 const options = [
@@ -39,9 +35,20 @@ function OffCanvasExample({ name, ...props }) {
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
+  const {logOut,user} = UserAuth();
+const handleSignOut = async () => {
+  try {
+          alert('Are You Sure You Want to Log-Out');
+            await logOut();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
   return (
     <>
-      <Button variant="light" onClick={toggleShow} className="me-2">
+      <Button variant="light" onClick={toggleShow} as= "span" className="me-2">
       {name}
       <Navbar.Toggle aria-controls="navbarScroll" />
       </Button>
@@ -83,7 +90,7 @@ function OffCanvasExample({ name, ...props }) {
     <ListGroup className='mt-5'></ListGroup>
     <ListGroup className=''>
         
-      <ListGroup.Item action variant='danger' onClick={alertClicked}>
+      <ListGroup.Item action variant='danger' onClick={handleSignOut}>
         Logout
       </ListGroup.Item>
     </ListGroup>

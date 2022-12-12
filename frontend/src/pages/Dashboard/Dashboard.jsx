@@ -36,10 +36,14 @@ export const Dashboard = () => {
                 <NavBar />
                 <DashboardContext.Provider value={contextValue}>
                     {active.action === 'rooms' && <HotelRooms />}
-                    {active.action === 'staff' && <StaffPage /> }
+                    {active.action === 'staff' && <StaffPage />}
                 </DashboardContext.Provider>
             </div>
-        );  
-}
+
+        );
+            
+    
+    };
+
 
 export default Dashboard;
