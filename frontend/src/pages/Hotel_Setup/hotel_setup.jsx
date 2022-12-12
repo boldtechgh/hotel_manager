@@ -6,7 +6,7 @@ import { BrandLogo } from "../../components/Logo";
 import { SetupContext } from "./context";
 import './hotel_setup.styles.scss';
 
-export const Hotel_Setup = () => {
+export const HotelSetup = () => {
     const initialActive = useParams();
     const [active, setActive] = useState(initialActive ? initialActive : 'hotel_chain');
 
