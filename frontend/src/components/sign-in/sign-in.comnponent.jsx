@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import GoogleIcon from '../../images/google.png';
 import './sign-in.styles.scss';
 import { Marginer } from '../marginer';
@@ -10,7 +10,7 @@ import { UserAuth } from '../../components/firebase/AuthContext';
 export function SignIn() {
     //google
     const {googleSignIn,user} = UserAuth();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const handleGoogleSignIn = async () => {
         try {
             await googleSignIn();
@@ -37,8 +37,10 @@ export function SignIn() {
   const handleChange = event => {
     const { value, name } = event.target;
 
-    {name === 'email' && setEmail(value)}
-    {name === 'password' && setPassword(value)}
+    <>
+      {name === 'email' && setEmail(value)}
+      {name === 'password' && setPassword(value)}
+      </>
     this.setState({ [name]: value });
   };
 

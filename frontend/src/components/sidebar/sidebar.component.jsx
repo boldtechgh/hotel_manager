@@ -4,6 +4,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Navbar from 'react-bootstrap/Navbar';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { UserAuth } from '../firebase/AuthContext';
+import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
 
 
 const options = [
@@ -89,7 +90,9 @@ const handleSignOut = async () => {
     <ListGroup className='mt-5'></ListGroup>
     <ListGroup className='mt-5'></ListGroup>
     <ListGroup className=''>
-        
+            <ListGroupItem>
+            <p>{user?.displayName}  </p>
+        </ListGroupItem>
       <ListGroup.Item action variant='danger' onClick={handleSignOut}>
         Logout
       </ListGroup.Item>

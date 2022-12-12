@@ -4,8 +4,7 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     signOut,
-    onAuthStateChanged,
-    signInWithRedirect
+    onAuthStateChanged
  } from "firebase/auth";
  import {auth} from './firebase.utils.js';
 

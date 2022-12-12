@@ -2,7 +2,6 @@ import { faArrowLeft, faArrowRight, faBuilding, faCogs, faDashboard, faMagnifyin
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, useProSidebar, menuClasses } from "react-pro-sidebar";
-import CustomButton from "../custom-button/custom-button.component";
 import { BrandLogo } from "../Logo";
 import "./layout.styles.scss";
 import {Button, Form, Navbar, Nav} from 'react-bootstrap';
@@ -11,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Layout = (props) => {
     const {children} = props;
-    const { toggleSidebar, collapseSidebar, broken, rtl } = useProSidebar();
+    const {   rtl } = useProSidebar();
     return (
         <div style={{ display: 'flex', height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
             <Sidebar
@@ -44,8 +43,8 @@ const Layout = (props) => {
                 },
                 }}
             >
-                <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
-                <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
+                <MenuItem routerLink={<Link to="#" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
+                <MenuItem routerLink={<Link to="/dashboard/checkin" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
                 <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check out</MenuItem>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
                     <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faBuilding} /> }>Hotel</MenuItem>
