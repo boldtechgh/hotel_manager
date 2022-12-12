@@ -3,25 +3,16 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import FormInput from '../form-input/form-input.component';
 import HotelSideBar from '../sidebar/sidebar.component';
 import { UserAuth } from '../firebase/AuthContext';
 
 
 function NavBar() {
-  const {logOut,user} = UserAuth();
-    const handleSignOut = async () => {
-        try {
-            await logOut();
-        } catch (error) {
-            console.log(error)
-        }
-    }
+  const {user} = UserAuth()
   return (
     <Navbar bg="light" variant='light' expand="lg" sticky='top'>
       <Container fluid>
-        <Navbar.Brand as={HotelSideBar} >Hotel Manager</Navbar.Brand>
+        <Navbar.Brand as={HotelSideBar} ><p> {user?.displayName}  </p></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

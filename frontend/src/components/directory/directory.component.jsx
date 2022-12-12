@@ -1,10 +1,9 @@
 import React from 'react';
 import HotelCard from '../hotel-cards/hotel-card.component';
 import "./directory.styles.scss";
-
 class Directory extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     
         this.state = {
             rooms: [
@@ -32,20 +31,34 @@ class Directory extends React.Component {
                     description: 'Description 1',
                     imageSrc: 'https://placekitten.com/320/320'
                 }
-            ]
+            ],
+            searchFeild:''
         };
     
             
     }
 
     render() {
+        const { rooms, searchFeild } = this.state;
+        const filteredRooms = rooms.filter(room =>
+            room.name1.toLowerCase().includes(searchFeild.toLowerCase())
+        ); 
             return (
                 
-                <div className="directory-menu">
-                    {this.state.rooms.map(({id,name1, description,imageSrc}) => (
+                <div className='all'>
+                    <input 
+                        type='search'
+                        placeholder='Search Room'
+                        onChange ={ e => this.setState({ searchField: e.target.value})}
+                    />
+                    <div className="directory-menu">
+                        
+                     
+                    {filteredRooms.map(({id,name1, description,imageSrc}) => (
                         <HotelCard key={id} name1={name1} description={description} imageSrc = {imageSrc} />
                     ))}
                     </div>  
+                    </div>
                     );
 }
 }

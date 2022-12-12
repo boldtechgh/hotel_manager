@@ -15,9 +15,9 @@ export const Dashboard = () => {
         setTimeout(() => setActive(active), 400)
     }
 
-    const switchToDashboard = () => {
-        switchActive('dashboard')
-    }
+    // const switchToDashboard = () => {
+    //     switchActive('dashboard')
+    // }
 
     const switchToRooms = () => {
         switchActive('rooms')
