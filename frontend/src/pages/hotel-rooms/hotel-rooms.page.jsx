@@ -1,15 +1,15 @@
 import React from 'react';
 import './hotel-rooms.styles.scss';
-import Directory from '../../components/directory/directory.component';
+import HotelsCard from '../../components/hotel/hotel-card.compoinent';
 // import ModalComponent from '../../components/modal/modal.component';
 
-const HotelRooms = () => (
+const HotelRooms = (props) => (
     <div className='hotelrooms'>
         <div className='rooms-page'>
             <div className='Add-form'>
                 {/* <ModalComponent /> */}
                 </div>
-            <Directory />
+                    <HotelsCard />
             </div>
         </div>
 );
