@@ -44,10 +44,10 @@ const Layout = (props) => {
                 }}
             >
                 <MenuItem routerLink={<Link to="#" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
-                <MenuItem routerLink={<Link to="/dashboard/checkin" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
+                <MenuItem routerLink={<Link to="/dashboard/checkout" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
                 <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check out</MenuItem>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
-                    <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faBuilding} /> }>Hotel</MenuItem>
+                    <MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }><a href="/dashboard/checkin">Hotel</a></MenuItem>
                     <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faUsers} /> }>Staff</MenuItem>
                 </SubMenu>
             </Menu>
