@@ -43,12 +43,12 @@ const Layout = (props) => {
                 },
                 }}
             >
-                <MenuItem routerLink={<Link to="/chekdis" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
-                <MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}><a href="/dashboard/checkin">Check in</a></MenuItem>
-                <MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}><a href="/dashboard/checkout">Check Out</a></MenuItem>
+                <a href="/dashboard/dashboard"><MenuItem icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem></a>
+                <a href="/dashboard/checkin"><MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem></a>
+                <a href="/dashboard/checkout"><MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check Out</MenuItem></a>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
-                <MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }><a href="/dashboard/hotels">Hotels</a></MenuItem>
-                <MenuItem  icon={<FontAwesomeIcon icon={faUsers} /> }><a href="/dashboard/staff">Staff</a></MenuItem>
+                <a href="/dashboard/hotels"><MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }>Hotels</MenuItem></a>
+                <a href="/dashboard/staff"><MenuItem  icon={<FontAwesomeIcon icon={faUsers} /> }>Staff</MenuItem></a>
                 </SubMenu>
             </Menu>
             </Sidebar>
