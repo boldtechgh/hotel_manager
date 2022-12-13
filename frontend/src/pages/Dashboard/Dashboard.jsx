@@ -1,31 +1,25 @@
 import React,{useState} from "react";
 import { useParams } from "react-router-dom";
+import DashComponent from "../../components/dashboard/dashboard.component";
 import Layout from "../../components/layout/layout.component";
+import HotelRooms from "../hotel-rooms/hotel-rooms.page";
 import { DashboardContext } from "./context";
-import StaffPage from "../../components/table/table.component";
-import CheckIn from "../../components/checkin/checkin.component";
-import HotelsCard from "../../components/hotel/hotel-card.compoinent";
-import CheckOut from "../../components/checkout/checkout.component";
 
-const Dashboard = () => {
+
+const Dashboard = (props) => {
     const initialActive = useParams();
     const [active, setActive] = useState(initialActive ? initialActive : 'dashboard');
 
     const switchActive = (active) => {
         setTimeout(() => setActive(active), 400)
     }
-    // const switchToDashboard = () => {
-    //     switchActive('dashboard')
-    // }
+
+    const switchToDashboard = () => {
+        switchActive('dashboard')
+    }
 
     const switchToCheckIn = () => {
         switchActive('checkin')
-    }
-    const switchToCheckOut = () => {
-        switchActive('checkout')
-    }
-    const switchToHotels = () => {
-        switchActive('hotels')
     }
 
     const switchToStaff = () => {
@@ -33,15 +27,13 @@ const Dashboard = () => {
     }
 
     const contextValue = {
-        switchToCheckIn, switchToStaff, switchToHotels,switchToCheckOut
+        switchToCheckIn, switchToStaff, switchToDashboard
     }
     return (
         <Layout>
             <DashboardContext.Provider value={contextValue}>
-             {active.action === 'checkout' && <CheckOut />} 
-             {active.action === 'checkin' && <CheckIn />} 
-             {active.action === 'hotels' && <HotelsCard />} 
-             {active.action === 'staff' && <StaffPage />} 
+                {active.action === 'dashboard' && <DashComponent />}
+             {active.action === 'checkin' && <HotelRooms />} 
             </DashboardContext.Provider>
         </Layout>
     )

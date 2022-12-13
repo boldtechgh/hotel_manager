@@ -1,0 +1,49 @@
+.info-card {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    -webkit-box-shadow: 1px 1px 0.7px 1px rgb(231, 231, 231);
+        box-shadow: 1px 1px 0.7px 1px rgb(231, 231, 231);
+
+
+    & .name-icon {
+        width: 60%;
+        height: 120px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        & .icon {
+            width: 100%;
+            height: 50%;
+            font-size: 30px;
+        }
+
+        & .name {
+            width: 100%;
+            height: 10%;
+            font-weight: 500;
+            font-size: 18px;
+        }
+    }
+
+    & .value {
+        width: 35%;
+        height: 120px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 28px;
+        font-weight: 600;
+    }
+}
