@@ -43,7 +43,7 @@ const Layout = (props) => {
                 },
                 }}
             >
-                <MenuItem routerLink={<Link to="#" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
+                <MenuItem routerLink={<Link to="/chekdis" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
                 <MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}><a href="/dashboard/checkin">Check in</a></MenuItem>
                 <MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}><a href="/dashboard/checkout">Check Out</a></MenuItem>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
@@ -86,7 +86,8 @@ const Layout = (props) => {
                         </button>
                     ) : null}  
                 </div> */}
-                <div className="children">
+                <div className="children">  
+            
                     {children}
                 </div>
             </main>
