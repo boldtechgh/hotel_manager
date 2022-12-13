@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { BarChart } from '../charts';
 import ComponentTitle from '../component-title';
 import InfoCard from '../info-card';
+import RoomInfo from '../room-info';
 import './dashboard.styles.scss';
 
 const DashComponent = () => {
@@ -26,10 +27,12 @@ const DashComponent = () => {
                 <BarChart labels={['Reserved', 'Occupied', 'Available','Maintenance']} label="Rooms" values={[20, 50, 125,5]} colors={['red', 'blue', 'green','black']} />
             </div>
             <div className='room-info'>
-                <div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                 <div className='chart-title'>
+                    <h2>Rooms</h2>
+                    <Link to="/">View</Link>
+                </div>
+                <div className='room-info-table'>
+                    <RoomInfo />
                 </div>
                 
             </div>

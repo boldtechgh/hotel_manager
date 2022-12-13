@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import HotelSetup from "./pages/Hotel_Setup/hotel_setup";
 import { AuthContextProvider } from "./components/firebase/AuthContext";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 class App extends Component {
   render() {

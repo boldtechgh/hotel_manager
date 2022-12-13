@@ -53,7 +53,7 @@ const Layout = (props) => {
             </Menu>
             </Sidebar>
             <main style={{width:'100%'}}>
-                <Navbar bg="transparent" expand="md" className="mb-3">
+                <Navbar bg="light" expand="md" className="mb-3">
                     <Container fluid>
                         {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
                         <Navbar.Toggle aria-controls="navbarScroll" />
