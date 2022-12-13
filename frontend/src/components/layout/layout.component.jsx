@@ -43,8 +43,8 @@ const Layout = (props) => {
                 },
                 }}
             >
-                <MenuItem routerLink={<Link to="#" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
-                <MenuItem routerLink={<Link to="/dashboard/checkout" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
+                <MenuItem routerLink={<Link to="/dashboard/dashboard" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
+                <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
                 <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check out</MenuItem>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
                     <MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }><a href="/dashboard/checkin">Hotel</a></MenuItem>
@@ -53,12 +53,12 @@ const Layout = (props) => {
             </Menu>
             </Sidebar>
             <main>
-                <Navbar bg="transparent" expand="md" className="mb-3">
+                <Navbar bg="light" expand="md" className="mb-3">
                     <Container fluid>
                         {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll">
-                            <Nav className="me-auto my-4 my-lg-3" style={{maxHeight: '100px', display: 'flex', alignItems: 'center'}} navbarScroll>
+                            <Nav className="me-auto my-4 my-lg-2" style={{maxHeight: '80px', display: 'flex', alignItems: 'center'}} navbarScroll>
                                  <Form className="d-flex">
                                 <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
                                 <Button variant="success"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>

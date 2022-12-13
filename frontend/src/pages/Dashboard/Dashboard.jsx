@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { useParams } from "react-router-dom";
+import DashComponent from "../../components/dashboard/dashboard.component";
 import Layout from "../../components/layout/layout.component";
 import HotelRooms from "../hotel-rooms/hotel-rooms.page";
 import { DashboardContext } from "./context";
@@ -12,9 +13,10 @@ const Dashboard = (props) => {
     const switchActive = (active) => {
         setTimeout(() => setActive(active), 400)
     }
-    // const switchToDashboard = () => {
-    //     switchActive('dashboard')
-    // }
+
+    const switchToDashboard = () => {
+        switchActive('dashboard')
+    }
 
     const switchToCheckIn = () => {
         switchActive('checkin')
@@ -25,11 +27,12 @@ const Dashboard = (props) => {
     }
 
     const contextValue = {
-        switchToCheckIn, switchToStaff
+        switchToCheckIn, switchToStaff, switchToDashboard
     }
     return (
         <Layout>
             <DashboardContext.Provider value={contextValue}>
+                {active.action === 'dashboard' && <DashComponent />}
              {active.action === 'checkin' && <HotelRooms />} 
             </DashboardContext.Provider>
         </Layout>
