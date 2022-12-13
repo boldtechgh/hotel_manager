@@ -1,10 +1,11 @@
 import React,{useState} from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/layout/layout.component";
-import HotelRooms from "../hotel-rooms/hotel-rooms.page";
 import { DashboardContext } from "./context";
 import StaffPage from "../../components/table/table.component";
-import HotelPage from "../Hotel_Setup/hotel.page";
+import CheckIn from "../../components/checkin/checkin.component";
+import HotelsCard from "../../components/hotel/hotel-card.compoinent";
+import CheckOut from "../../components/checkout/checkout.component";
 
 const Dashboard = () => {
     const initialActive = useParams();
@@ -20,6 +21,9 @@ const Dashboard = () => {
     const switchToCheckIn = () => {
         switchActive('checkin')
     }
+    const switchToCheckOut = () => {
+        switchActive('checkout')
+    }
     const switchToHotels = () => {
         switchActive('hotels')
     }
@@ -29,13 +33,14 @@ const Dashboard = () => {
     }
 
     const contextValue = {
-        switchToCheckIn, switchToStaff, switchToHotels
+        switchToCheckIn, switchToStaff, switchToHotels,switchToCheckOut
     }
     return (
         <Layout>
             <DashboardContext.Provider value={contextValue}>
-             {active.action === 'checkin' && <HotelRooms />} 
-             {active.action === 'hotels' && <HotelPage/>} 
+             {active.action === 'checkout' && <CheckOut />} 
+             {active.action === 'checkin' && <CheckIn />} 
+             {active.action === 'hotels' && <HotelsCard />} 
              {active.action === 'staff' && <StaffPage />} 
             </DashboardContext.Provider>
         </Layout>

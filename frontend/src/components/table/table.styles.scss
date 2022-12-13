@@ -1,13 +1,8 @@
 .tablestyle{
-    
-    background: url(../../images/background/hotel_room.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
-    padding-block: 1rem;
-    padding-left: 255px;
-    padding-right: 20px;
     
     @media only screen and (max-width: 600px) {
             display: flex;
@@ -18,9 +13,12 @@
   
 
 .tables{
-    display: flex;
     background-color: rgba(255, 255, 255, 0.353);
-    overflow: hidden;
-    margin: 50px 0 100px;
     padding: 20px 0px;
+  }
+  .pagination{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: rgb(242 242 242);
+    justify-content: center;
   }

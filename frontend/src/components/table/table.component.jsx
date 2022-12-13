@@ -1,16 +1,28 @@
 import Table from 'react-bootstrap/Table';
+import ModalComponent from '../modal/modal.component';
 import PaginationComponent from './pagination.component';
 import "./table.styles.scss";
 
 function StaffPage() {
+  const Fields = {
+    id: 1,
+    title: 'Add Staff',
+    label1: "First Name",
+    label2: "Last Name",
+    label3: "Designation",
+    label4: "Address",
+    label5: "Contact",
+    label6: "Email Address",
+    label7: "Department",
+    label8: "Hotel"
+  }
   return (
-   
       <div className='tablestyle'>
-          <div className="searchBox">
-              
+          <div className="">
+        <ModalComponent {...Fields} />
           </div>
       <div className='tables'>
-           <Table striped bordered>
+           <Table striped hover bordered variant="dark">
       <thead>
         <tr>
           <th>Staff ID</th>
@@ -37,8 +49,11 @@ function StaffPage() {
           <td>@fat</td>
         </tr>
       </tbody>
+        </Table>
+        <div className='pagination'>
+
       <PaginationComponent />
-      </Table>
+        </div>
           </div>
       </div>
   );

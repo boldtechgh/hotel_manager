@@ -12,9 +12,7 @@ const Layout = (props) => {
     const {children} = props;
     const {   rtl } = useProSidebar();
     return (
-        <div style={{ display: 'flex' , height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
-            
-            <div>
+        <div style={{ display: "flex" ,  height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
             <Sidebar
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
@@ -46,20 +44,16 @@ const Layout = (props) => {
                 }}
             >
                 <MenuItem routerLink={<Link to="#" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
-                <MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}><a href="checkin">Check in</a></MenuItem>
-                <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check out</MenuItem>
+                <MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}><a href="/dashboard/checkin">Check in</a></MenuItem>
+                <MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}><a href="/dashboard/checkout">Check Out</a></MenuItem>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
-                    <MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }><a href="hotels">Hotel</a></MenuItem>
-                    <MenuItem  icon={<FontAwesomeIcon icon={faUsers} /> }>Staff</MenuItem>
+                <MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }><a href="/dashboard/hotels">Hotels</a></MenuItem>
+                <MenuItem  icon={<FontAwesomeIcon icon={faUsers} /> }><a href="/dashboard/staff">Staff</a></MenuItem>
                 </SubMenu>
             </Menu>
-             </Sidebar>
-                </div>
-
-            <div className="main-content">
-                <main>
-                    <div>
-                    <Navbar bg="transparent" expand="md" className="mb-3">
+            </Sidebar>
+            <main style={{width:'100%'}}>
+                <Navbar bg="transparent" expand="md" className="mb-3">
                     <Container fluid>
                         {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
                         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -92,12 +86,11 @@ const Layout = (props) => {
                         </button>
                     ) : null}  
                 </div> */}
-                    </div>
                 <div className="children">
                     {children}
                 </div>
             </main>
-                </div>
+        
         </div>
         
     )
