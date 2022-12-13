@@ -10,22 +10,26 @@ class Directory extends React.Component {
                 {
                     id: '1',
                     name1: 'Room 1',
-                    description: 'Description 1'
+                    description: 'Description 1',
+                    bookingStatus:'booked'
                 },
                 {
                     id: '2',
                     name1: 'Room 2',
-                    description: 'Description 1'
+                    description: 'Description 1',
+                    bookingStatus:'booked'
                 },
                 {
                     id: '3',
                     name1: 'Room 3',
                     description: 'Description 3',
+                    bookingStatus:''
                 },
                 {
                     id: '4',
                     name1: 'Room 4',
-                    description: 'Description 1'
+                    description: 'Description 1',
+                    bookingStatus:'booked'
                 }
             ],
             searchFeild:''
@@ -41,15 +45,14 @@ class Directory extends React.Component {
         ); 
             return (
                 
-                <div className='all'>
-                    <div className="directory-menu">
+                <div className='hotelrooms'>
+                    {filteredRooms.map(({ id, name1, description,bookingStatus }) => (
+                        <div className='cards'>
+                            <HotelCard key={id} name1={name1} description={description} bookingStatus={bookingStatus} />
+                        </div>
                         
-                     
-                    {filteredRooms.map(({id,name1, description}) => (
-                        <HotelCard key={id} name1={name1} description={description}  />
                     ))}
                     </div>  
-                    </div>
                     );
 }
 }

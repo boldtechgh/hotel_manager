@@ -12,7 +12,7 @@ const Layout = (props) => {
     const {children} = props;
     const {   rtl } = useProSidebar();
     return (
-        <div style={{ display: 'flex', height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
+        <div style={{ display: "flex" ,  height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
             <Sidebar
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
@@ -43,22 +43,22 @@ const Layout = (props) => {
                 },
                 }}
             >
-                <MenuItem routerLink={<Link to="/dashboard/dashboard" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
-                <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
-                <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check out</MenuItem>
+                <MenuItem routerLink={<Link to="/chekdis" />} icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem>
+                <MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}><a href="/dashboard/checkin">Check in</a></MenuItem>
+                <MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}><a href="/dashboard/checkout">Check Out</a></MenuItem>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
-                    <MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }><a href="/dashboard/checkin">Hotel</a></MenuItem>
-                    <MenuItem routerLink={<Link to="/" />} icon={<FontAwesomeIcon icon={faUsers} /> }>Staff</MenuItem>
+                <MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }><a href="/dashboard/hotels">Hotels</a></MenuItem>
+                <MenuItem  icon={<FontAwesomeIcon icon={faUsers} /> }><a href="/dashboard/staff">Staff</a></MenuItem>
                 </SubMenu>
             </Menu>
             </Sidebar>
-            <main>
-                <Navbar bg="light" expand="md" className="mb-3">
+            <main style={{width:'100%'}}>
+                <Navbar bg="transparent" expand="md" className="mb-3">
                     <Container fluid>
                         {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll">
-                            <Nav className="me-auto my-4 my-lg-2" style={{maxHeight: '80px', display: 'flex', alignItems: 'center'}} navbarScroll>
+                            <Nav className="me-auto my-4 my-lg-3" style={{maxHeight: '100px', display: 'flex', alignItems: 'center'}} navbarScroll>
                                  <Form className="d-flex">
                                 <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
                                 <Button variant="success"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
@@ -86,7 +86,8 @@ const Layout = (props) => {
                         </button>
                     ) : null}  
                 </div> */}
-                <div className="children">
+                <div className="children">  
+            
                     {children}
                 </div>
             </main>

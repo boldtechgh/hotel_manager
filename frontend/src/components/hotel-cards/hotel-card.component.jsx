@@ -3,9 +3,13 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import HotelModal from './bookmodal';
 
-function HotelCard({description,name1, imageSrc}) {
+function HotelCard({description,name1, imageSrc,bookingStatus}) {
     return (
       <div className='hotelroom'>
+        {
+          imageSrc &&
+          <Card.Img variant="top" src={`${imageSrc}`} />
+        }
     <Card style={{ width: '18rem' }}>
       <Card.Body>
               <Card.Title>{ name1 }</Card.Title>
@@ -19,8 +23,10 @@ function HotelCard({description,name1, imageSrc}) {
         <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
       </ListGroup>
       <Card.Body >
-      <Button variant="success" as={HotelModal}>Book!</Button>
-      </Card.Body>
+            <HotelModal bookingStatus={ bookingStatus } />
+          </Card.Body>
+          <Card.Footer className="text-muted">2 days ago</Card.Footer>
+          
     </Card>
             </div>
   );

@@ -17,3 +17,47 @@ main {
         padding: 0 10px;
     }
 }
+.hotelrooms{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.023);
+    border-radius: 20px;
+
+    
+  }
+.cards{
+    display: block;
+    margin: 10px;
+    padding-block: 10px;
+    width: 288;
+    height: 475.250;
+    border-top-left-radius: 10px;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.hoteladd{
+    background-color: rgba(46, 46, 46, 0.052);
+    border-radius: 10px;
+    width:288px;
+    height: 450.250px;
+    text-align: center;
+    padding-top: 120px;
+
+    &:hover{
+        background-color: rgba(46, 46, 46, 1);
+        color: white;
+        cursor: pointer;
+        height: 475.250px;
+        transition: 0.5s ease-in-out;
+        cursor: pointer;
+        
+    }
+}
+.plus-btn{
+    font-size: 100px;
+    font-weight: bold;
+    color: rgba(38, 190, 94, 0.429);
+}

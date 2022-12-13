@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-function HotelModal() {
+function HotelModal({bookingStatus}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -12,9 +12,11 @@ function HotelModal() {
   return (
       <>
           <div className="add-btn">
-      <Button variant="success" onClick={handleShow}>
+      {/* <Button variant="success" onClick={handleShow}>
         Book
-              </Button>
+        </Button> */}
+        {bookingStatus === 'booked' ? <Button variant="success" onClick={handleShow}>Book!</Button> :
+         <Button variant="success" onClick={handleShow}>CheckOut!</Button>}
             </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

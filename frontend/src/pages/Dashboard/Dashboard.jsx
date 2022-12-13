@@ -2,8 +2,11 @@ import React,{useState} from "react";
 import { useParams } from "react-router-dom";
 import DashComponent from "../../components/dashboard/dashboard.component";
 import Layout from "../../components/layout/layout.component";
-import HotelRooms from "../hotel-rooms/hotel-rooms.page";
 import { DashboardContext } from "./context";
+import StaffPage from "../../components/table/table.component";
+import CheckIn from "../../components/checkin/checkin.component";
+import HotelsCard from "../../components/hotel/hotel-card.compoinent";
+import CheckOut from "../../components/checkout/checkout.component";
 
 
 const Dashboard = (props) => {
@@ -26,14 +29,24 @@ const Dashboard = (props) => {
         switchActive('staff')
     }
 
+    const switchToCheckOut = () => {
+        switchActive('checkout')
+    }
+    const switchToHotels = () => {
+        switchActive('hotels')
+    }
+
     const contextValue = {
-        switchToCheckIn, switchToStaff, switchToDashboard
+        switchToCheckIn, switchToStaff, switchToHotels,switchToCheckOut,switchToDashboard
     }
     return (
         <Layout>
             <DashboardContext.Provider value={contextValue}>
-                {active.action === 'dashboard' && <DashComponent />}
-             {active.action === 'checkin' && <HotelRooms />} 
+            {active.action === 'checkout' && <CheckOut />} 
+             {active.action === 'checkin' && <CheckIn />} 
+             {active.action === 'hotels' && <HotelsCard />} 
+             {active.action === 'staff' && <StaffPage />}
+            {active.action === 'dashboard' && <DashComponent />}
             </DashboardContext.Provider>
         </Layout>
     )
