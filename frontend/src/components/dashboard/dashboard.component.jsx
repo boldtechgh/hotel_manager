@@ -45,7 +45,7 @@ const DashComponent = () => {
                 </div>
                 </div>
                 <div className='expected'>
-                    <ExpectedArrivals rowStyle={{border: 'none'}} />
+                    <ExpectedArrivals />
                     <ExpectedDepartures />
                 </div>
             </div>
