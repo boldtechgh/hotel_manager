@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Badge from 'react-bootstrap/Badge';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function simulateNetworkRequest() {
     return new Promise((resolve) => setTimeout(resolve, 2000));
@@ -88,14 +89,24 @@ const CheckInDetails = (props) => {
                             <Col><Badge  bg="primary"  className='justify-content-center' style={{width:'70px',justifyContent:'center', paddingtop:'200px',height:'30px'}}><span className='pt-5 align-center'>Room 1</span></Badge></Col>
                         </Row>
                     </Container>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="name@example.com" />
+                <Form.Group   className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Col sm='4'>
+        <Form.Label>Check In Date and Time</Form.Label>
+        <Form.Control type="datetime-local"  />
+        </Col>
+                    <Col sm='4'>
+        <Form.Label>Check Out Date and Time</Form.Label>
+        <Form.Control type="datetime-local"  />
+        </Col>
+        
       </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Example textarea</Form.Label>
-        <Form.Control as="textarea" rows={3} />
+      <Form.Group   className="mb-3 " style={{width:'750px'}} stycontrolId="exampleForm.ControlTextarea1">
+        <Form.Label>Check In Notes</Form.Label>
+        <Form.Control as="textarea" rows={2} cols={2}  />
       </Form.Group>
+      <div className="d-flex">
+      <Button variant="success">Next</Button>
+      </div>
                 </Form.Group>
                 </Form>
                 </div>
