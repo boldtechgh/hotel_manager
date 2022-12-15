@@ -4,7 +4,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 const products = [{'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}];
 const columns = [{
     dataField: 'id',
-    text: 'Room Type ID'
+    text: 'ID'
 }, {
     dataField: 'roomType',
     text: 'Room Type'
@@ -13,10 +13,10 @@ const columns = [{
     text: 'Rate'
 }, {
     dataField: 'count',
-    text: 'Number of rooms'
+    text: 'Total'
 }, {
     dataField: 'countAvailable',
     text: 'Available'
 }];
 
-export default () => <BootstrapTable keyField="id" data={products} columns={columns} />
+export default (props) => <BootstrapTable keyField="id" data={props.products} columns={props.columns} />

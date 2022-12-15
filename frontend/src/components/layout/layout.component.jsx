@@ -53,12 +53,12 @@ const Layout = (props) => {
             </Menu>
             </Sidebar>
             <main style={{width:'100%'}}>
-                <Navbar bg="light" expand="md" className="mb-3">
+                <Navbar bg="light" expand="md" className="mb-3" fixed>
                     <Container fluid>
                         {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll">
-                            <Nav className="me-auto my-4 my-lg-3" style={{maxHeight: '100px', display: 'flex', alignItems: 'center'}} navbarScroll>
+                            <Nav className="me-auto my-4 my-lg-3" style={{maxHeight: '9vh', display: 'flex', alignItems: 'center'}} navbarScroll>
                                  <Form className="d-flex">
                                 <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
                                 <Button variant="success"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
