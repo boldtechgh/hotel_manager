@@ -8,6 +8,7 @@ import ExpectedArrivals from '../expected-arrivals';
 import ExpectedDepartures from '../expected-arrivals/departures';
 import InfoCard from '../info-card';
 import InfoTable from '../info-table';
+import RoomType from '../room-type';
 import './dashboard.styles.scss';
 
 const DashComponent = () => {
@@ -36,11 +37,12 @@ const DashComponent = () => {
                         <Link to="/">View</Link>
                     </div>
                     <div className='room-info-table'>
-                        <InfoTable 
+                        {/* <InfoTable 
                         products = {[{'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}]} 
                         
                         columns = {[{ dataField: 'id', text: 'ID'}, {dataField: 'roomType',   text: 'Room Type'}, {dataField: 'rate', text: 'Rate'}, {dataField: 'count', text: 'Total'}, {  dataField: 'countAvailable', text: 'Available'}]} 
-                        />
+                        /> */}
+                        <RoomType />
                     </div>    
                 </div>
                 </div>

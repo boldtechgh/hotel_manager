@@ -1,4 +1,20 @@
 @import "~bootstrap/scss/bootstrap";
+// @import '~mdb-ui-kit/css/mdb.min.css';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    //     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    //     sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgb(230, 230, 230);
+}
 
 a{
     text-decoration: none;
