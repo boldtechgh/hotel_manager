@@ -18,7 +18,7 @@ const ExpectedDepartures = () => {
             /> */}
             <MDBTable align='middle' hover>
             <MDBTableHead>
-                <tr className="table-dark">
+                <tr>
                     <th scope='col'>Room Number</th>
                     <th scope='col'>Guest Name</th>
                     <th scope='col'>Source</th>

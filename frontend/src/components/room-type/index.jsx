@@ -4,8 +4,8 @@ import Table from 'react-bootstrap/Table';
 
 const RoomType = () => {
     return (
-        <div>
-            <Table striped hover>
+        <div className="room-types">
+            <Table striped hover scroll>
                 <thead>
                     <tr>
                         <th>ID</th>
