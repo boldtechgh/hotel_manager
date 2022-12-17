@@ -11,8 +11,8 @@ class App extends Component {
   render() {
     return (
       <AuthContextProvider>
-        <CheckIn />
         <Routes>
+          <Route  exact path="/checkin" element={<CheckIn/>}/>
           <Route exact path="/:action" element={<Login />} />
           <Route path="/dashboard/:action" element={<Dashboard />} />
           <Route path="/setup/:action" element={<HotelSetup />} />
