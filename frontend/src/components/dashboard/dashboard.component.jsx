@@ -10,6 +10,7 @@ import InfoCard from '../info-card';
 import InfoTable from '../info-table';
 import RoomType from '../room-type';
 import './dashboard.styles.scss';
+import LogoImg from '../../images/google.png';
 
 const DashComponent = () => {
     return (
@@ -37,11 +38,6 @@ const DashComponent = () => {
                         <Link to="/">View</Link>
                     </div>
                     <div className='room-info-table'>
-                        {/* <InfoTable 
-                        products = {[{'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}, {'id': '1', 'roomType': 'Panorama', 'rate': 'GHC 600', 'count': '10', 'countAvailable': '8'}]} 
-                        
-                        columns = {[{ dataField: 'id', text: 'ID'}, {dataField: 'roomType',   text: 'Room Type'}, {dataField: 'rate', text: 'Rate'}, {dataField: 'count', text: 'Total'}, {  dataField: 'countAvailable', text: 'Available'}]} 
-                        /> */}
                         <RoomType />
                     </div>    
                 </div>
@@ -51,7 +47,8 @@ const DashComponent = () => {
                     <ExpectedDepartures />
                 </div>
             </div>
-            <div className='hotel-status'>
+            <div className='rigth-side-section'>
+                <div className='hotel-status'>
                  <div className='chart-title'>
                         <h2>Current Status</h2>
                         <Link to="/">View</Link>
@@ -92,6 +89,42 @@ const DashComponent = () => {
                        <div className='percent'>10%</div>
                     </div>
             </div>
+
+            <div className='activities'>
+                 <div className='chart-title'>
+                        <h2>Recent Activity</h2>
+                        <Link to="/">View</Link>
+                    </div>
+                    <div className='activity'>
+                        <div className='profile-photo'>
+                            <img src={LogoImg} alt="test" />
+                        </div>
+                        <div className='activity-desc'>
+                            <p className='desc'>John Doe requested a room.</p>
+                            <p className='time'>2 hours ago</p>
+                        </div>
+                    </div>
+                    <div className='activity'>
+                        <div className='profile-photo'>
+                            <img src={LogoImg} alt="test" />
+                        </div>
+                        <div className='activity-desc'>
+                            <p className='desc'>John Doe requested a room.</p>
+                            <p className='time'>2 hours ago</p>
+                        </div>
+                    </div>
+                    <div className='activity'>
+                        <div className='profile-photo'>
+                            <img src={LogoImg} alt="test" />
+                        </div>
+                        <div className='activity-desc'>
+                            <p className='desc'>John Doe requested a room.</p>
+                            <p className='time'>2 hours ago</p>
+                        </div>
+                    </div>
+            </div>
+            </div>
+            
         </div>
         
         </>
