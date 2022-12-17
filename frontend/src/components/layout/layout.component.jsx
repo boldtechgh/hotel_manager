@@ -44,7 +44,7 @@ const Layout = (props) => {
                 }}
             >
                 <a href="/dashboard/dashboard"><MenuItem icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem></a>
-                <a href="/dashboard/checkin"><MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem></a>
+                <a href="/checkin"><MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem></a>
                 <a href="/dashboard/checkout"><MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check Out</MenuItem></a>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
                 <a href="/dashboard/hotels"><MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }>Hotels</MenuItem></a>
