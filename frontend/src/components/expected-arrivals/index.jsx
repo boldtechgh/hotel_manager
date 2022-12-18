@@ -13,7 +13,7 @@ const ExpectedArrivals = () => {
             </div>
             <MDBTable align='middle' hover>
             <MDBTableHead>
-                <tr className="table-dark">
+                <tr>
                     <th scope='col'>Reserv. ID</th>
                     <th scope='col'>Source</th>
                     <th scope='col'>Guest Name</th>
