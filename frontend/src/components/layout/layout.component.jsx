@@ -1,4 +1,4 @@
-import { faArrowLeft, faArrowRight, faBuilding, faCalendar, faCalendarAlt, faCogs, faDashboard, faDoorOpen, faMagnifyingGlass, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faBuilding, faCalendar, faCalendarAlt, faCogs, faDashboard, faDoorOpen, faHouse, faMagnifyingGlass, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, useProSidebar, menuClasses } from "react-pro-sidebar";
@@ -45,9 +45,13 @@ const Layout = (props) => {
             >
                 <a href="/dashboard/dashboard"><MenuItem icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem></a>
                 <SubMenu label="Bookings" icon={<FontAwesomeIcon icon={faCalendarAlt} />}>
-                    <a href="/bookings"><MenuItem icon={<FontAwesomeIcon icon={faDoorOpen} />}>All Bookings</MenuItem></a>
-                    <a href="/checkin"><MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem></a>
+                    <MenuItem routerLink={<Link to="/bookings" />} icon={<FontAwesomeIcon icon={faDoorOpen} />}>All Bookings</MenuItem>
+                    <MenuItem routerLink={<Link to="/checkin" />} icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem>
                 <a href="/dashboard/checkout"><MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check Out</MenuItem></a>
+                </SubMenu>
+                <SubMenu label="Rooms" icon={<FontAwesomeIcon icon={faHouse} />}>
+                    <MenuItem routerLink={<Link to="/room-list" />} >All rooms</MenuItem>
+                   <MenuItem routerLink={<Link to="/room-type" />} >Room Types</MenuItem>
                 </SubMenu>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
                 <a href="/dashboard/hotels"><MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }>Hotels</MenuItem></a>

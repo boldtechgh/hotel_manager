@@ -1,13 +1,61 @@
-import React from "react";
-import { Table } from "react-bootstrap";
+import React, { useMemo, useState } from "react";
+import { Button, Table } from "react-bootstrap";
 import './bookings.styles.scss';
 import ProfilePhoto from '../../images/google.png';
+import DataTable from "react-data-table-component";
+import DataTableExtensions from 'react-data-table-component-extensions';
+import 'react-data-table-component-extensions/dist/index.css';
 
 const BookingsList = () => {
-    
+//     const columns = [
+//     {
+//         name: 'Title',
+//         selector: row => row.title,
+//         sortable: true,
+//     },
+//     {
+//         name: 'Year',
+//         selector: row => row.year,
+//         sortable: true,
+//     },
+// ];
+
+// const data = [
+//     {
+//         id: 1,
+//         title: 'Beetlejuice',
+//         year: '1988',
+//     },
+//     {
+//         id: 2,
+//         title: 'Ghostbusters',
+//         year: '1984',
+//     },
+// ]
+
+// const tableData = {
+//     columns,
+//     data,
+//   };
 
     return(
+        
         <div className="blist">
+             {/* <DataTableExtensions
+                {...tableData}
+                >
+                    <DataTable
+                        noHeader
+                        defaultSortField="id"
+                        defaultSortAsc={false}
+                        pagination
+                        highlightOnHover
+                        selectableRows
+                        persistTableHead
+                    />
+                </DataTableExtensions> */}
+            
+          
             <Table id="table">
                 <thead>
                     <tr>

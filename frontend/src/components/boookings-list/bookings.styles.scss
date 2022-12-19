@@ -1,11 +1,12 @@
 .blist {
-    width: 100%;
+    // position: relative;
     background: #fff;
     padding: 20px;
-    margin: 20px;
+    margin: 10px 20px;
 
     & td {
         height: 50px;
+        font-size: 12px;
     }
 
     & .guest-name {
@@ -42,5 +43,5 @@
                 color: rgb(100, 100, 100);
             }
         }
-    }
+    } 
 }
