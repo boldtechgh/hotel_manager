@@ -1,4 +1,4 @@
-import { faArrowLeft, faArrowRight, faBuilding, faCogs, faDashboard, faMagnifyingGlass, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faBuilding, faCalendar, faCalendarAlt, faCogs, faDashboard, faDoorOpen, faMagnifyingGlass, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, useProSidebar, menuClasses } from "react-pro-sidebar";
@@ -44,8 +44,11 @@ const Layout = (props) => {
                 }}
             >
                 <a href="/dashboard/dashboard"><MenuItem icon={<FontAwesomeIcon icon={faDashboard} />}>DashBoard</MenuItem></a>
-                <a href="/checkin"><MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem></a>
+                <SubMenu label="Bookings" icon={<FontAwesomeIcon icon={faCalendarAlt} />}>
+                    <a href="/bookings"><MenuItem icon={<FontAwesomeIcon icon={faDoorOpen} />}>All Bookings</MenuItem></a>
+                    <a href="/checkin"><MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}>Check in</MenuItem></a>
                 <a href="/dashboard/checkout"><MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}>Check Out</MenuItem></a>
+                </SubMenu>
                 <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
                 <a href="/dashboard/hotels"><MenuItem icon={<FontAwesomeIcon icon={faBuilding} /> }>Hotels</MenuItem></a>
                 <a href="/dashboard/staff"><MenuItem  icon={<FontAwesomeIcon icon={faUsers} /> }>Staff</MenuItem></a>
