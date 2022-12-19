@@ -92,6 +92,7 @@ class App extends Component {
     return (
       <AuthContextProvider>
         <Routes>
+          <Route  exact path="/checkin" element={<CheckIn/>}/>
           <Route exact path="/:action" element={<Login />} />
           <Route path="/dashboard/:action" element={<Dashboard />} />
           <Route path="/setup/:action" element={<HotelSetup />} />
