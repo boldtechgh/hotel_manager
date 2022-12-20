@@ -39,10 +39,14 @@ class App extends Component {
               //   extend: "pageLength",
               //   className: "btn btn-success bg-success",
               // },
-              // {
-              //   extend: "copy",
-              //   className: "btn btn-success bg-success",
-              // },
+              {
+                extend: "copy",
+                className: "btn btn-light bg-light",
+              },
+              {
+                extend: "excel",
+                className: "btn btn-light bg-light",
+              },
               {
                 extend: "csv",
                 className: "btn btn-light bg-light",

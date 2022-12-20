@@ -7,6 +7,7 @@ import "./layout.styles.scss";
 import {Button, Form, Navbar, Nav} from 'react-bootstrap';
 import { Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import CustomButton from "../custom-button/custom-button.component";
 
 const Layout = (props) => {
     const {children} = props;
@@ -60,6 +61,7 @@ const Layout = (props) => {
             </Menu>
             </Sidebar>
             <main style={{width:'100%'}}>
+                <div className="filter">
                 <Navbar bg="light" expand="md" className="mb-3" fixed>
                     <Container fluid>
                         {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
@@ -68,8 +70,8 @@ const Layout = (props) => {
                             <Nav className="me-auto my-4 my-lg-3" style={{maxHeight: '9vh', display: 'flex', alignItems: 'center'}} navbarScroll>
                                  <Form className="d-flex">
                                 <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
-                                <Button variant="success"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                                {/* <CustomButton><FontAwesomeIcon icon={faMagnifyingGlass} /></CustomButton> */}
+                                {/* <Button variant="success"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button> */}
+                                <CustomButton width="50px" height="40px"><FontAwesomeIcon icon={faMagnifyingGlass} /></CustomButton>
                             </Form>
                             </Nav>
                             <Nav style={{paddingRight: '50px'}}>
@@ -96,6 +98,7 @@ const Layout = (props) => {
                 <div className="children">  
             
                     {children}
+                </div>
                 </div>
             </main>
         
