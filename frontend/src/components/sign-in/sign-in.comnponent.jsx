@@ -52,7 +52,7 @@ export function SignIn(props) {
       console.log(createUserProfileDocument(user));
       console.log(user);
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
