@@ -1,10 +1,20 @@
 .sb-title {
     width: 100%;
-    height: 100px;
-    // display: flex;
-    // justify-content: flex-start;
-    // align-items: center;
-    padding-left: 20px;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    padding-left: 30px;
+    color: #fff;
+    font-size: 30px;
+    margin-bottom: 10px;
+
+    & .menu-bars {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 main {
@@ -25,6 +35,21 @@ main {
         width: 100%;
         height: 100%;
         background: rgba(254, 254, 254, 0.8);
+    }
+
+    & .user-photo {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        margin-left: 50px;
+        background: blue;
+        border-radius: 50%;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
     }
 }
 .hotelrooms{

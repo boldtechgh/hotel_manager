@@ -1,4 +1,4 @@
-import { faArrowLeft, faArrowRight, faBuilding, faCalendar, faCalendarAlt, faCogs, faDashboard, faDoorOpen, faHouse, faMagnifyingGlass, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faBars, faBell, faBuilding, faCalendar, faCalendarAlt, faCogs, faDashboard, faDoorOpen, faHouse, faMagnifyingGlass, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, useProSidebar, menuClasses } from "react-pro-sidebar";
@@ -11,13 +11,14 @@ import CustomButton from "../custom-button/custom-button.component";
 
 const Layout = (props) => {
     const {children} = props;
-    const {   rtl } = useProSidebar();
+    const { collapseSidebar,  rtl } = useProSidebar();
     return (
-        <div style={{ display: "flex" ,  height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
+        <div style={{ display: "flex" , height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
             <Sidebar
                 rootStyles={{
                     [`.${sidebarClasses.container}`]: {
                     backgroundColor: '#363740',
+                    width: '100%'
                     },
                     [`.${menuClasses.container}`]: {
                         backgroundColor: '#363740',
@@ -30,7 +31,8 @@ const Layout = (props) => {
                     }
                 }}>
                 <div className="sb-title">
-                    <BrandLogo hideLogo color="#fff" />
+                  <FontAwesomeIcon className="menu-bars" onClick={() => collapseSidebar()} icon={faBars} />
+                  <BrandLogo position="relative" hideLogo color="#fff" />
                 </div>
             <Menu
                 menuItemStyles={{
@@ -75,11 +77,16 @@ const Layout = (props) => {
                             </Form>
                             </Nav>
                             <Nav style={{paddingRight: '50px'}}>
-                                <Nav.Link href="#">
-                                    <FontAwesomeIcon icon={faUser} />
-                                </Nav.Link>
+
+                                <NavDropdown title={<FontAwesomeIcon icon={faBell} />} id="navbarScrollingDropdown" align="end">
+
+                                </NavDropdown>
+                               
+                                <div className="user-photo">
+                                    <img src="" alt="" />
+                                </div>
                                 
-                                <NavDropdown title="User" id="navbarScrollingDropdown" align="end">
+                                <NavDropdown title={"User"} id="navbarScrollingDropdown" align="end">
                                     <NavDropdown.Item href="#">Profile</NavDropdown.Item>
                                     <NavDropdown.Item href="#">Logout</NavDropdown.Item>
                                 </NavDropdown>
