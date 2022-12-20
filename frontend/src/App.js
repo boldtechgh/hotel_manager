@@ -21,78 +21,78 @@ import RoomType from "./pages/rooms/roomtypes";
 
 class App extends Component {
   componentDidMount() {
-    // if (!$.fn.DataTable.isDataTable("#table")) {
-    $(document).ready(function () {
-      setTimeout(function () {
-        $("#table").DataTable({
-          retrieve: true,
-          pagingType: "full_numbers",
-          pageLength: 20,
-          processing: true,
-          dom: "Bfrtip",
-          select: {
-            style: "single",
-          },
-
-          buttons: [
-            // {
-            //   extend: "pageLength",
-            //   className: "btn btn-success bg-success",
-            // },
-            // {
-            //   extend: "copy",
-            //   className: "btn btn-success bg-success",
-            // },
-            {
-              extend: "csv",
-              className: "btn btn-light bg-light",
+    if (!$.fn.DataTable.isDataTable("#table")) {
+      $(document).ready(function () {
+        setTimeout(function () {
+          $("#table").DataTable({
+            retrieve: true,
+            pagingType: "full_numbers",
+            pageLength: 20,
+            processing: true,
+            dom: "Bfrtip",
+            select: {
+              style: "single",
             },
-            {
-              extend: "print",
-              customize: function (win) {
-                $(win.document.body).css("font-size", "10pt");
-                $(win.document.body)
-                  .find("table")
-                  .addClass("compact")
-                  .css("font-size", "inherit");
+
+            buttons: [
+              // {
+              //   extend: "pageLength",
+              //   className: "btn btn-success bg-success",
+              // },
+              // {
+              //   extend: "copy",
+              //   className: "btn btn-success bg-success",
+              // },
+              {
+                extend: "csv",
+                className: "btn btn-light bg-light",
               },
-              className: "btn btn-light bg-light",
-            },
-          ],
-
-          fnRowCallback: function (
-            nRow,
-            aData,
-            iDisplayIndex,
-            iDisplayIndexFull
-          ) {
-            var index = iDisplayIndexFull + 1;
-            $("td:first", nRow).html(index);
-            return nRow;
-          },
-
-          lengthMenu: [
-            [10, 20, 30, 50, -1],
-            [10, 20, 30, 50, "All"],
-          ],
-          columnDefs: [
-            {
-              targets: 0,
-              render: function (data, type, row, meta) {
-                return type === "export" ? meta.row + 1 : data;
+              {
+                extend: "print",
+                customize: function (win) {
+                  $(win.document.body).css("font-size", "10pt");
+                  $(win.document.body)
+                    .find("table")
+                    .addClass("compact")
+                    .css("font-size", "inherit");
+                },
+                className: "btn btn-light bg-light",
               },
+            ],
+
+            fnRowCallback: function (
+              nRow,
+              aData,
+              iDisplayIndex,
+              iDisplayIndexFull
+            ) {
+              var index = iDisplayIndexFull + 1;
+              $("td:first", nRow).html(index);
+              return nRow;
             },
-          ],
-        });
-      }, 1000);
-    });
-    // }
+
+            lengthMenu: [
+              [10, 20, 30, 50, -1],
+              [10, 20, 30, 50, "All"],
+            ],
+            columnDefs: [
+              {
+                targets: 0,
+                render: function (data, type, row, meta) {
+                  return type === "export" ? meta.row + 1 : data;
+                },
+              },
+            ],
+          });
+        }, 1000);
+      });
+    }
   }
   render() {
     return (
       <AuthContextProvider>
         <Routes>
-          <Route  exact path="/checkin" element={<CheckIn/>}/>
+          <Route exact path="/checkin" element={<CheckIn />} />
           <Route exact path="/:action" element={<Login />} />
           <Route path="/dashboard/:action" element={<Dashboard />} />
           <Route path="/setup/:action" element={<HotelSetup />} />

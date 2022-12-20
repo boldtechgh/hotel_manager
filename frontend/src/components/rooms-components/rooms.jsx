@@ -1,7 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import './rooms.styles.scss';
-import ProfilePhoto from '../../images/google.png';
 
 const RoomList = () => {
     return (

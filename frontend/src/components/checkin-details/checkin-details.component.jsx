@@ -28,13 +28,13 @@ const CheckInDetails = (props) => {
   
     return(
         <>
-        <div className='container-fluid text-light' style={{height:'500px',width:'auto'}}>
+        <div className='container-fluid' style={{height:'auto',width:'100%'}}>
             <div className="col">
                 <div className="row">
                 <Form>
-                <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+                <Form.Group as={Row} className="mb-4" controlId="formPlaintextEmail">
                 <Col sm='2'>
-                <Form.Label htmlFor="exampleColorInput" className='text-light'>Select Room</Form.Label>
+                <Form.Label htmlFor="exampleColorInput">Select Room</Form.Label>
 
                 <Form.Select size="sm">
                 <option>1</option>
@@ -46,7 +46,7 @@ const CheckInDetails = (props) => {
                 </Col>
                
                 <Col sm='2'>
-                <Form.Label htmlFor="exampleColorInput" className='text-light'>Room Type</Form.Label>
+                <Form.Label htmlFor="exampleColorInput">Room Type</Form.Label>
                 <Form.Select size="sm">
                 <option>Suite</option>
                 <option>Deluxe</option>
@@ -79,8 +79,8 @@ const CheckInDetails = (props) => {
     </Button>
 </Col>
                 </Form.Group>
-                <Form.Group>
-                    <Container className='bg-light d-flex' style={{margin:'0', height: '120px', width: '900px' }}>
+                <Form.Group className="mb-5">
+                    <Container className='bg-secondary mb-4 d-flex' style={{margin:'0', height: '120px', width: '100%' }}>
                         <Row xs="sm" className='text-center'>
                             <Col><Badge  bg="primary"  className='justify-content-center' style={{width:'70px',justifyContent:'center', paddingtop:'200px',height:'30px'}}><span className='pt-5 align-center'>Room 1</span></Badge></Col>
                             <Col><Badge  bg="primary"  className='justify-content-center' style={{width:'70px',justifyContent:'center', paddingtop:'200px',height:'30px'}}><span className='pt-5 align-center'>Room 1</span></Badge></Col>
@@ -89,7 +89,7 @@ const CheckInDetails = (props) => {
                             <Col><Badge  bg="primary"  className='justify-content-center' style={{width:'70px',justifyContent:'center', paddingtop:'200px',height:'30px'}}><span className='pt-5 align-center'>Room 1</span></Badge></Col>
                         </Row>
                     </Container>
-                <Form.Group   className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group   className="mb-4" controlId="exampleForm.ControlInput1">
                     <Col sm='4'>
         <Form.Label>Check In Date and Time</Form.Label>
         <Form.Control type="datetime-local"  />
