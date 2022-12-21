@@ -47,7 +47,7 @@ export function SignIn(props) {
 
   useEffect(() => {
     if (user != null) {
-      navigate("/dashboard/dashboard");
+      //navigate("/dashboard/dashboard");
       createUserProfileDocument(user);
       console.log(createUserProfileDocument(user));
       console.log(user);

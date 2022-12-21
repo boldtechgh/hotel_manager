@@ -37,7 +37,7 @@ const Layout = (props) => {
   const handleSignOut = async () => {
     try {
       await logOut();
-      navigate("../signin", replace);
+      navigate("../signin");
     } catch (error) {
       console.log(error);
     }
