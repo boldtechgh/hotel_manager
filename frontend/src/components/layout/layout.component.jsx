@@ -26,16 +26,18 @@ import { BrandLogo } from "../Logo";
 import "./layout.styles.scss";
 import { Button, Form, Navbar, Nav } from "react-bootstrap";
 import { Container, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../firebase/AuthContext";
 
 const Layout = (props) => {
   const { children } = props;
+  const navigate = useNavigate();
   const { rtl } = useProSidebar();
   const { user, logOut } = UserAuth();
   const handleSignOut = async () => {
     try {
       await logOut();
+      navigate("../signin", replace);
     } catch (error) {
       console.log(error);
     }
