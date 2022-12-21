@@ -1,9 +1,28 @@
-h1 {
+.component-title, .sub-title {
+    width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 0 20px;
+}
+
+.component-title {
+    // width: 100%;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: flex-start;
+    // padding: 0 20px;
+    margin-top: 40px;
+    
+    & h1 {
     font-style: normal;
         font-weight: 700;
-        font-size: 24px;
+        font-size: 28px;
         line-height: 120%;
         /* identical to box height, or 29px */
     color: rgb(30, 30, 30);
         letter-spacing: 0.005em;
 }
+}
+
+

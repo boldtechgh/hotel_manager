@@ -16,14 +16,16 @@ import HotelSetup from "./pages/Hotel_Setup/hotel_setup";
 import { AuthContextProvider } from "./components/firebase/AuthContext";
 import CheckIn from "./pages/checkin/chekin.page";
 import Bookings from "./pages/bookings";
+import RoomType from "./pages/rooms/roomtypes";
+import Rooms from "./pages/rooms/";
 
 class App extends Component {
-  render() {
-    if (!$.fn.DataTable.isDataTable("#myTable")) {
+  componentDidMount() {
+    if (!$.fn.DataTable.isDataTable("#table")) {
       $(document).ready(function () {
         setTimeout(function () {
           $("#table").DataTable({
-            // paging: false,
+            retrieve: true,
             pagingType: "full_numbers",
             pageLength: 20,
             processing: true,
@@ -33,17 +35,21 @@ class App extends Component {
             },
 
             buttons: [
-              {
-                extend: "pageLength",
-                className: "btn btn-success bg-success",
-              },
+              // {
+              //   extend: "pageLength",
+              //   className: "btn btn-success bg-success",
+              // },
               {
                 extend: "copy",
-                className: "btn btn-success bg-success",
+                className: "btn btn-light bg-light",
+              },
+              {
+                extend: "excel",
+                className: "btn btn-light bg-light",
               },
               {
                 extend: "csv",
-                className: "btn btn-success bg-success",
+                className: "btn btn-light bg-light",
               },
               {
                 extend: "print",
@@ -54,7 +60,7 @@ class App extends Component {
                     .addClass("compact")
                     .css("font-size", "inherit");
                 },
-                className: "btn btn-success bg-success",
+                className: "btn btn-light bg-light",
               },
             ],
 
@@ -85,7 +91,8 @@ class App extends Component {
         }, 1000);
       });
     }
-
+  }
+  render() {
     return (
       <AuthContextProvider>
         <Routes>
@@ -95,6 +102,8 @@ class App extends Component {
           <Route path="/setup/:action" element={<HotelSetup />} />
           <Route path="/checkin" element={<CheckIn />} />
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/room-list" element={<Rooms />} />
+          <Route path="/room-type" element={<RoomType />} />
         </Routes>
       </AuthContextProvider>
     );
