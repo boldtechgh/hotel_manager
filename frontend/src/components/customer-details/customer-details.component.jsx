@@ -9,7 +9,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 const CustomerDetails = () => {
   return (
     <>
-      <Form className="container-fluid py-3 text-light">
+      <Form className="container-fluid py-3 text-dark">
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Full Name</Form.Label>

@@ -16,7 +16,7 @@ export function SignIn(props) {
 
     const userRef = doc(db, `users/${user.uid}`);
     const snapShot = await getDoc(userRef);
-    console.log(snapShot);
+    // console.log(snapShot);
 
     if (!snapShot.exists()) {
       const { displayName, email } = user;
@@ -46,13 +46,13 @@ export function SignIn(props) {
   };
 
   useEffect(() => {
-    if (user != null) {
+    if (user !== null) {
       navigate("/dashboard/dashboard");
       createUserProfileDocument(user);
-      console.log(createUserProfileDocument(user));
+      // console.log(createUserProfileDocument(user));
       console.log(user);
     }
-  }, [user, navigate]);
+  }, [user]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

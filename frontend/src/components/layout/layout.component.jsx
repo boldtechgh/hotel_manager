@@ -18,14 +18,17 @@ import { Link } from "react-router-dom";
 import CustomButton from "../custom-button/custom-button.component";
 import UserPhoto from "../../images/user.png";
 import { UserAuth } from "../firebase/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Layout = (props) => {
   const { children } = props;
-  const { rtl } = useProSidebar();
+  const { collapseSidebar, rtl } = useProSidebar();
   const { user, logOut } = UserAuth();
+  const navigate = useNavigate();
   const handleSignOut = async () => {
     try {
-      await logOut();
+      await logOut()
+      navigate('/signin');
     } catch (error) {
       console.log(error);
     }
@@ -125,6 +128,7 @@ const Layout = (props) => {
                 </div> */}
                 
         <div className="children">{children}</div>
+        </div>
       </main>
     </div>
   );
