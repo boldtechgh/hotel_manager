@@ -1,18 +1,36 @@
 import { faArrowLeft, faArrowRight, faBars, faBell, faBuilding, faCalendar, faCalendarAlt, faCogs, faDashboard, faDoorOpen, faHouse, faMagnifyingGlass, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses, useProSidebar, menuClasses } from "react-pro-sidebar";
+import {
+  Sidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  sidebarClasses,
+  useProSidebar,
+  menuClasses,
+} from "react-pro-sidebar";
 import { BrandLogo } from "../Logo";
 import "./layout.styles.scss";
-import {Button, Form, Navbar, Nav} from 'react-bootstrap';
+import { Button, Form, Navbar, Nav } from "react-bootstrap";
 import { Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CustomButton from "../custom-button/custom-button.component";
 import UserPhoto from "../../images/user.png";
+import { UserAuth } from "../firebase/AuthContext";
 
 const Layout = (props) => {
-    const {children} = props;
-    const { collapseSidebar,  rtl } = useProSidebar();
+  const { children } = props;
+  const { rtl } = useProSidebar();
+  const { user, logOut } = UserAuth();
+  const handleSignOut = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
     return (
         <div style={{ display: "flex" , height: '100vh', direction: rtl ? 'rtl' : 'ltr' }}>
             <Sidebar
@@ -89,7 +107,9 @@ const Layout = (props) => {
                                 
                                 <NavDropdown title={"User"} id="navbarScrollingDropdown" align="end">
                                     <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                                    <NavDropdown.Item href="#">Logout</NavDropdown.Item>
+                                    <NavDropdown.Item as="span" onClick={handleSignOut}>
+                                      Logout
+                                    </NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
@@ -103,16 +123,12 @@ const Layout = (props) => {
                         </button>
                     ) : null}  
                 </div> */}
-                <div className="children">  
-            
-                    {children}
-                </div>
-                </div>
-            </main>
-        
-        </div>
-        
-    )
-}
+                
+        <div className="children">{children}</div>
+      </main>
+    </div>
+  );
+};
+
 
 export default Layout;
