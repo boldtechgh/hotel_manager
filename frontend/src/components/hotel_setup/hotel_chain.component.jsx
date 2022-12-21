@@ -115,9 +115,8 @@ export function HotelChain() {
         )}
         {active === "address" && (
           <>
-            <CustomButton width="20%" position="relative" height="40px">
-              <FontAwesomeIcon icon={faArrowLeft} onClick={handlePrevious} />{" "}
-              Previous
+            <CustomButton width="20%" height="40px" onClick={handlePrevious}>
+              <FontAwesomeIcon icon={faArrowLeft} /> Previous
             </CustomButton>
 
             <h2>Hotel chain address</h2>
