@@ -38,11 +38,12 @@ main {
     }
 
     & .user-photo {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
         margin-right: 10px;
         margin-left: 50px;
-        background: blue;
+        background: #9d9e9b;
+        color: #fff;
         border-radius: 50%;
 
         & img {
@@ -50,6 +51,15 @@ main {
             height: 100%;
             border-radius: 50%;
         }
+    }
+
+    & .notifications {
+
+        & svg {
+            color: #779341;
+            font-size: 20px;
+        }
+        
     }
 }
 .hotelrooms{

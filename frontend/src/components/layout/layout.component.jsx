@@ -8,6 +8,7 @@ import {Button, Form, Navbar, Nav} from 'react-bootstrap';
 import { Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CustomButton from "../custom-button/custom-button.component";
+import UserPhoto from "../../images/user.png";
 
 const Layout = (props) => {
     const {children} = props;
@@ -78,12 +79,12 @@ const Layout = (props) => {
                             </Nav>
                             <Nav style={{paddingRight: '50px'}}>
 
-                                <NavDropdown title={<FontAwesomeIcon icon={faBell} />} id="navbarScrollingDropdown" align="end">
+                                <NavDropdown className="notifications" title={<FontAwesomeIcon icon={faBell} />} id="navbarScrollingDropdown" align="end">
 
                                 </NavDropdown>
                                
                                 <div className="user-photo">
-                                    <img src="" alt="" />
+                                    <img src={UserPhoto} alt="user" />
                                 </div>
                                 
                                 <NavDropdown title={"User"} id="navbarScrollingDropdown" align="end">
