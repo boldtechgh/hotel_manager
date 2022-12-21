@@ -10,37 +10,35 @@ import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 import { Marginer } from "../marginer";
 import "./hotel_setup.styles.scss";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase.utils";
+import { UserAuth } from "../firebase/AuthContext";
 
 export function HotelChain() {
-  const [formdata, setformdata] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    website: "",
+    address: "",
+    digitalAddress: "",
+    city: "",
+    region: "",
+    country: "Ghana",
+    zipCode: "00233",
+  });
   const [active, setActive] = useState("register");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [website, setWebsite] = useState("");
-  const [address, setAddress] = useState("");
-  const [digitalAddress, setDigitalAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [region, setRegion] = useState("");
-  const [country, setCountry] = useState("Ghana");
-  const [zipCode, setZipCode] = useState("00233");
 
   const handleChange = (event) => {
     const { value, name } = event.target;
-    <>
-      {name === "name" && setName(value)}
-      {name === "phone" && setPhone(value)}
-      {name === "email" && setEmail(value)}
-      {name === "website" && setWebsite(value)}
-      {name === "address" && setAddress(value)}
-      {name === "digitalAddress" && setDigitalAddress(value)}
-      {name === "city" && setCity(value)}
-      {name === "region" && setRegion(value)}
-      {name === "country" && setCountry(value)}
-      {name === "zipCode" && setZipCode(value)}
-    </>;
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
   };
-
+  console.log(formData);
   const handleProceed = (event) => {
     event.preventDefault();
 
@@ -52,12 +50,39 @@ export function HotelChain() {
 
     setActive("register");
   };
-
-  const handleSubmit = (event) => {
+  const { user } = UserAuth();
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const userRef = doc(db, `users/${user.uid}`);
+    const snapShot = await getDoc(userRef);
 
-    setActive("");
+    if (snapShot.exists()) {
+      const userRef2 = doc(db, `users/${user.uid}/hotelchain/${user.uid}`);
+      const createdAt = new Date();
+      try {
+        await setDoc(userRef2, formData);
+        console.log("Success");
+        document.location.href = "/dashboard/dashboard";
+      } catch (error) {
+        console.log("error creating user", error.message);
+      }
+    }
+
+    // setActive("");
   };
+
+  const {
+    name,
+    phone,
+    email,
+    website,
+    address,
+    digitalAddress,
+    city,
+    region,
+    country,
+    zipCode,
+  } = formData;
 
   return (
     <div className="hcmain">
@@ -73,7 +98,7 @@ export function HotelChain() {
               type="text"
               placeholder="Enter hotel chain name"
               value={name}
-              onChange={handleChange}
+              handleChange={handleChange}
               label="Name"
               required
             />
