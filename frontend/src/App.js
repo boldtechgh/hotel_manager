@@ -16,8 +16,8 @@ import HotelSetup from "./pages/Hotel_Setup/hotel_setup";
 import { AuthContextProvider } from "./components/firebase/AuthContext";
 import CheckIn from "./pages/checkin/chekin.page";
 import Bookings from "./pages/bookings";
-import Rooms from "./pages/rooms";
 import RoomType from "./pages/rooms/roomtypes";
+import Rooms from "./pages/rooms/";
 
 class App extends Component {
   componentDidMount() {

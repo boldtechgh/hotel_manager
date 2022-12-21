@@ -2,9 +2,9 @@ import React, { useMemo, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import './bookings.styles.scss';
 import ProfilePhoto from '../../images/google.png';
-import DataTable from "react-data-table-component";
-import DataTableExtensions from 'react-data-table-component-extensions';
-import 'react-data-table-component-extensions/dist/index.css';
+// import DataTable from "react-data-table-component";
+// import DataTableExtensions from 'react-data-table-component-extensions';
+// import 'react-data-table-component-extensions/dist/index.css';
 
 const BookingsList = () => {
 //     const columns = [
