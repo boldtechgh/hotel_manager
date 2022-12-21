@@ -15,7 +15,7 @@ import LogoImg from '../../images/google.png';
 const DashComponent = () => {
     return (
         <>
-        <ComponentTitle>Dashboard</ComponentTitle>
+        <ComponentTitle><h1>Dashboard</h1></ComponentTitle>
         <div className='info-section'>
             <InfoCard bgColor="#488A99" icon={<FontAwesomeIcon icon={faBuilding} />} name="Rooms" value="200" />
             <InfoCard bgColor="#1C4E80" icon={<FontAwesomeIcon icon={faBuilding} />} name="Occupied" value="200" />

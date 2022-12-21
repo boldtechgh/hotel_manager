@@ -1,12 +1,15 @@
 import {
   faArrowLeft,
   faArrowRight,
+  faBars,
+  faBell,
   faBuilding,
   faCalendar,
   faCalendarAlt,
   faCogs,
   faDashboard,
   faDoorOpen,
+  faHouse,
   faMagnifyingGlass,
   faUser,
   faUsers,
@@ -27,6 +30,8 @@ import "./layout.styles.scss";
 import { Button, Form, Navbar, Nav } from "react-bootstrap";
 import { Container, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import CustomButton from "../custom-button/custom-button.component";
+import UserPhoto from "../../images/user.png";
 import { UserAuth } from "../firebase/AuthContext";
 
 const Layout = (props) => {
@@ -55,6 +60,7 @@ const Layout = (props) => {
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
             backgroundColor: "#363740",
+            width: "100%",
           },
           [`.${menuClasses.container}`]: {
             backgroundColor: "#363740",
@@ -68,7 +74,12 @@ const Layout = (props) => {
         }}
       >
         <div className="sb-title">
-          <BrandLogo hideLogo color="#fff" />
+          <FontAwesomeIcon
+            className="menu-bars"
+            onClick={() => collapseSidebar()}
+            icon={faBars}
+          />
+          <BrandLogo position="relative" hideLogo color="#fff" />
         </div>
         <Menu
           menuItemStyles={{
@@ -91,21 +102,29 @@ const Layout = (props) => {
             label="Bookings"
             icon={<FontAwesomeIcon icon={faCalendarAlt} />}
           >
-            <a href="/bookings">
-              <MenuItem icon={<FontAwesomeIcon icon={faDoorOpen} />}>
-                All Bookings
-              </MenuItem>
-            </a>
-            <a href="/checkin">
-              <MenuItem icon={<FontAwesomeIcon icon={faArrowRight} />}>
-                Check in
-              </MenuItem>
-            </a>
+            <MenuItem
+              routerLink={<Link to="/bookings" />}
+              icon={<FontAwesomeIcon icon={faDoorOpen} />}
+            >
+              All Bookings
+            </MenuItem>
+            <MenuItem
+              routerLink={<Link to="/checkin" />}
+              icon={<FontAwesomeIcon icon={faArrowRight} />}
+            >
+              Check in
+            </MenuItem>
             <a href="/dashboard/checkout">
               <MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}>
                 Check Out
               </MenuItem>
             </a>
+          </SubMenu>
+          <SubMenu label="Rooms" icon={<FontAwesomeIcon icon={faHouse} />}>
+            <MenuItem routerLink={<Link to="/room-list" />}>All rooms</MenuItem>
+            <MenuItem routerLink={<Link to="/room-type" />}>
+              Room Types
+            </MenuItem>
           </SubMenu>
           <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
             <a href="/dashboard/hotels">
@@ -122,53 +141,61 @@ const Layout = (props) => {
         </Menu>
       </Sidebar>
       <main style={{ width: "100%" }}>
-        <Navbar bg="light" expand="md" className="mb-3" fixed>
-          <Container fluid>
-            {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
-            <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
-              <Nav
-                className="me-auto my-4 my-lg-3"
-                style={{
-                  maxHeight: "9vh",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-                navbarScroll
-              >
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="success">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                  </Button>
-                  {/* <CustomButton><FontAwesomeIcon icon={faMagnifyingGlass} /></CustomButton> */}
-                </Form>
-              </Nav>
-              <Nav style={{ paddingRight: "50px" }}>
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faUser} />
-                </Nav.Link>
-
-                <NavDropdown
-                  title="Profile"
-                  id="navbarScrollingDropdown"
-                  align="end"
+        <div className="filter">
+          <Navbar bg="light" expand="md" className="mb-3" fixed>
+            <Container fluid>
+              {/* <Navbar.Brand href="#"><BrandLogo hideLogo /></Navbar.Brand> */}
+              <Navbar.Toggle aria-controls="navbarScroll" />
+              <Navbar.Collapse id="navbarScroll">
+                <Nav
+                  className="me-auto my-4 my-lg-3"
+                  style={{
+                    maxHeight: "9vh",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                  navbarScroll
                 >
-                  {user?.displayName}
-                  <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                  <NavDropdown.Item as="span" onClick={handleSignOut}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+                  <Form className="d-flex">
+                    <Form.Control
+                      type="search"
+                      placeholder="Search"
+                      className="me-2"
+                      aria-label="Search"
+                    />
+                    {/* <Button variant="success"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button> */}
+                    <CustomButton width="50px" height="40px">
+                      <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </CustomButton>
+                  </Form>
+                </Nav>
+                <Nav style={{ paddingRight: "50px" }}>
+                  <NavDropdown
+                    className="notifications"
+                    title={<FontAwesomeIcon icon={faBell} />}
+                    id="navbarScrollingDropdown"
+                    align="end"
+                  ></NavDropdown>
+
+                  <div className="user-photo">
+                    <img src={UserPhoto} alt="user" />
+                  </div>
+
+                  <NavDropdown
+                    title={"User"}
+                    id="navbarScrollingDropdown"
+                    align="end"
+                  >
+                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+                    <NavDropdown.Item as="span" onClick={handleSignOut}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        </div>
         {/* <div style={{ display: 'flex', padding: 10 }}>
                     <CustomButton onClick={() => collapseSidebar()}><FontAwesomeIcon icon={faBuilding} /></CustomButton>
                     {broken ? (
@@ -177,6 +204,7 @@ const Layout = (props) => {
                         </button>
                     ) : null}  
                 </div> */}
+
         <div className="children">{children}</div>
       </main>
     </div>

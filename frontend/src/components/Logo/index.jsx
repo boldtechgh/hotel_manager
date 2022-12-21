@@ -23,7 +23,7 @@ float: ${({float}) => (float ? float : 'none')};
 `;
 
 const LogoTitle = styled.h2`
-  position: absolute;
+  position: ${({position}) => (position ? position : 'absolute')};
   float: ${({float}) => (float ? float : 'none')};
   margin: 20px;
   font-size: ${({ size }) => (size ? size + 'px' : '30px')};
@@ -37,7 +37,7 @@ const StyledLink = styled(Link)`
 `;
 
 export function BrandLogo(props) {
-  const { logoSize, textSize, color, hideLogo, hideLogoTitle, float } = props;
+  const { logoSize, textSize, color, hideLogo, hideLogoTitle, float, position } = props;
 
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
 
@@ -52,7 +52,7 @@ export function BrandLogo(props) {
       )}
       {!isMobile && !hideLogoTitle && (
         <StyledLink to="/home">
-          <LogoTitle size={textSize} color={color} float={float}>
+          <LogoTitle size={textSize} color={color} float={float} position={position}>
             Hotelica
           </LogoTitle>
         </StyledLink>

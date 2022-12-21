@@ -3,27 +3,28 @@ import Tabs from "react-bootstrap/esm/Tabs";
 import Tab from "react-bootstrap/Tab";
 import CheckInDetails from "../checkin-details/checkin-details.component";
 import CustomerDetails from "../customer-details/customer-details.component";
+import './checkin-header.styles.scss';
 
 const CheckInHeader = () => {
   return (
     <>
       <div className="container">
         <Tabs
-          defaultActiveKey="checkin"
+          defaultActiveKey="home"
           id="justify-tab-example"
-          className="mb-3"
-          justify
+          className="mb-4"
+          fill
         >
-          <Tab eventKey="home" title="Check In Details">
+          <Tab className="tab" eventKey="home" title="Check In Details">
             <CheckInDetails />
           </Tab>
-          <Tab eventKey="profile" title="Customer Details">
+          <Tab className="tab" eventKey="profile" title="Customer Details">
             <CustomerDetails />
           </Tab>
-          <Tab eventKey="longer-tab" title="Billing Info">
+          <Tab className="tab" eventKey="longer-tab" title="Billing Info">
             Billing Info
           </Tab>
-          <Tab eventKey="contact" title="Summary">
+          <Tab className="tab" eventKey="contact" title="Summary">
             Summary
           </Tab>
         </Tabs>
