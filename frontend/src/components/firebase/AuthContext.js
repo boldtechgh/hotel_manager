@@ -4,48 +4,83 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase.utils.js";
 
 const AuthContext = createContext();
 
-// export const createUserProfileDocument = async (user, additionalData) => {
-//   if (!user) return;
-
-//   const userRef = db.doc(`users/${user.uid}`);
-//   const snapShot = await getDoc(userRef);
-//   console.log(snapShot);
-
-//   if (!snapShot.exists()) {
-//     const { displayName, email } = user;
-//     const createdAt = new Date();
-//     try {
-//       await setDoc(userRef, {
-//         displayName,
-//         email,
-//         createdAt,
-//         ...additionalData,
-//       });
-//       userRef.set = await addDoc(collection(db, "users"), {});
-//     } catch (error) {
-//       console.log("error creating user", error.message);
-//     }
-//   }
-
-//   return userRef;
-// };
-
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  //createUserProfileDocument(user);
+
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
-    // signInWithRedirect(auth,provider);
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        if (user) {
+          document.location.href = "/setup/hotel_chain";
+        }
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
+
+  const passwordSignIn = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+
+        if (user) {
+          document.location.href = "/dashboard/dashboard";
+        }
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
+
+  const passwordSignUp = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+
+        if (user) {
+          console.log(user);
+          document.location.href = "/setup/hotel_chain";
+        }
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
+      });
   };
 
   const logOut = () => {
-    signOut(auth);
+    signOut(auth).then(() => {
+      document.location.href = "/signin";
+    });
   };
 
   useEffect(() => {
@@ -58,7 +93,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, user }}>
+    <AuthContext.Provider
+      value={{ googleSignIn, logOut, user, passwordSignIn, passwordSignUp }}
+    >
       {children}
     </AuthContext.Provider>
   );

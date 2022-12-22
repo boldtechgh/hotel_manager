@@ -1,31 +1,38 @@
 import React, { useState } from "react";
-
+import GoogleIcon from "../../images/google.png";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { Marginer } from "../marginer";
+import { UserAuth } from "../../components/firebase/AuthContext";
 
 export function SignUp() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [username, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState("");
+  const [formData, setFormData] = useState({
+    fistName: "",
+    lastname: "",
+    username: "",
+    email: "",
+    password: "",
+    passwordVerify: "",
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  const { googleSignIn, user, passwordSignUp } = UserAuth();
+  const { firstName, lastName, username, email, password, passwordVerify } =
+    formData;
 
   const handleChange = (event) => {
     const { value, name } = event.target;
-    <>
-      {name === "firstName" && setFirstName(value)}
-      {name === "lastName" && setLastName(value)}
-      {name === "userName" && setUserName(value)}
-      {name === "email" && setEmail(value)}
-      {name === "password" && setPassword(value)}
-      {name === "passwordVerify" && setPasswordVerify(value)}
-    </>;
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    passwordSignUp(email, password);
   };
 
   return (
@@ -42,9 +49,12 @@ export function SignUp() {
 
       <h2>Sign up</h2>
 
-      {/* <div>
-              <button className='google-btn'><img src={GoogleIcon} alt="Google icon" />Sign in with Google</button>
-            </div> */}
+      <div>
+        <button className="google-btn">
+          <img src={GoogleIcon} alt="Google icon" />
+          Sign up with Google
+        </button>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div className="merge-input">

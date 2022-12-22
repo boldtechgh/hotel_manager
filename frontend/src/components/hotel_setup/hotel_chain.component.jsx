@@ -15,6 +15,7 @@ import { db } from "../firebase/firebase.utils";
 import { UserAuth } from "../firebase/AuthContext";
 
 export function HotelChain() {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -53,6 +54,8 @@ export function HotelChain() {
   const { user } = UserAuth();
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(user);
+    setLoading(true);
     const userRef = doc(db, `users/${user.uid}`);
     const snapShot = await getDoc(userRef);
 
@@ -60,11 +63,14 @@ export function HotelChain() {
       const userRef2 = doc(db, `users/${user.uid}/hotelchain/${user.uid}`);
       const createdAt = new Date();
       try {
-        await setDoc(userRef2, formData);
-        console.log("Success");
-        document.location.href = "/dashboard/dashboard";
+        await setDoc(userRef2, formData).then(() => {
+          console.log("Success");
+          setLoading(false);
+          document.location.href = "/dashboard/dashboard";
+        });
       } catch (error) {
         console.log("error creating user", error.message);
+        setLoading(false);
       }
     }
 
@@ -229,7 +235,8 @@ export function HotelChain() {
 
             <Marginer direction="vertical" margin={50} />
             <CustomButton type="Submit">
-              Save <FontAwesomeIcon icon={faFloppyDisk} />
+              {loading ? "loading..." : "Save"}{" "}
+              <FontAwesomeIcon icon={faFloppyDisk} />
             </CustomButton>
           </>
         )}
