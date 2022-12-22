@@ -9,6 +9,8 @@ import { Marginer } from "../marginer";
 import { UserAuth } from "../../components/firebase/AuthContext";
 import { db } from "../firebase/firebase.utils";
 
+// const auth = getAuth();
+
 export function SignIn(props) {
   // !Create google SigninProfile
   const createUserProfileDocument = async (user, additionalData) => {
@@ -16,7 +18,6 @@ export function SignIn(props) {
 
     const userRef = doc(db, `users/${user.uid}`);
     const snapShot = await getDoc(userRef);
-    console.log(snapShot);
 
     if (!snapShot.exists()) {
       const { displayName, email } = user;
@@ -35,44 +36,48 @@ export function SignIn(props) {
   };
 
   //google
-  const { googleSignIn, user } = UserAuth();
+  const { googleSignIn, user, passwordSignIn } = UserAuth();
   const navigate = useNavigate();
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();
+      // if (login) return (document.location.href = "/dashboard/dashboard");
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (user != null) {
+    if (user !== null) {
       //navigate("/dashboard/dashboard");
       createUserProfileDocument(user);
-      console.log(createUserProfileDocument(user));
+      // console.log(createUserProfileDocument(user));
       console.log(user);
     }
-  }, [user, navigate]);
+  }, [user]);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    this.setState({ email: "", password: "" });
-  };
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleChange = (event) => {
     const { value, name } = event.target;
 
-    {
-      name === "email" && setEmail(value);
-    }
-    {
-      name === "password" && setPassword(value);
-    }
-    this.setState({ [name]: value });
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  const { email, password } = formData;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    await passwordSignIn(email, password);
   };
 
   return (

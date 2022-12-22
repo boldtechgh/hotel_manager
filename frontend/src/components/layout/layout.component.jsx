@@ -29,20 +29,21 @@ import { BrandLogo } from "../Logo";
 import "./layout.styles.scss";
 import { Button, Form, Navbar, Nav } from "react-bootstrap";
 import { Container, NavDropdown } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CustomButton from "../custom-button/custom-button.component";
 import UserPhoto from "../../images/user.png";
 import { UserAuth } from "../firebase/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Layout = (props) => {
   const { children } = props;
-  const navigate = useNavigate();
-  const { rtl } = useProSidebar();
+  const { collapseSidebar, rtl } = useProSidebar();
   const { user, logOut } = UserAuth();
+  const navigate = useNavigate();
+
   const handleSignOut = async () => {
     try {
       await logOut();
-      navigate("../signin");
     } catch (error) {
       console.log(error);
     }
@@ -114,11 +115,12 @@ const Layout = (props) => {
             >
               Check in
             </MenuItem>
-            <a href="/dashboard/checkout">
-              <MenuItem icon={<FontAwesomeIcon icon={faArrowLeft} />}>
-                Check Out
-              </MenuItem>
-            </a>
+            <MenuItem
+              routerLink={<Link to="/checkout" />}
+              icon={<FontAwesomeIcon icon={faArrowLeft} />}
+            >
+              Check Out
+            </MenuItem>
           </SubMenu>
           <SubMenu label="Rooms" icon={<FontAwesomeIcon icon={faHouse} />}>
             <MenuItem routerLink={<Link to="/room-list" />}>All rooms</MenuItem>
@@ -127,16 +129,19 @@ const Layout = (props) => {
             </MenuItem>
           </SubMenu>
           <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
-            <a href="/dashboard/hotels">
-              <MenuItem icon={<FontAwesomeIcon icon={faBuilding} />}>
-                Hotels
-              </MenuItem>
-            </a>
-            <a href="/dashboard/staff">
-              <MenuItem icon={<FontAwesomeIcon icon={faUsers} />}>
-                Staff
-              </MenuItem>
-            </a>
+            <MenuItem
+              routerLink={<Link to="/dashboard/hotels" />}
+              icon={<FontAwesomeIcon icon={faBuilding} />}
+            >
+              Hotels
+            </MenuItem>
+
+            <MenuItem
+              routerLink={<Link to="/dashboard/staff" />}
+              icon={<FontAwesomeIcon icon={faUsers} />}
+            >
+              Staff
+            </MenuItem>
           </SubMenu>
         </Menu>
       </Sidebar>
@@ -178,7 +183,11 @@ const Layout = (props) => {
                   ></NavDropdown>
 
                   <div className="user-photo">
-                    <img src={UserPhoto} alt="user" />
+                    <img
+                      src={user?.photoURL}
+                      alt="user"
+                      crossOrigin="use-credentials"
+                    />
                   </div>
 
                   <NavDropdown
@@ -186,8 +195,9 @@ const Layout = (props) => {
                     id="navbarScrollingDropdown"
                     align="end"
                   >
+                    {user?.displayName}
                     <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                    <NavDropdown.Item as="span" onClick={handleSignOut}>
+                    <NavDropdown.Item onClick={handleSignOut}>
                       Logout
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -195,8 +205,7 @@ const Layout = (props) => {
               </Navbar.Collapse>
             </Container>
           </Navbar>
-        </div>
-        {/* <div style={{ display: 'flex', padding: 10 }}>
+          {/* <div style={{ display: 'flex', padding: 10 }}>
                     <CustomButton onClick={() => collapseSidebar()}><FontAwesomeIcon icon={faBuilding} /></CustomButton>
                     {broken ? (
                         <button className="sb-button" onClick={() => toggleSidebar()}>
@@ -205,7 +214,8 @@ const Layout = (props) => {
                     ) : null}  
                 </div> */}
 
-        <div className="children">{children}</div>
+          <div className="children">{children}</div>
+        </div>
       </main>
     </div>
   );

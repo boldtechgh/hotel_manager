@@ -17,7 +17,7 @@ import { AuthContextProvider } from "./components/firebase/AuthContext";
 import CheckIn from "./pages/checkin/chekin.page";
 import Bookings from "./pages/bookings";
 import RoomType from "./pages/rooms/roomtypes";
-import Rooms from "./pages/rooms/";
+import Rooms from "./pages/rooms";
 
 class App extends Component {
   componentDidMount() {

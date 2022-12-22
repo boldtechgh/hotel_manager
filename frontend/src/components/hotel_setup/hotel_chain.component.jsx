@@ -1,4 +1,8 @@
-import { faArrowRight, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faFloppyDisk,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useState } from "react";
@@ -6,62 +10,101 @@ import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 import { Marginer } from "../marginer";
 import "./hotel_setup.styles.scss";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase.utils";
+import { UserAuth } from "../firebase/AuthContext";
 
 export function HotelChain() {
-  const [active, setActive] = useState("register");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [website, setWebsite] = useState("");
-  const [address, setAddress] = useState("");
-  const [digitalAddress, setDigitalAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [region, setRegion] = useState("");
-  const [country, setCountry] = useState("Ghana");
-  const [zipCode, setZipCode] = useState("00233");
-
-  const [formValue, setFormValue] = useState({
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
     email: "",
-    username: "",
-    password: "",
+    website: "",
+    address: "",
+    digitalAddress: "",
+    city: "",
+    region: "",
+    country: "Ghana",
+    zipCode: "00233",
   });
+  const [active, setActive] = useState("register");
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormValue((prevState) => {
+    const { value, name } = event.target;
+    setFormData((prevState) => {
       return {
         ...prevState,
         [name]: value,
       };
     });
   };
-
+  console.log(formData);
   const handleProceed = (event) => {
     event.preventDefault();
 
     setActive("address");
   };
 
-  const handleSubmit = (event) => {
+  const handlePrevious = (event) => {
     event.preventDefault();
 
-    setActive("");
+    setActive("register");
   };
-  const { email1, username, password } = formValue;
+  const { user } = UserAuth();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(user);
+    setLoading(true);
+    const userRef = doc(db, `users/${user.uid}`);
+    const snapShot = await getDoc(userRef);
+
+    if (snapShot.exists()) {
+      const userRef2 = doc(db, `users/${user.uid}/hotelchain/${user.uid}`);
+      const createdAt = new Date();
+      try {
+        await setDoc(userRef2, formData).then(() => {
+          console.log("Success");
+          setLoading(false);
+          document.location.href = "/dashboard/dashboard";
+        });
+      } catch (error) {
+        console.log("error creating user", error.message);
+        setLoading(false);
+      }
+    }
+
+    // setActive("");
+  };
+
+  const {
+    name,
+    phone,
+    email,
+    website,
+    address,
+    digitalAddress,
+    city,
+    region,
+    country,
+    zipCode,
+  } = formData;
+
   return (
     <div className="hcmain">
-      {active === "register" && (
-        <>
-          <h2>Register hotel chain</h2>
-          <p>Fill in the form below with details of your umbrella company</p>
-          <form onSubmit={handleProceed}>
+      <form onSubmit={handleSubmit}>
+        {active === "register" && (
+          <>
+            <h2>Register hotel chain</h2>
+            <p>Fill in the form below with details of your umbrella company</p>
+
             <FormInput
               name="name"
               inputType="input"
               type="text"
               placeholder="Enter hotel chain name"
               value={name}
-              onChange={handleChange}
+              handleChange={handleChange}
               label="Name"
               required
             />
@@ -96,18 +139,19 @@ export function HotelChain() {
               required
             />
             <Marginer direction="vertical" margin={80} />
-            <CustomButton type="Submit">
+            <CustomButton onClick={handleProceed}>
               Next <FontAwesomeIcon icon={faArrowRight} />
             </CustomButton>
-          </form>
-        </>
-      )}
+          </>
+        )}
+        {active === "address" && (
+          <>
+            <CustomButton width="20%" height="40px" onClick={handlePrevious}>
+              <FontAwesomeIcon icon={faArrowLeft} /> Previous
+            </CustomButton>
 
-      {active === "address" && (
-        <>
-          <h2>Hotel chain address</h2>
-          <p>Please provide information about the location of your company</p>
-          <form onSubmit={handleSubmit}>
+            <h2>Hotel chain address</h2>
+            <p>Please provide information about the location of your company</p>
             <FormInput
               name="address"
               inputType="input"
@@ -191,11 +235,12 @@ export function HotelChain() {
 
             <Marginer direction="vertical" margin={50} />
             <CustomButton type="Submit">
-              Save <FontAwesomeIcon icon={faFloppyDisk} />
+              {loading ? "loading..." : "Save"}{" "}
+              <FontAwesomeIcon icon={faFloppyDisk} />
             </CustomButton>
-          </form>
-        </>
-      )}
+          </>
+        )}
+      </form>
     </div>
   );
 }
