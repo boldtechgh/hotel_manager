@@ -7,23 +7,46 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "./firebase.utils.js";
+import { auth ,db} from "./firebase.utils.js";
+
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const createUserProfileDocument = async (user, additionalData) => {
+    if (!user) return;
 
-  const googleSignIn = () => {
+    const userRef = doc(db, `users/${user.uid}`);
+    const snapShot = await getDoc(userRef);
+
+    if (!snapShot.exists()) {
+      const { displayName, email } = user;
+      const createdAt = new Date();
+      try {
+        await setDoc(userRef, {
+          displayName,
+          email,
+          createdAt,
+          ...additionalData,
+        });
+      } catch (error) {
+        console.log("error creating user", error.message);
+      }
+    }
+  };
+  const googleSignIn =  () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result)  => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
         if (user) {
+          await createUserProfileDocument(user);
           document.location.href = "/setup/hotel_chain";
         }
       })

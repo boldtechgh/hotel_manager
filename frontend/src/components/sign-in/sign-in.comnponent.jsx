@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { doc, getDoc, setDoc } from "firebase/firestore";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,54 +6,33 @@ import GoogleIcon from "../../images/google.png";
 import "./sign-in.styles.scss";
 import { Marginer } from "../marginer";
 import { UserAuth } from "../../components/firebase/AuthContext";
-import { db } from "../firebase/firebase.utils";
-
 // const auth = getAuth();
 
 export function SignIn(props) {
   // !Create google SigninProfile
-  const createUserProfileDocument = async (user, additionalData) => {
-    if (!user) return;
-
-    const userRef = doc(db, `users/${user.uid}`);
-    const snapShot = await getDoc(userRef);
-
-    if (!snapShot.exists()) {
-      const { displayName, email } = user;
-      const createdAt = new Date();
-      try {
-        await setDoc(userRef, {
-          displayName,
-          email,
-          createdAt,
-          ...additionalData,
-        });
-      } catch (error) {
-        console.log("error creating user", error.message);
-      }
-    }
-  };
+  
 
   //google
-  const { googleSignIn, user, passwordSignIn } = UserAuth();
+  const { googleSignIn,  passwordSignIn } = UserAuth();
   const navigate = useNavigate();
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();
+
       // if (login) return (document.location.href = "/dashboard/dashboard");
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    if (user !== null) {
-      //navigate("/dashboard/dashboard");
-      createUserProfileDocument(user);
-      // console.log(createUserProfileDocument(user));
-      console.log(user);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     //navigate("/dashboard/dashboard");
+  //     createUserProfileDocument(user);
+  //     // console.log(createUserProfileDocument(user));
+  //     console.log(user);
+  //   }
+  // }, [user]);
 
   const [formData, setFormData] = useState({
     email: "",
