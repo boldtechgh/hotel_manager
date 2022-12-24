@@ -14,7 +14,7 @@ export function SignUp() {
     password: "",
     passwordVerify: "",
   });
-
+  const [passwordMatch, setPasswordMatch] = useState();
   const { googleSignIn, user, passwordSignUp } = UserAuth();
   const { firstName, lastName, username, email, password, passwordVerify } =
     formData;
@@ -32,7 +32,11 @@ export function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    passwordSignUp(email, password);
+    if (password === passwordVerify) {
+      passwordSignUp(email, password);
+    } else {
+      setPasswordMatch(false);
+    }
   };
 
   return (
@@ -48,7 +52,7 @@ export function SignUp() {
       </div>
 
       <h2>Sign up</h2>
-
+      <Marginer direction="vertical" margin={60} />
       <div>
         <button className="google-btn">
           <img src={GoogleIcon} alt="Google icon" />
@@ -107,15 +111,17 @@ export function SignUp() {
             placeholder="Password"
             required
           />
-          <FormInput
-            inputType="input"
-            name="passwordVerify"
-            type="passwordVerify"
-            value={passwordVerify}
-            handleChange={handleChange}
-            placeholder="Confirm Password"
-            required
-          />
+          <div>
+            <FormInput
+              inputType="input"
+              name="passwordVerify"
+              type="passwordVerify"
+              value={passwordVerify}
+              handleChange={handleChange}
+              placeholder="Confirm Password"
+              required
+            />
+          </div>
         </div>
         <Marginer direction="vertical" margin={50} />
         <CustomButton type="submit"> Sign Up </CustomButton>
