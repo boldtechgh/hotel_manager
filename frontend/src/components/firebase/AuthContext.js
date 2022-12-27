@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth ,db} from "./firebase.utils.js";
+import { auth, db } from "./firebase.utils.js";
 
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -36,10 +36,10 @@ export const AuthContextProvider = ({ children }) => {
       }
     }
   };
-  const googleSignIn =  () => {
+  const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
-      .then(async (result)  => {
+      .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -47,7 +47,13 @@ export const AuthContextProvider = ({ children }) => {
         const user = result.user;
         if (user) {
           await createUserProfileDocument(user);
-          document.location.href = "/setup/hotel_chain";
+          const userRef = doc(db, `users/${user.uid}/hotelchain/${user.uid}`);
+          const snapShot = await getDoc(userRef);
+          if (snapShot.exists()) {
+            document.location.href = "/dashboard/hotels";
+          } else {
+            document.location.href = "/setup/hotel_chain";
+          }
         }
       })
       .catch((error) => {
@@ -82,13 +88,19 @@ export const AuthContextProvider = ({ children }) => {
 
   const passwordSignUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
 
         if (user) {
           console.log(user);
-          document.location.href = "/setup/hotel_chain";
+          const userRef = doc(db, `users/${user.uid}/hotelchain/${user.uid}`);
+          const snapShot = await getDoc(userRef);
+          if (snapShot.exists()) {
+            document.location.href = "/dashboard/hotels";
+          } else {
+            document.location.href = "/setup/hotel_chain";
+          }
         }
         // ...
       })
