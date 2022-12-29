@@ -7,9 +7,9 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "./firebase.utils.js";
+import { auth, db } from "./firebase.utils.js";
+
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase.utils";
 
 const AuthContext = createContext();
 
@@ -58,7 +58,7 @@ export const AuthContextProvider = ({ children }) => {
             const snapShot = await getDoc(userRef);
 
             if (snapShot) {
-              document.location.href = "/setup/hotel_chain";
+              document.location.href = "/dashboard/dashboard";
             } else {
               document.location.href = "/setup/hotel_chain";
             }

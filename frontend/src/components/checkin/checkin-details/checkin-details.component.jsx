@@ -6,9 +6,13 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Badge from "react-bootstrap/Badge";
-import CustomButton from "../custom-button/custom-button.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowAltCircleRight,
+  faHome,
+} from "@fortawesome/free-solid-svg-icons";
+import CustomButton from "../../custom-button/custom-button.component";
+import { Marginer } from "../../marginer";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function simulateNetworkRequest() {
@@ -18,6 +22,18 @@ function simulateNetworkRequest() {
 const CheckInDetails = (props) => {
   const [isLoading, setLoading] = useState(false);
   const [rooms, setRooms] = useState([]);
+  const [room, setRoom] = useState({});
+
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+
+    setRoom((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
 
   useEffect(() => {
     if (isLoading) {
@@ -29,7 +45,22 @@ const CheckInDetails = (props) => {
 
   const handleClick = () => {
     setLoading(true);
+
+    setRooms((existingRooms) => {
+      return [...existingRooms, room];
+    });
+
+    // setLoading(false);
   };
+
+  const deleteRoom = (idx) => {
+    setRooms((existingRooms) => {
+      return [...existingRooms.splice(idx, 1)];
+    });
+  };
+
+  console.log(room);
+  console.log(rooms);
 
   return (
     <>
@@ -37,57 +68,76 @@ const CheckInDetails = (props) => {
         className="container-fluid"
         style={{ height: "auto", width: "100%" }}
       >
+        <FontAwesomeIcon icon={faHome} />
+        <p>Select rooms and set arrival and departure dates</p>
         <div className="col">
           <div className="row">
-            <Form>
-              <Form.Group
-                as={Row}
-                className="mb-4"
-                controlId="formPlaintextEmail"
-              >
+            <Form className="container-fluid py-3 text-dark">
+              <Form.Group as={Row} className="mb-4">
                 <Col sm="4">
-                  <Form.Label htmlFor="exampleColorInput">Room Type</Form.Label>
-                  <Form.Select size="sm">
-                    <option>Suite</option>
-                    <option>Deluxe</option>
+                  <Form.Label>Room Type</Form.Label>
+                  <Form.Select
+                    size="sm"
+                    name="roomType"
+                    // onChange={handleChange}
+                    onInput={handleChange}
+                  >
+                    <option value="suite">Suite</option>
+                    <option value="deluxe">Deluxe</option>
                   </Form.Select>
                 </Col>
 
                 <Col sm="2">
-                  <Form.Label htmlFor="exampleColorInput">Room No.</Form.Label>
+                  <Form.Label>Room No.</Form.Label>
 
-                  <Form.Select size="sm">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                  <Form.Select
+                    size="sm"
+                    name="roomNumber"
+                    // onChange={handleChange}
+                    onInput={handleChange}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
                   </Form.Select>
                 </Col>
 
                 <Col sm="2">
-                  <Form.Label htmlFor="exampleColorInput">
-                    Room Price
-                  </Form.Label>
+                  <Form.Label>Room Price</Form.Label>
 
                   <Form.Control
                     type="number"
+                    name="rate"
                     size="sm"
                     placeholder="Room Price"
+                    // onChange={handleChange}
+                    onInput={handleChange}
                   />
                 </Col>
                 <Col sm="1">
-                  <Form.Label htmlFor="exampleColorInput">Discount </Form.Label>
-
-                  <Form.Control type="number" size="sm" placeholder="0.00" />
-                </Col>
-                <Col sm="1">
-                  <Form.Label htmlFor="exampleColorInput">Total</Form.Label>
+                  <Form.Label>Discount </Form.Label>
 
                   <Form.Control
                     type="number"
+                    name="discount"
                     size="sm"
                     placeholder="0.00"
-                    disabled
+                    // onChange={handleChange}
+                    onInput={handleChange}
+                  />
+                </Col>
+                <Col sm="1">
+                  <Form.Label>Total</Form.Label>
+
+                  <Form.Control
+                    type="number"
+                    name="total"
+                    size="sm"
+                    placeholder="0.00"
+                    // disabled
+                    // onChange={handleChange}
+                    onInput={handleChange}
                   />
                 </Col>
                 <Col sm="2" className="justify-content-center">
@@ -113,37 +163,26 @@ const CheckInDetails = (props) => {
                   }}
                 >
                   <Row xs="sm" className="text-center">
-                    <Col>
-                      <Badge pill bg="info" className="justify-content-center">
-                        <span className="pt-5 align-center">Room 106</span>
-                      </Badge>
-                    </Col>
-                    <Col>
-                      <Badge pill bg="info" className="justify-content-center">
-                        <span className="pt-5 align-center">Room 100</span>
-                      </Badge>
-                    </Col>
-                    <Col>
-                      <Badge pill bg="info" className="justify-content-center">
-                        <span className="pt-5 align-center">Room 211</span>
-                      </Badge>
-                    </Col>
-                    <Col>
-                      <Badge pill bg="info" className="justify-content-center">
-                        <span className="pt-5 align-center">Room 150</span>
-                      </Badge>
-                    </Col>
-                    <Col>
-                      <Badge pill bg="info" className="justify-content-center">
-                        <span className="pt-5 align-center">Room 10</span>
-                      </Badge>
-                    </Col>
+                    {rooms.map((room, idx) => (
+                      <Col>
+                        <Button className="btn btn-info">
+                          <span className="pt-5 align-center">
+                            Room {room.roomNumber}
+                          </span>{" "}
+                          <Badge
+                            pill
+                            bg="danger"
+                            title="delete room"
+                            onClick={() => deleteRoom(idx)}
+                          >
+                            x
+                          </Badge>
+                        </Button>
+                      </Col>
+                    ))}
                   </Row>
                 </Container>
-                <Form.Group
-                  className="mb-4"
-                  controlId="exampleForm.ControlInput1"
-                >
+                <Form.Group className="mb-4">
                   <Row>
                     <Col sm="6">
                       <Form.Label>Arrival</Form.Label>
@@ -161,7 +200,7 @@ const CheckInDetails = (props) => {
                   stycontrolId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>Note</Form.Label>
-                  <Form.Control as="textarea" rows={3} cols={2} />
+                  <Form.Control as="textarea" rows={2} cols={2} />
                 </Form.Group>
                 <div className="d-flex">
                   {/* <Button variant="success">Next</Button> */}

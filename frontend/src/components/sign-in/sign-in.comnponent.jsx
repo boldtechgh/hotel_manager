@@ -6,16 +6,19 @@ import GoogleIcon from "../../images/google.png";
 import "./sign-in.styles.scss";
 import { Marginer } from "../marginer";
 import { UserAuth } from "../../components/firebase/AuthContext";
-
 // const auth = getAuth();
 
 export function SignIn(props) {
+  // !Create google SigninProfile
+
   //google
-  const { googleSignIn, user, passwordSignIn } = UserAuth();
+  const { googleSignIn, passwordSignIn } = UserAuth();
   const navigate = useNavigate();
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();
+
+      // if (login) return (document.location.href = "/dashboard/dashboard");
     } catch (error) {
       console.log(error);
     }
