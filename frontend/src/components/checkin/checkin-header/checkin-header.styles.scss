@@ -31,6 +31,8 @@
     color: #fff;
     background: #779341;
     border: none;
+    // width: 50px;
+    font-size: 30px;
   }
 
   & .btn {
@@ -49,5 +51,10 @@
   .fa-user {
     color: #779341;
     font-size: 30px;
+  }
+
+  & .checkbox,
+  .roomDate {
+    color: #779341;
   }
 }

@@ -12,18 +12,19 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../../custom-button/custom-button.component";
-import { Marginer } from "../../marginer";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { InputGroup } from "react-bootstrap";
 
 function simulateNetworkRequest() {
-  return new Promise((resolve) => setTimeout(resolve, 2000));
+  return new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
 const CheckInDetails = (props) => {
   const [isLoading, setLoading] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [room, setRoom] = useState({});
+  const [sameDate, setSameDate] = useState(true);
 
+  //set room properties
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -35,6 +36,32 @@ const CheckInDetails = (props) => {
     });
   };
 
+  //set same/different arrival/departure dates
+  const handleChecked = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setLoading(true);
+
+      setSameDate(value === "true");
+    }
+  };
+
+  //add room to rooms list
+  const handleClick = () => {
+    setLoading(true);
+
+    setRooms((existingRooms) => {
+      return [...existingRooms, room];
+    });
+  };
+
+  //delete a room from rooms list
+  const deleteRoom = (idx) => {
+    setLoading(true);
+    rooms.splice(idx, 1);
+  };
+
+  //rerender page to update DOM
   useEffect(() => {
     if (isLoading) {
       simulateNetworkRequest().then(() => {
@@ -42,25 +69,6 @@ const CheckInDetails = (props) => {
       });
     }
   }, [isLoading]);
-
-  const handleClick = () => {
-    setLoading(true);
-
-    setRooms((existingRooms) => {
-      return [...existingRooms, room];
-    });
-
-    // setLoading(false);
-  };
-
-  const deleteRoom = (idx) => {
-    setRooms((existingRooms) => {
-      return [...existingRooms.splice(idx, 1)];
-    });
-  };
-
-  console.log(room);
-  console.log(rooms);
 
   return (
     <>
@@ -76,12 +84,7 @@ const CheckInDetails = (props) => {
               <Form.Group as={Row} className="mb-4">
                 <Col sm="4">
                   <Form.Label>Room Type</Form.Label>
-                  <Form.Select
-                    size="sm"
-                    name="roomType"
-                    // onChange={handleChange}
-                    onInput={handleChange}
-                  >
+                  <Form.Select size="sm" name="roomType" onInput={handleChange}>
                     <option value="suite">Suite</option>
                     <option value="deluxe">Deluxe</option>
                   </Form.Select>
@@ -93,7 +96,6 @@ const CheckInDetails = (props) => {
                   <Form.Select
                     size="sm"
                     name="roomNumber"
-                    // onChange={handleChange}
                     onInput={handleChange}
                   >
                     <option value="1">1</option>
@@ -111,7 +113,6 @@ const CheckInDetails = (props) => {
                     name="rate"
                     size="sm"
                     placeholder="Room Price"
-                    // onChange={handleChange}
                     onInput={handleChange}
                   />
                 </Col>
@@ -123,7 +124,6 @@ const CheckInDetails = (props) => {
                     name="discount"
                     size="sm"
                     placeholder="0.00"
-                    // onChange={handleChange}
                     onInput={handleChange}
                   />
                 </Col>
@@ -135,20 +135,17 @@ const CheckInDetails = (props) => {
                     name="total"
                     size="sm"
                     placeholder="0.00"
-                    // disabled
-                    // onChange={handleChange}
                     onInput={handleChange}
                   />
                 </Col>
-                <Col sm="2" className="justify-content-center">
-                  <br></br>
+                <Col sm="1" className="justify-content-center">
+                  {/* <br /> */}
                   <Button
-                    // variant="primary"
                     className="add-btn"
                     disabled={isLoading}
                     onClick={!isLoading ? handleClick : null}
                   >
-                    {isLoading ? "Loading…" : " + "}
+                    +
                   </Button>
                 </Col>
               </Form.Group>
@@ -158,7 +155,7 @@ const CheckInDetails = (props) => {
                   style={{
                     margin: "0",
                     padding: "20px",
-                    minHeight: "120px",
+                    minHeight: "80px",
                     width: "100%",
                   }}
                 >
@@ -182,18 +179,62 @@ const CheckInDetails = (props) => {
                     ))}
                   </Row>
                 </Container>
-                <Form.Group className="mb-4">
-                  <Row>
-                    <Col sm="6">
-                      <Form.Label>Arrival</Form.Label>
-                      <Form.Control type="datetime-local" />
-                    </Col>
-                    <Col sm="6">
-                      <Form.Label>Departure</Form.Label>
-                      <Form.Control type="datetime-local" />
-                    </Col>
-                  </Row>
-                </Form.Group>
+                <Row className="mb-4">
+                  <Form.Group as={Col} controlId="formGridPhone">
+                    <Form.Check
+                      className="checkbox"
+                      type="checkbox"
+                      label="Same Arrival/Departure dates"
+                      value={true}
+                      checked={sameDate}
+                      onChange={handleChecked}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col} controlId="formGridPhone">
+                    <Form.Check
+                      className="checkbox"
+                      type="checkbox"
+                      label="Different Arrival/Departure dates"
+                      value={false}
+                      checked={sameDate === false}
+                      onChange={handleChecked}
+                    />
+                  </Form.Group>
+                </Row>
+                {sameDate && (
+                  <Form.Group className="mb-4">
+                    <Row>
+                      <Col sm="6">
+                        <Form.Label>Arrival</Form.Label>
+                        <Form.Control type="datetime-local" />
+                      </Col>
+                      <Col sm="6">
+                        <Form.Label>Departure</Form.Label>
+                        <Form.Control type="datetime-local" />
+                      </Col>
+                    </Row>
+                  </Form.Group>
+                )}
+                {!sameDate &&
+                  rooms.map((room, idx) => (
+                    <Form.Group className="mb-4">
+                      <Row>
+                        <Form.Label className="roomDate">
+                          Room {room.roomNumber}
+                        </Form.Label>
+                      </Row>
+                      <Row>
+                        <Col sm="6">
+                          <Form.Label>Arrival</Form.Label>
+                          <Form.Control type="datetime-local" />
+                        </Col>
+                        <Col sm="6">
+                          <Form.Label>Departure</Form.Label>
+                          <Form.Control type="datetime-local" />
+                        </Col>
+                      </Row>
+                    </Form.Group>
+                  ))}
                 <Form.Group
                   className="mb-4 "
                   style={{ width: "100%" }}
