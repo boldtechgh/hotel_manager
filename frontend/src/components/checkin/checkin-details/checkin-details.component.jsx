@@ -12,7 +12,7 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../../custom-button/custom-button.component";
-import { InputGroup } from "react-bootstrap";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 function simulateNetworkRequest() {
   return new Promise((resolve) => setTimeout(resolve, 1000));
@@ -20,7 +20,12 @@ function simulateNetworkRequest() {
 
 const CheckInDetails = (props) => {
   const [isLoading, setLoading] = useState(false);
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useLocalStorage("hm_booking_room_details", []);
+  const [note, setNote] = useLocalStorage("hm_booking_note", null);
+  // const [activeTab, setActiveTab] = useLocalStorage(
+  //   "hm_booking_active_tab",
+  //   null
+  // );
   const [room, setRoom] = useState({});
   const [sameDate, setSameDate] = useState(true);
 
@@ -53,12 +58,22 @@ const CheckInDetails = (props) => {
     setRooms((existingRooms) => {
       return [...existingRooms, room];
     });
+
+    setRoom({});
   };
 
   //delete a room from rooms list
   const deleteRoom = (idx) => {
     setLoading(true);
     rooms.splice(idx, 1);
+    setRooms([...rooms]);
+  };
+
+  //handle submit
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    props.onSubmit("profile");
   };
 
   //rerender page to update DOM
@@ -70,6 +85,9 @@ const CheckInDetails = (props) => {
     }
   }, [isLoading]);
 
+  console.log(room);
+  console.log(rooms);
+
   return (
     <>
       <div
@@ -80,7 +98,10 @@ const CheckInDetails = (props) => {
         <p>Select rooms and set arrival and departure dates</p>
         <div className="col">
           <div className="row">
-            <Form className="container-fluid py-3 text-dark">
+            <Form
+              className="container-fluid py-3 text-dark"
+              onSubmit={handleSubmit}
+            >
               <Form.Group as={Row} className="mb-4">
                 <Col sm="4">
                   <Form.Label>Room Type</Form.Label>
@@ -226,11 +247,27 @@ const CheckInDetails = (props) => {
                       <Row>
                         <Col sm="6">
                           <Form.Label>Arrival</Form.Label>
-                          <Form.Control type="datetime-local" />
+                          <Form.Control
+                            type="datetime-local"
+                            name="arrival"
+                            value={room.arrival}
+                            onChange={(e) => {
+                              room.arrival = e.target.value;
+                              setRooms([...rooms]);
+                            }}
+                          />
                         </Col>
                         <Col sm="6">
                           <Form.Label>Departure</Form.Label>
-                          <Form.Control type="datetime-local" />
+                          <Form.Control
+                            type="datetime-local"
+                            name="departure"
+                            value={room.departure}
+                            onChange={(e) => {
+                              room.departure = e.target.value;
+                              setRooms([...rooms]);
+                            }}
+                          />
                         </Col>
                       </Row>
                     </Form.Group>
@@ -241,10 +278,15 @@ const CheckInDetails = (props) => {
                   stycontrolId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>Note</Form.Label>
-                  <Form.Control as="textarea" rows={2} cols={2} />
+                  <Form.Control
+                    as="textarea"
+                    rows={2}
+                    cols={2}
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                  />
                 </Form.Group>
                 <div className="d-flex">
-                  {/* <Button variant="success">Next</Button> */}
                   <CustomButton width="10%">
                     Next <FontAwesomeIcon icon={faArrowAltCircleRight} />
                   </CustomButton>
