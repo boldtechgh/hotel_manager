@@ -21,7 +21,7 @@ const CheckInHeader = () => {
     <>
       <div className="container">
         <Tabs
-          defaultActiveKey={activeTab ? activeTab : "home"}
+          activeKey={activeTab ? activeTab : "home"}
           id="justify-tab-example"
           className="mb-4"
           fill
@@ -30,12 +30,12 @@ const CheckInHeader = () => {
             <CheckInDetails onSubmit={activateTab} />
           </Tab>
           <Tab className="tab" eventKey="profile" title="Customer Details">
-            <CustomerDetails />
+            <CustomerDetails onSubmit={activateTab} />
           </Tab>
-          <Tab className="tab" eventKey="longer-tab" title="Billing Info">
+          <Tab className="tab" eventKey="billing" title="Billing Info">
             <BillingAddress />
           </Tab>
-          <Tab className="tab" eventKey="contact" title="Summary">
+          <Tab className="tab" eventKey="summary" title="Summary">
             Summary
           </Tab>
         </Tabs>

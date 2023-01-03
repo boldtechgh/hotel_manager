@@ -27,11 +27,7 @@ const BillingAddress = () => {
                 Reference person
               </Form.Label>
               <InputGroup className="mb-2">
-                {/* <InputGroup.Text>@</InputGroup.Text> */}
-                <Form.Control
-                  id="inlineFormInputGroup"
-                  placeholder="Enter reference person's name"
-                />
+                <Form.Control placeholder="Enter reference person's name" />
               </InputGroup>
             </Form.Group>
           </Row>
@@ -39,24 +35,16 @@ const BillingAddress = () => {
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridPhone">
               <Form.Check type="checkbox" label="TIN" />
-              {/* <Form.Label htmlFor="inlineFormInputGroup">Nationality</Form.Label> */}
+
               <InputGroup className="mb-2">
-                {/* <InputGroup.Text>@</InputGroup.Text> */}
-                <Form.Control
-                  id="inlineFormInputGroup"
-                  placeholder="Enter TIN number"
-                />
+                <Form.Control placeholder="Enter TIN number" />
               </InputGroup>
             </Form.Group>
             <Form.Group as={Col} controlId="formGridPhone">
               <Form.Check type="checkbox" label="VAT" />
-              {/* <Form.Label htmlFor="inlineFormInputGroup">Nationality</Form.Label> */}
+
               <InputGroup className="mb-2">
-                {/* <InputGroup.Text>@</InputGroup.Text> */}
-                <Form.Control
-                  id="inlineFormInputGroup"
-                  placeholder="Enter VAT number"
-                />
+                <Form.Control placeholder="Enter VAT number" />
               </InputGroup>
             </Form.Group>
           </Row>
@@ -70,10 +58,7 @@ const BillingAddress = () => {
               <Form.Label htmlFor="inlineFormInputGroup">Phone</Form.Label>
               <InputGroup className="mb-2">
                 {/* <InputGroup.Text>@</InputGroup.Text> */}
-                <Form.Control
-                  id="inlineFormInputGroup"
-                  placeholder="Enter phone number"
-                />
+                <Form.Control placeholder="Enter phone number" />
               </InputGroup>
             </Form.Group>
           </Row>

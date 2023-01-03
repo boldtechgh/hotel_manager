@@ -11,10 +11,47 @@ import {
   faArrowAltCircleRight,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import { useEffect } from "react";
+import { simulateNetworkRequest } from "../checkin-details/checkin-details.component";
 
-const CustomerDetails = () => {
+const CustomerDetails = ({ onSubmit }) => {
+  const [isLoading, setLoading] = useState(false);
+  const [customer, setCustomer] = useLocalStorage("hm_customer_details", {});
+  const [rooms, setRooms] = useLocalStorage("hm_booking_room_details", {});
+
+  //set customer details
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+
+    setCustomer((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    onSubmit("billing");
+  };
+
+  //re-render page to update DOM
+  useEffect(() => {
+    if (isLoading) {
+      simulateNetworkRequest().then(() => {
+        setLoading(false);
+      });
+    }
+  }, [isLoading]);
+
+  console.log(customer);
+  console.log(rooms);
+
   return (
-    //Customer details form
     <>
       <div
         className="container-fluid"
@@ -22,45 +59,60 @@ const CustomerDetails = () => {
       >
         <FontAwesomeIcon icon={faUser} />
         <p>Provide customer details</p>
-        <Form className="container-fluid py-3 text-dark">
+        <Form
+          className="container-fluid py-3 text-dark"
+          onSubmit={handleSubmit}
+        >
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Surname</Form.Label>
               <Form.Control
                 type="text"
+                name="surname"
                 placeholder="Enter customer's surname"
+                onChange={handleChange}
+                value={customer.surname}
               />
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridPhone">
-              <Form.Label htmlFor="inlineFormInputGroup">Othernames</Form.Label>
+            <Form.Group as={Col}>
+              <Form.Label>Othernames</Form.Label>
               <InputGroup className="mb-2">
                 {/* <InputGroup.Text>@</InputGroup.Text> */}
                 <Form.Control
                   id="inlineFormInputGroup"
+                  name="othernames"
                   placeholder="Enter customer's other names"
+                  onChange={handleChange}
+                  value={customer.othernames}
                 />
               </InputGroup>
             </Form.Group>
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Gender</Form.Label>
-              <Form.Select defaultValue="Choose...">
+              <Form.Select
+                defaultValue="Choose..."
+                name="gender"
+                onChange={handleChange}
+                value={customer.gender}
+              >
                 <option>Select customer's gender</option>
                 <option>Male</option>
                 <option>Female</option>
                 <option>Other</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridPhone">
-              <Form.Label htmlFor="inlineFormInputGroup">
-                Nationality
-              </Form.Label>
+            <Form.Group as={Col}>
+              <Form.Label>Nationality</Form.Label>
               <InputGroup className="mb-2">
                 {/* <InputGroup.Text>@</InputGroup.Text> */}
                 <Form.Control
                   id="inlineFormInputGroup"
+                  name="nationality"
+                  onChange={handleChange}
+                  value={customer.nationality}
                   placeholder="Enter customer's nationality"
                 />
               </InputGroup>
@@ -68,44 +120,70 @@ const CustomerDetails = () => {
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridEmail">
+            <Form.Group as={Col}>
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
+                name="email"
+                onChange={handleChange}
+                value={customer.email}
                 placeholder="Enter customer's email address"
               />
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridPhone">
-              <Form.Label htmlFor="inlineFormInputGroup">Phone</Form.Label>
+            <Form.Group as={Col}>
+              <Form.Label>Phone</Form.Label>
               <InputGroup className="mb-2">
                 {/* <InputGroup.Text>@</InputGroup.Text> */}
                 <Form.Control
                   id="inlineFormInputGroup"
+                  name="phone"
+                  onChange={handleChange}
+                  value={customer.phone}
                   placeholder="Enter customer's phone number"
                 />
               </InputGroup>
             </Form.Group>
           </Row>
 
-          <Form.Group className="mb-3" controlId="formGridAddress1">
+          <Form.Group className="mb-3">
             <Form.Label>Address</Form.Label>
-            <Form.Control placeholder="1234 Main St" />
+            <Form.Control
+              placeholder="1234 Main St"
+              name="address"
+              onChange={handleChange}
+              value={customer.address}
+            />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formGridAddress2">
+          <Form.Group className="mb-3">
             <Form.Label>Address 2</Form.Label>
-            <Form.Control placeholder="Apartment, studio, or floor" />
+            <Form.Control
+              placeholder="Apartment, studio, or floor"
+              name="address2"
+              onChange={handleChange}
+              value={customer.address2}
+            />
           </Form.Group>
 
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridCity">
+            <Form.Group as={Col}>
               <Form.Label>City</Form.Label>
-              <Form.Control placeholder="Enter customer's city" />
+              <Form.Control
+                placeholder="Enter customer's city"
+                name="city"
+                onChange={handleChange}
+                value={customer.city}
+              />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridState">
+            <Form.Group as={Col}>
               <Form.Label>Region/State</Form.Label>
-              <Form.Select defaultValue="Choose...">
+              <Form.Select
+                defaultValue="Choose..."
+                name="region"
+                onChange={handleChange}
+                value={customer.region}
+              >
                 <option>Choose...</option>
                 <option>...</option>
               </Form.Select>
@@ -113,24 +191,39 @@ const CustomerDetails = () => {
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridState">
+            <Form.Group as={Col}>
               <Form.Label>Country</Form.Label>
-              <Form.Select defaultValue="Choose...">
+              <Form.Select
+                defaultValue="Choose..."
+                name="country"
+                onChange={handleChange}
+                value={customer.country}
+              >
                 <option>Choose...</option>
                 <option>...</option>
               </Form.Select>
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridZip">
+            <Form.Group as={Col}>
               <Form.Label>Zip Code</Form.Label>
-              <Form.Control placeholder="Enter zip code" />
+              <Form.Control
+                placeholder="Enter zip code"
+                name="zip"
+                onChange={handleChange}
+                value={customer.zip}
+              />
             </Form.Group>
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridState">
+            <Form.Group as={Col}>
               <Form.Label>Purpose of Visit</Form.Label>
-              <Form.Select defaultValue="Choose...">
+              <Form.Select
+                defaultValue="Choose..."
+                name="purpose"
+                onChange={handleChange}
+                value={customer.purpose}
+              >
                 <option>Select the purpose of visit</option>
                 <option>Business</option>
                 <option>Tourism</option>
@@ -138,23 +231,48 @@ const CustomerDetails = () => {
               </Form.Select>
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridZip">
+            <Form.Group as={Col}>
               <Form.Label>Proof of ID</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control type="file" name="proof" onChange={handleChange} />
             </Form.Group>
           </Row>
 
-          <Form.Group className="mb-3" id="formGridCheckbox">
+          <Form.Group className="mb-3">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
+          {rooms != null &&
+            rooms.map((room, idx) => (
+              <Form.Group className="mb-4">
+                <Row>
+                  <Form.Label className="roomDate">
+                    Room {room.roomNumber}
+                  </Form.Label>
+                </Row>
+                <Row>
+                  <Col sm="6">
+                    <Form.Label>Arrival</Form.Label>
+                    <Form.Control
+                      type="datetime-local"
+                      name="arrival"
+                      value={room.arrival}
+                    />
+                  </Col>
+                  <Col sm="6">
+                    <Form.Label>Departure</Form.Label>
+                    <Form.Control
+                      type="datetime-local"
+                      name="departure"
+                      value={room.departure}
+                    />
+                  </Col>
+                </Row>
+              </Form.Group>
+            ))}
 
-          {/* <Button variant="primary" type="submit">
-          Submit
-        </Button> */}
           <div className="d-flex">
-            {/* <Button variant="success">Next</Button> */}
             <CustomButton width="10%">
-              Next <FontAwesomeIcon icon={faArrowAltCircleRight} />
+              {isLoading ? "Loading..." : "Next"}{" "}
+              <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </CustomButton>
           </div>
         </Form>

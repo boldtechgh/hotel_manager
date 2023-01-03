@@ -14,18 +14,14 @@ import {
 import CustomButton from "../../custom-button/custom-button.component";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
-function simulateNetworkRequest() {
+export function simulateNetworkRequest() {
   return new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
-const CheckInDetails = (props) => {
+const CheckInDetails = ({ onSubmit }) => {
   const [isLoading, setLoading] = useState(false);
   const [rooms, setRooms] = useLocalStorage("hm_booking_room_details", []);
   const [note, setNote] = useLocalStorage("hm_booking_note", null);
-  // const [activeTab, setActiveTab] = useLocalStorage(
-  //   "hm_booking_active_tab",
-  //   null
-  // );
   const [room, setRoom] = useState({});
   const [sameDate, setSameDate] = useState(true);
 
@@ -62,21 +58,19 @@ const CheckInDetails = (props) => {
     setRoom({});
   };
 
-  //delete a room from rooms list
   const deleteRoom = (idx) => {
     setLoading(true);
     rooms.splice(idx, 1);
     setRooms([...rooms]);
   };
 
-  //handle submit
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
-    props.onSubmit("profile");
+    onSubmit("profile");
   };
 
-  //rerender page to update DOM
+  //re-render page to update DOM
   useEffect(() => {
     if (isLoading) {
       simulateNetworkRequest().then(() => {
@@ -170,7 +164,7 @@ const CheckInDetails = (props) => {
                   </Button>
                 </Col>
               </Form.Group>
-              <Form.Group className="mb-5">
+              <Form.Group className="mb-2">
                 <Container
                   className="bg-light container mb-4 d-flex"
                   style={{
@@ -227,11 +221,31 @@ const CheckInDetails = (props) => {
                     <Row>
                       <Col sm="6">
                         <Form.Label>Arrival</Form.Label>
-                        <Form.Control type="datetime-local" />
+                        <Form.Control
+                          type="datetime-local"
+                          onChange={(e) => {
+                            rooms.map(
+                              (room) => (
+                                (room.arrival = e.target.value),
+                                setRooms([...rooms])
+                              )
+                            );
+                          }}
+                        />
                       </Col>
                       <Col sm="6">
                         <Form.Label>Departure</Form.Label>
-                        <Form.Control type="datetime-local" />
+                        <Form.Control
+                          type="datetime-local"
+                          onChange={(e) => {
+                            rooms.map(
+                              (room) => (
+                                (room.departure = e.target.value),
+                                setRooms([...rooms])
+                              )
+                            );
+                          }}
+                        />
                       </Col>
                     </Row>
                   </Form.Group>
