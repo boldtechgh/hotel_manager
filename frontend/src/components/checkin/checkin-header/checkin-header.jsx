@@ -5,7 +5,9 @@ import Tabs from "react-bootstrap/esm/Tabs";
 import Tab from "react-bootstrap/Tab";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import BillingAddress from "../billing-address";
-import CheckInDetails from "../checkin-details/checkin-details.component";
+import CheckInDetails, {
+  simulateNetworkRequest,
+} from "../checkin-details/checkin-details.component";
 import CustomerDetails from "../customer-details/customer-details.component";
 import "./checkin-header.styles.scss";
 
@@ -33,7 +35,7 @@ const CheckInHeader = () => {
             <CustomerDetails onSubmit={activateTab} />
           </Tab>
           <Tab className="tab" eventKey="billing" title="Billing Info">
-            <BillingAddress />
+            <BillingAddress onSubmit={activateTab} />
           </Tab>
           <Tab className="tab" eventKey="summary" title="Summary">
             Summary

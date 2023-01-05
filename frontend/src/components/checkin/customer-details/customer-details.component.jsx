@@ -19,7 +19,6 @@ import { simulateNetworkRequest } from "../checkin-details/checkin-details.compo
 const CustomerDetails = ({ onSubmit }) => {
   const [isLoading, setLoading] = useState(false);
   const [customer, setCustomer] = useLocalStorage("hm_customer_details", {});
-  const [rooms, setRooms] = useLocalStorage("hm_booking_room_details", {});
 
   //set customer details
   const handleChange = (event) => {
@@ -49,7 +48,6 @@ const CustomerDetails = ({ onSubmit }) => {
   }, [isLoading]);
 
   console.log(customer);
-  console.log(rooms);
 
   return (
     <>
@@ -237,37 +235,44 @@ const CustomerDetails = ({ onSubmit }) => {
             </Form.Group>
           </Row>
 
+          <Row className="mb-3">
+            <Form.Group as={Col}>
+              <Form.Label>Number of Guest</Form.Label>
+              <Form.Control
+                placeholder="Enter umber of guest"
+                type="number"
+                name="guestNumber"
+                onChange={handleChange}
+                value={customer.guestNumber}
+              />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>Adults</Form.Label>
+              <Form.Control
+                placeholder="Enter number of adults"
+                type="number"
+                name="adultGuests"
+                onChange={handleChange}
+                value={customer.adultGuests}
+              />
+            </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>Children</Form.Label>
+              <Form.Control
+                placeholder="Enter number of children"
+                type="number"
+                name="childGuests"
+                onChange={handleChange}
+                value={customer.childGuests}
+              />
+            </Form.Group>
+          </Row>
+
           <Form.Group className="mb-3">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          {rooms != null &&
-            rooms.map((room, idx) => (
-              <Form.Group className="mb-4">
-                <Row>
-                  <Form.Label className="roomDate">
-                    Room {room.roomNumber}
-                  </Form.Label>
-                </Row>
-                <Row>
-                  <Col sm="6">
-                    <Form.Label>Arrival</Form.Label>
-                    <Form.Control
-                      type="datetime-local"
-                      name="arrival"
-                      value={room.arrival}
-                    />
-                  </Col>
-                  <Col sm="6">
-                    <Form.Label>Departure</Form.Label>
-                    <Form.Control
-                      type="datetime-local"
-                      name="departure"
-                      value={room.departure}
-                    />
-                  </Col>
-                </Row>
-              </Form.Group>
-            ))}
 
           <div className="d-flex">
             <CustomButton width="10%">
