@@ -73,8 +73,6 @@ export function HotelChain() {
         setLoading(false);
       }
     }
-
-    // setActive("");
   };
 
   const {

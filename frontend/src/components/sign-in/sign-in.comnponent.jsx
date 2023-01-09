@@ -10,10 +10,9 @@ import { UserAuth } from "../../components/firebase/AuthContext";
 
 export function SignIn(props) {
   // !Create google SigninProfile
-  
 
   //google
-  const { googleSignIn,  passwordSignIn } = UserAuth();
+  const { googleSignIn, passwordSignIn } = UserAuth();
   const navigate = useNavigate();
   const handleGoogleSignIn = async () => {
     try {
@@ -24,15 +23,6 @@ export function SignIn(props) {
       console.log(error);
     }
   };
-
-  // useEffect(() => {
-  //   if (user !== null) {
-  //     //navigate("/dashboard/dashboard");
-  //     createUserProfileDocument(user);
-  //     // console.log(createUserProfileDocument(user));
-  //     console.log(user);
-  //   }
-  // }, [user]);
 
   const [formData, setFormData] = useState({
     email: "",

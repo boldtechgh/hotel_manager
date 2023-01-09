@@ -1,0 +1,60 @@
+.container {
+  width: 100%;
+  font-size: 16px;
+  & .nav-link {
+    color: rgb(30, 30, 30);
+    margin-right: 5px;
+
+    &:hover {
+      color: #fff;
+      background: #779341;
+    }
+  }
+  & .nav-link.active {
+    color: #fff;
+    background: #779341;
+  }
+
+  & .tab {
+    background-color: rgb(254, 254, 254);
+    color: rgb(30, 30, 30);
+    border: 1px solid rgb(230, 230, 230);
+    padding: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
+  }
+
+  & .add-btn {
+    color: #fff;
+    background: #779341;
+    border: none;
+    // width: 50px;
+    font-size: 30px;
+  }
+
+  & .btn {
+    // width: 100px;
+    border-radius: 10px;
+    color: #fff;
+  }
+
+  & form {
+    overflow-y: auto;
+    max-height: 60vh;
+  }
+
+  & .fa-house,
+  .fa-file-invoice-dollar,
+  .fa-user {
+    color: #779341;
+    font-size: 30px;
+  }
+
+  & .checkbox,
+  .roomDate {
+    color: #779341;
+  }
+}

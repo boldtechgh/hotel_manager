@@ -22,8 +22,8 @@ import Rooms from "./pages/rooms";
 class App extends Component {
   componentDidMount() {
     if (!$.fn.DataTable.isDataTable("#table")) {
-      $(document).ready(function () {
-        setTimeout(function () {
+      $(document).ready(function() {
+        setTimeout(function() {
           $("#table").DataTable({
             retrieve: true,
             pagingType: "full_numbers",
@@ -53,7 +53,7 @@ class App extends Component {
               },
               {
                 extend: "print",
-                customize: function (win) {
+                customize: function(win) {
                   $(win.document.body).css("font-size", "10pt");
                   $(win.document.body)
                     .find("table")
@@ -64,7 +64,7 @@ class App extends Component {
               },
             ],
 
-            fnRowCallback: function (
+            fnRowCallback: function(
               nRow,
               aData,
               iDisplayIndex,
@@ -82,7 +82,7 @@ class App extends Component {
             columnDefs: [
               {
                 targets: 0,
-                render: function (data, type, row, meta) {
+                render: function(data, type, row, meta) {
                   return type === "export" ? meta.row + 1 : data;
                 },
               },
