@@ -129,6 +129,14 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      // async function GetRoomData() {
+      //   const RoomRef = db.collection(rooms).doc(`${user}`);
+      //   const snapshot = await RoomRef.get();
+      //   stu;
+      //   snapshot.forEach((doc) => {
+      //     console.log(doc.id, "=>", doc.data());
+      //   });
+      // }
     });
     return () => {
       unsubscribe();
