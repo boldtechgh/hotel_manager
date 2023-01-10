@@ -9,6 +9,7 @@ import CheckInDetails, {
   simulateNetworkRequest,
 } from "../checkin-details/checkin-details.component";
 import CustomerDetails from "../customer-details/customer-details.component";
+import BookingSumary from "../summary";
 import "./checkin-header.styles.scss";
 
 const CheckInHeader = () => {
@@ -38,7 +39,7 @@ const CheckInHeader = () => {
             <BillingAddress onSubmit={activateTab} />
           </Tab>
           <Tab className="tab" eventKey="summary" title="Summary">
-            Summary
+            <BookingSumary />
           </Tab>
         </Tabs>
       </div>

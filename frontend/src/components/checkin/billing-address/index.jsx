@@ -10,7 +10,6 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 import CustomButton from "../../custom-button/custom-button.component";
 
 const BillingAddress = ({ onSubmit }) => {
-  const [isLoading, setLoading] = useState(false);
   const [billingAddress, setBillingAddress] = useLocalStorage(
     "hm_billing_address",
     {}
@@ -30,7 +29,6 @@ const BillingAddress = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setLoading(true);
     onSubmit("summary");
   };
 
