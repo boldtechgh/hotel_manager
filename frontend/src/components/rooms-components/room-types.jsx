@@ -54,7 +54,7 @@ const RoomTypeList = () => {
     fetchData();
     console.log("i run once");
     setLoading(false);
-  }, [isLoading, setLoading]);
+  }, []);
 
   return (
     <div className="blist">
