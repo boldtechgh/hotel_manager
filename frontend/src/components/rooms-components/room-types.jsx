@@ -24,15 +24,14 @@ const columns = [
   },
 ];
 
-const RoomTypeList = () => {
+const RoomTypeList = (props) => {
   const [roomData, setRoomData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const { user } = UserAuth();
-  const idRoom = user?.uid;
 
   const q = query(
     collection(db, "roomTypes"),
-    where("hotelchainId", "==", `${idRoom}`)
+    where("hotelchainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`)
   );
 
   const fetchData = async () => {
@@ -44,17 +43,15 @@ const RoomTypeList = () => {
       setRoomData((arr) => [...arr, data]);
       console.log(doc.id, " => ", doc.data());
     });
-    console.log(user);
-    console.log("id" + idRoom);
     console.log(user.uid);
     console.log("Data Successfully Retrieved");
   };
 
   useEffect(() => {
     fetchData();
-    console.log("i run once");
+    console.log("i run once" + user.uid);
     setLoading(false);
-  }, [isLoading, setLoading]);
+  }, []);
 
   return (
     <div className="blist">
