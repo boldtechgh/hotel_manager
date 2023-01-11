@@ -2,21 +2,41 @@ import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { Table } from "react-bootstrap";
 import "./rooms.styles.scss";
-
+import DataTable from "react-data-table-component";
 import { db } from "../firebase/firebase.utils";
 import { UserAuth } from "../firebase/AuthContext";
 
+const columns = [
+  { name: "Name", selector: (row) => row.typeName, sortable: true },
+  {
+    name: "Slug",
+    selector: (row) => row.shortCode,
+    sortable: true,
+  },
+  {
+    name: "Rate",
+    selector: (row) => row.typeRate,
+    sortable: true,
+  },
+  {
+    name: "Status",
+    selector: (row) => row.typeStatus,
+  },
+];
+
 const RoomTypeList = () => {
+  const [roomData, setRoomData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   const { user } = UserAuth();
   const idRoom = user?.uid;
-  const idRoom1 = user?.uid;
-  const [count, setCount] = useState(1);
+
   const q = query(
     collection(db, "roomTypes"),
-    where("hotelChainId", "==", `${idRoom}`)
+    where("hotelchainId", "==", `${idRoom}`)
   );
-  const [Roomdata, setRoomData] = useState([]);
+
   const fetchData = async () => {
+    setLoading(true);
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
@@ -29,34 +49,23 @@ const RoomTypeList = () => {
     console.log(user.uid);
     console.log("Data Successfully Retrieved");
   };
+
   useEffect(() => {
     fetchData();
-  }, []);
+    console.log("i run once");
+    setLoading(false);
+  }, [isLoading, setLoading]);
 
   return (
     <div className="blist">
-      <Table id="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Rate(Basic)</th>
-            <th>Short Code</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Roomdata.map((data, index) => (
-            <tr key={index + 1}>
-              <td>{index + 1}</td>
-              <td>{data.ShortCode}</td>
-              <td>{data.typeName}</td>
-              <td>{data.typeRate}</td>
-              <td>{data.typeStatus}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <DataTable
+        columns={columns}
+        data={roomData}
+        progressPending={isLoading}
+        // progressComponent={<CustomLoader />}
+        pagination
+        striped
+      />
     </div>
   );
 };

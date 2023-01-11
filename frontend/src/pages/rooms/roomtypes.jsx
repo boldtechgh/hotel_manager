@@ -1,7 +1,15 @@
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import React, { useState } from "react";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import ComponentTitle, { SubTitle } from "../../components/component-title";
 import { UserAuth } from "../../components/firebase/AuthContext";
@@ -11,13 +19,9 @@ import ModalComponent from "../../components/modal/modal.component";
 import RoomTypeList from "../../components/rooms-components/room-types";
 
 const RoomType = (props) => {
+  const { user } = UserAuth();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    Name: "",
-    Rate: "",
-    shortCode: "",
-    Status: "",
-  });
+  const [formData, setFormData] = useState({ hotelchainId: user?.uid });
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -30,7 +34,6 @@ const RoomType = (props) => {
   };
   console.log(formData);
 
-  const { user } = UserAuth();
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(user);
@@ -58,6 +61,7 @@ const RoomType = (props) => {
 
     // setActive("");
   };
+
   const { typeName, typeRate, shortCode, typeStatus } = formData;
   return (
     <Layout>

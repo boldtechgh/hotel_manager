@@ -5,14 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import { AuthContextProvider } from "./components/firebase/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <ProSidebarProvider>
-      <App />
-    </ProSidebarProvider>
-  </BrowserRouter>
+  <AuthContextProvider>
+    <BrowserRouter>
+      <ProSidebarProvider>
+        <App />
+      </ProSidebarProvider>
+    </BrowserRouter>
+  </AuthContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
