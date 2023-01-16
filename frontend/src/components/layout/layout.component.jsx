@@ -60,6 +60,13 @@ const Layout = (props) => {
     )
       return true;
   });
+  const [settingsMenu, setSettingsMenu] = useState(() => {
+    if (
+      window.location.pathname === "/hotels" ||
+      window.location.pathname === "/staff"
+    )
+      return true;
+  });
   const [collapsed, setCollapsed] = useState(false);
 
   const handleSignOut = async () => {
@@ -140,8 +147,8 @@ const Layout = (props) => {
             </MenuItem>
 
             <MenuItem
-              active={window.location.pathname === "/dashboard/dashboard"}
-              routerLink={<Link to="/dashboard/dashboard" />}
+              active={window.location.pathname === "/frontdesk"}
+              routerLink={<Link to="/frontdesk" />}
               icon={<FontAwesomeIcon icon={faTable} />}
             >
               Frontdesk
@@ -166,12 +173,6 @@ const Layout = (props) => {
               >
                 Check in
               </MenuItem>
-              <MenuItem
-                routerLink={<Link to="/checkout" />}
-                icon={<FontAwesomeIcon icon={faArrowLeft} />}
-              >
-                Check Out
-              </MenuItem>
             </SubMenu>
             <SubMenu
               label="Rooms"
@@ -191,16 +192,22 @@ const Layout = (props) => {
                 Room Types
               </MenuItem>
             </SubMenu>
-            <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
+            <SubMenu
+              label="Settings"
+              icon={<FontAwesomeIcon icon={faCogs} />}
+              open={settingsMenu}
+            >
               <MenuItem
-                routerLink={<Link to="/dashboard/hotels" />}
+                active={window.location.pathname === "/hotels"}
+                routerLink={<Link to="/hotels" />}
                 icon={<FontAwesomeIcon icon={faBuilding} />}
               >
                 Hotels
               </MenuItem>
 
               <MenuItem
-                routerLink={<Link to="/dashboard/staff" />}
+                active={window.location.pathname === "/staff"}
+                routerLink={<Link to="/staff" />}
                 icon={<FontAwesomeIcon icon={faUsers} />}
               >
                 Staff

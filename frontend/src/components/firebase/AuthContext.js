@@ -57,7 +57,7 @@ export const AuthContextProvider = ({ children }) => {
             const snapShot = await getDoc(userRef);
 
             if (snapShot) {
-              document.location.href = "/dashboard/dashboard";
+              document.location.href = "/frontdesk";
             } else {
               document.location.href = "/setup/hotel_chain";
             }
@@ -84,7 +84,7 @@ export const AuthContextProvider = ({ children }) => {
         const user = userCredential.user;
 
         if (user) {
-          document.location.href = "/dashboard/dashboard";
+          document.location.href = "/frontdesk";
         }
         // ...
       })
