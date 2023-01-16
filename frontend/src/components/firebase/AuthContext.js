@@ -127,6 +127,7 @@ export const AuthContextProvider = ({ children }) => {
 
   //set user state
   useEffect(() => {
+    localStorage.setItem("userId", JSON.stringify(user.uid));
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       // async function GetRoomData() {
