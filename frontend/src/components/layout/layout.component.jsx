@@ -36,6 +36,7 @@ import { UserAuth } from "../firebase/AuthContext";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../form-input/form-input.component";
 import { useState } from "react";
+import MyCalendar from "../calendar";
 
 const Layout = (props) => {
   const { children } = props;
@@ -183,6 +184,9 @@ const Layout = (props) => {
             </MenuItem>
           </SubMenu>
         </Menu>
+        <div className="my-calendar">
+          <MyCalendar />
+        </div>
       </Sidebar>
       <main style={{ width: "100%" }}>
         <div className="filter">
