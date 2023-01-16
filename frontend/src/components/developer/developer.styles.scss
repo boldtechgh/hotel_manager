@@ -1,0 +1,12 @@
+.dev {
+  width: 100%;
+  margin-left: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #fff;
+
+  & p {
+    margin: 0;
+  }
+}

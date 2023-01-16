@@ -64,7 +64,7 @@ const RoomType = (props) => {
 
   const { typeName, typeRate, shortCode, typeStatus } = formData;
   return (
-    <>
+    <Layout>
       <ComponentTitle>
         <h1>Room Types</h1>
         <div className="add-booking">
@@ -117,7 +117,7 @@ const RoomType = (props) => {
       </ComponentTitle>
       <SubTitle>Here is our various room types {user.uid}</SubTitle>
       <RoomTypeList />
-    </>
+    </Layout>
   );
 };
 

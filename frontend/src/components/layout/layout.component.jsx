@@ -34,12 +34,31 @@ import CustomButton from "../custom-button/custom-button.component";
 import UserPhoto from "../../images/user.png";
 import { UserAuth } from "../firebase/AuthContext";
 import { useNavigate } from "react-router-dom";
+import FormInput from "../form-input/form-input.component";
+import { useState } from "react";
+import MyCalendar from "../calendar";
+import Developer from "../developer";
 
 const Layout = (props) => {
   const { children } = props;
   const { collapseSidebar, rtl } = useProSidebar();
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
+  const [bookingsSubMenu, setBookingsSubMenu] = useState(() => {
+    if (
+      window.location.pathname === "/bookings" ||
+      window.location.pathname === "/checkin"
+    )
+      return true;
+  });
+  const [roomsSubMenu, setRoomsSubMenu] = useState(() => {
+    if (
+      window.location.pathname === "/room-list" ||
+      window.location.pathname === "/room-type"
+    )
+      return true;
+  });
+  const [collapsed, setCollapsed] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -58,10 +77,14 @@ const Layout = (props) => {
       }}
     >
       <Sidebar
+        width="300px"
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
             backgroundColor: "#363740",
-            width: "100%",
+            // width: "300px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
           },
           [`.${menuClasses.container}`]: {
             backgroundColor: "#363740",
@@ -74,76 +97,117 @@ const Layout = (props) => {
           },
         }}
       >
-        <div className="sb-title">
-          <FontAwesomeIcon
-            className="menu-bars"
-            onClick={() => collapseSidebar()}
-            icon={faBars}
-          />
-          <BrandLogo position="relative" hideLogo color="#fff" />
-        </div>
-        <Menu
-          menuItemStyles={{
-            button: ({ level, active, disabled }) => {
-              // only apply styles on first level elements of the tree
-              if (level === 0 || level === 1)
-                return {
-                  color: disabled ? "#f5d9ff" : "rgb(230, 230, 230)",
-                  backgroundColor: active ? "#363740" : "#363740",
-                };
-            },
-          }}
-        >
-          <a href="/dashboard/dashboard">
-            <MenuItem icon={<FontAwesomeIcon icon={faDashboard} />}>
-              DashBoard
-            </MenuItem>
-          </a>
-          <SubMenu
-            label="Bookings"
-            icon={<FontAwesomeIcon icon={faCalendarAlt} />}
+        <div>
+          <div className="sb-title">
+            <FontAwesomeIcon
+              className="menu-bars"
+              onClick={() => {
+                collapseSidebar();
+                setCollapsed(!collapsed);
+              }}
+              icon={faBars}
+            />
+            <BrandLogo position="relative" hideLogo color="#fff" />
+          </div>
+          {!collapsed && (
+            <div className="hotel-dropdown">
+              <FormInput inputType="select">
+                <option value="">Select hotel</option>
+              </FormInput>
+            </div>
+          )}
+
+          <Menu
+            menuItemStyles={{
+              button: ({ level, active, disabled }) => {
+                // only apply styles on first level elements of the tree
+                if (level === 0 || level === 1)
+                  return {
+                    color: active ? "#779341" : "rgb(230, 230, 230)",
+                    backgroundColor: active ? "rgb(230, 230, 230)" : "#363740",
+                  };
+              },
+            }}
           >
             <MenuItem
-              routerLink={<Link to="/bookings" />}
-              icon={<FontAwesomeIcon icon={faDoorOpen} />}
+              active={window.location.pathname === "/dashboard/dashboard"}
+              routerLink={<Link to="/dashboard/dashboard" />}
+              icon={<FontAwesomeIcon icon={faDashboard} />}
             >
-              All Bookings
-            </MenuItem>
-            <MenuItem
-              routerLink={<Link to="/checkin" />}
-              icon={<FontAwesomeIcon icon={faArrowRight} />}
-            >
-              Check in
-            </MenuItem>
-            <MenuItem
-              routerLink={<Link to="/checkout" />}
-              icon={<FontAwesomeIcon icon={faArrowLeft} />}
-            >
-              Check Out
-            </MenuItem>
-          </SubMenu>
-          <SubMenu label="Rooms" icon={<FontAwesomeIcon icon={faHouse} />}>
-            <MenuItem routerLink={<Link to="/room-list" />}>All rooms</MenuItem>
-            <MenuItem routerLink={<Link to="/room-type" />}>
-              Room Types
-            </MenuItem>
-          </SubMenu>
-          <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
-            <MenuItem
-              routerLink={<Link to="/dashboard/hotels" />}
-              icon={<FontAwesomeIcon icon={faBuilding} />}
-            >
-              Hotels
+              DashBoard
             </MenuItem>
 
-            <MenuItem
-              routerLink={<Link to="/dashboard/staff" />}
-              icon={<FontAwesomeIcon icon={faUsers} />}
+            <SubMenu
+              label="Bookings"
+              icon={<FontAwesomeIcon icon={faCalendarAlt} />}
+              open={bookingsSubMenu}
             >
-              Staff
-            </MenuItem>
-          </SubMenu>
-        </Menu>
+              <MenuItem
+                active={window.location.pathname === "/bookings"}
+                routerLink={<Link to="/bookings" />}
+                icon={<FontAwesomeIcon icon={faDoorOpen} />}
+              >
+                All Bookings
+              </MenuItem>
+              <MenuItem
+                active={window.location.pathname === "/checkin"}
+                routerLink={<Link to="/checkin" />}
+                icon={<FontAwesomeIcon icon={faArrowRight} />}
+              >
+                Check in
+              </MenuItem>
+              <MenuItem
+                routerLink={<Link to="/checkout" />}
+                icon={<FontAwesomeIcon icon={faArrowLeft} />}
+              >
+                Check Out
+              </MenuItem>
+            </SubMenu>
+            <SubMenu
+              label="Rooms"
+              icon={<FontAwesomeIcon icon={faHouse} />}
+              open={roomsSubMenu}
+            >
+              <MenuItem
+                active={window.location.pathname === "/room-list"}
+                routerLink={<Link to="/room-list" />}
+              >
+                All rooms
+              </MenuItem>
+              <MenuItem
+                active={window.location.pathname === "/room-type"}
+                routerLink={<Link to="/room-type" />}
+              >
+                Room Types
+              </MenuItem>
+            </SubMenu>
+            <SubMenu label="Settings" icon={<FontAwesomeIcon icon={faCogs} />}>
+              <MenuItem
+                routerLink={<Link to="/dashboard/hotels" />}
+                icon={<FontAwesomeIcon icon={faBuilding} />}
+              >
+                Hotels
+              </MenuItem>
+
+              <MenuItem
+                routerLink={<Link to="/dashboard/staff" />}
+                icon={<FontAwesomeIcon icon={faUsers} />}
+              >
+                Staff
+              </MenuItem>
+            </SubMenu>
+          </Menu>
+        </div>
+        {!collapsed && (
+          <div>
+            <div className="my-calendar">
+              <MyCalendar />
+            </div>
+            <div>
+              <Developer />
+            </div>
+          </div>
+        )}
       </Sidebar>
       <main style={{ width: "100%" }}>
         <div className="filter">

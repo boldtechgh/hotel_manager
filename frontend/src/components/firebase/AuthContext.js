@@ -8,7 +8,6 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "./firebase.utils.js";
-
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();

@@ -71,7 +71,7 @@ const Rooms = (props) => {
     Status,
   } = formData;
   return (
-    <>
+    <Layout>
       <ComponentTitle>
         <h1>Room List </h1>
         <div className="add-booking">
@@ -144,7 +144,7 @@ const Rooms = (props) => {
       </ComponentTitle>
       <SubTitle>List of all rooms</SubTitle>
       <RoomList />
-    </>
+    </Layout>
   );
 };
 

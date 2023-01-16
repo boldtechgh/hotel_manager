@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { Table } from "react-bootstrap";
+import { Form, Table } from "react-bootstrap";
 import "./rooms.styles.scss";
 import DataTable from "react-data-table-component";
 import { db } from "../firebase/firebase.utils";
 import { UserAuth } from "../firebase/AuthContext";
+import { Export } from "react-data-table-component-extensions/dist/ui";
 
 const columns = [
   { name: "Name", selector: (row) => row.typeName, sortable: true },
@@ -27,11 +28,51 @@ const columns = [
 const RoomTypeList = (props) => {
   const [roomData, setRoomData] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [filterText, setFilterText] = useState("");
+  const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+  const filteredItems = roomData.filter(
+    (item) =>
+      item.typeName &&
+      item.typeName.toLowerCase().includes(filterText.toLowerCase())
+  );
+
+  const FilterComponent = ({ onFilter, onClear, filterText }) => {
+    return (
+      <Form>
+        <Form.Group>
+          <Form.Control
+            type="text"
+            onChange={onFilter}
+            // onClear={onClear}
+            value={filterText}
+            placeholder="Search"
+          />
+        </Form.Group>
+      </Form>
+    );
+  };
+
+  const subHeaderComponentMemo = React.useMemo(() => {
+    const handleClear = () => {
+      if (filterText) {
+        setResetPaginationToggle(!resetPaginationToggle);
+        setFilterText("");
+      }
+    };
+
+    return (
+      <FilterComponent
+        onFilter={(e) => setFilterText(e.target.value)}
+        onClear={handleClear}
+        filterText={filterText}
+      />
+    );
+  }, [filterText, resetPaginationToggle]);
   const { user } = UserAuth();
 
   const q = query(
     collection(db, "roomTypes"),
-    where("hotelchainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`)
+    where("hotelchainId", "==", `GgYrGv6FOCYEGDk8qvpZnXmQpTp1`)
   );
 
   const fetchData = async () => {
@@ -47,21 +88,28 @@ const RoomTypeList = (props) => {
     console.log("Data Successfully Retrieved");
   };
 
-  useEffect(() => {
-    fetchData();
+  useEffect(async () => {
+    await fetchData().then(() => {
+      setLoading(false);
+    });
     console.log("i run once" + user.uid);
-    setLoading(false);
   }, []);
 
   return (
     <div className="blist">
       <DataTable
+        title="Room Types"
         columns={columns}
-        data={roomData}
+        data={filteredItems}
         progressPending={isLoading}
         // progressComponent={<CustomLoader />}
         pagination
+        paginationResetDefaultPage={resetPaginationToggle}
         striped
+        subHeader
+        subHeaderComponent={subHeaderComponentMemo}
+        selectableRows
+        persistTableHead
       />
     </div>
   );
