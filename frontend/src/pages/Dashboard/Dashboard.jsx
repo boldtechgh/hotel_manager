@@ -57,9 +57,6 @@ const Dashboard = (props) => {
   return (
     <Layout>
       <DashboardContext.Provider value={contextValue}>
-        {active.action === "checkout" && <CheckOut />}
-        {active.action === "room-list" && <Rooms />}
-        {active.action === "room-type" && <RoomType />}
         {active.action === "hotels" && <HotelsCard />}
         {active.action === "staff" && <StaffPage />}
         {active.action === "dashboard" && <DashComponent />}

@@ -13,7 +13,6 @@ import Login from "./pages/Login/Login.jsx";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import HotelSetup from "./pages/Hotel_Setup/hotel_setup";
-import { AuthContextProvider } from "./components/firebase/AuthContext";
 import CheckIn from "./pages/checkin/chekin.page";
 import Bookings from "./pages/bookings";
 import RoomType from "./pages/rooms/roomtypes";
@@ -22,7 +21,6 @@ import Rooms from "./pages/rooms";
 const App = () => {
   return (
     <Routes>
-      <Route exact path="/checkin" element={<CheckIn />} />
       <Route exact path="/:action" element={<Login />} />
       <Route path="/dashboard/:action" element={<Dashboard />} />
       <Route path="/setup/:action" element={<HotelSetup />} />

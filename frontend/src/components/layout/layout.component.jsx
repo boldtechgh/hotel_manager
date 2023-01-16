@@ -8,9 +8,11 @@ import {
   faCalendarAlt,
   faCogs,
   faDashboard,
+  faDesktop,
   faDoorOpen,
   faHouse,
   faMagnifyingGlass,
+  faTable,
   faUser,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
@@ -130,11 +132,19 @@ const Layout = (props) => {
             }}
           >
             <MenuItem
-              active={window.location.pathname === "/dashboard/dashboard"}
+              active={window.location.pathname === "/"}
               routerLink={<Link to="/dashboard/dashboard" />}
               icon={<FontAwesomeIcon icon={faDashboard} />}
             >
-              DashBoard
+              Dashboard
+            </MenuItem>
+
+            <MenuItem
+              active={window.location.pathname === "/dashboard/dashboard"}
+              routerLink={<Link to="/dashboard/dashboard" />}
+              icon={<FontAwesomeIcon icon={faTable} />}
+            >
+              Frontdesk
             </MenuItem>
 
             <SubMenu
