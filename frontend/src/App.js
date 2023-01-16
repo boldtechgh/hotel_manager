@@ -28,8 +28,8 @@ const App = () => {
       <Route path="/setup/:action" element={<HotelSetup />} />
       <Route path="/checkin" element={<CheckIn />} />
       <Route path="/bookings" element={<Bookings />} />
-      <Route path="/room-list" element={<Rooms />} />
       <Route path="/room-type" element={<RoomType />} />
+      <Route path="/room-list" element={<Rooms />} />
     </Routes>
   );
 };

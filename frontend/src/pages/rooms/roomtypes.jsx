@@ -21,7 +21,7 @@ import RoomTypeList from "../../components/rooms-components/room-types";
 const RoomType = (props) => {
   const { user } = UserAuth();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ hotelchainId: user?.uid });
+  const [formData, setFormData] = useState({ hotelchainId: user.uid });
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -115,7 +115,7 @@ const RoomType = (props) => {
           </ModalComponent>
         </div>
       </ComponentTitle>
-      <SubTitle>Here is our various room types</SubTitle>
+      <SubTitle>Here is our various room types {user.uid}</SubTitle>
       <RoomTypeList />
     </Layout>
   );

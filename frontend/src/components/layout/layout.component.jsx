@@ -34,12 +34,28 @@ import CustomButton from "../custom-button/custom-button.component";
 import UserPhoto from "../../images/user.png";
 import { UserAuth } from "../firebase/AuthContext";
 import { useNavigate } from "react-router-dom";
+import FormInput from "../form-input/form-input.component";
+import { useState } from "react";
 
 const Layout = (props) => {
   const { children } = props;
   const { collapseSidebar, rtl } = useProSidebar();
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
+  const [bookingsSubMenu, setBookingsSubMenu] = useState(() => {
+    if (
+      window.location.pathname === "/bookings" ||
+      window.location.pathname === "/checkin"
+    )
+      return true;
+  });
+  const [roomsSubMenu, setRoomsSubMenu] = useState(() => {
+    if (
+      window.location.pathname === "/room-list" ||
+      window.location.pathname === "/room-type"
+    )
+      return true;
+  });
 
   const handleSignOut = async () => {
     try {
@@ -82,34 +98,45 @@ const Layout = (props) => {
           />
           <BrandLogo position="relative" hideLogo color="#fff" />
         </div>
+        <div className="hotel-dropdown">
+          <FormInput inputType="select">
+            <option value="">Select hotel</option>
+          </FormInput>
+        </div>
         <Menu
           menuItemStyles={{
             button: ({ level, active, disabled }) => {
               // only apply styles on first level elements of the tree
               if (level === 0 || level === 1)
                 return {
-                  color: disabled ? "#f5d9ff" : "rgb(230, 230, 230)",
-                  backgroundColor: active ? "#363740" : "#363740",
+                  color: active ? "#779341" : "rgb(230, 230, 230)",
+                  backgroundColor: active ? "rgb(230, 230, 230)" : "#363740",
                 };
             },
           }}
         >
-          <a href="/dashboard/dashboard">
-            <MenuItem icon={<FontAwesomeIcon icon={faDashboard} />}>
-              DashBoard
-            </MenuItem>
-          </a>
+          <MenuItem
+            active={window.location.pathname === "/dashboard/dashboard"}
+            routerLink={<Link to="/dashboard/dashboard" />}
+            icon={<FontAwesomeIcon icon={faDashboard} />}
+          >
+            DashBoard
+          </MenuItem>
+
           <SubMenu
             label="Bookings"
             icon={<FontAwesomeIcon icon={faCalendarAlt} />}
+            open={bookingsSubMenu}
           >
             <MenuItem
+              active={window.location.pathname === "/bookings"}
               routerLink={<Link to="/bookings" />}
               icon={<FontAwesomeIcon icon={faDoorOpen} />}
             >
               All Bookings
             </MenuItem>
             <MenuItem
+              active={window.location.pathname === "/checkin"}
               routerLink={<Link to="/checkin" />}
               icon={<FontAwesomeIcon icon={faArrowRight} />}
             >
@@ -122,9 +149,21 @@ const Layout = (props) => {
               Check Out
             </MenuItem>
           </SubMenu>
-          <SubMenu label="Rooms" icon={<FontAwesomeIcon icon={faHouse} />}>
-            <MenuItem routerLink={<Link to="/room-list" />}>All rooms</MenuItem>
-            <MenuItem routerLink={<Link to="/room-type" />}>
+          <SubMenu
+            label="Rooms"
+            icon={<FontAwesomeIcon icon={faHouse} />}
+            open={roomsSubMenu}
+          >
+            <MenuItem
+              active={window.location.pathname === "/room-list"}
+              routerLink={<Link to="/room-list" />}
+            >
+              All rooms
+            </MenuItem>
+            <MenuItem
+              active={window.location.pathname === "/room-type"}
+              routerLink={<Link to="/room-type" />}
+            >
               Room Types
             </MenuItem>
           </SubMenu>
