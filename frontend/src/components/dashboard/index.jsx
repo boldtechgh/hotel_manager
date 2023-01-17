@@ -7,19 +7,20 @@ import ComponentTitle from "../component-title";
 import ExpectedArrivals from "../expected-arrivals";
 import ExpectedDepartures from "../expected-arrivals/departures";
 import InfoCard from "../info-card";
-import InfoTable from "../info-table";
 import RoomType from "../room-type";
 import "./dashboard.styles.scss";
 import LogoImg from "../../images/google.png";
+import Card from "./info-card";
 
-const DashComponent = (props) => {
+const DashboardComponent = (props) => {
   return (
     <>
       <ComponentTitle>
-        <h1>Dashboard</h1>
+        <h1>Dashboard </h1>
       </ComponentTitle>
       <div className="info-section">
-        <InfoCard
+        <Card />
+        {/* <InfoCard
           bgColor="#488A99"
           icon={<FontAwesomeIcon icon={faBuilding} />}
           name="Rooms"
@@ -36,13 +37,7 @@ const DashComponent = (props) => {
           icon={<FontAwesomeIcon icon={faBuilding} />}
           name="Booked"
           value="200"
-        />
-        <InfoCard
-          bgColor="#202020"
-          icon={<FontAwesomeIcon icon={faBuilding} />}
-          name="Available"
-          value="200"
-        />
+        /> */}
       </div>
       <div className="statistics">
         <div className="top-section">
@@ -164,4 +159,4 @@ const DashComponent = (props) => {
   );
 };
 
-export default DashComponent;
+export default DashboardComponent;

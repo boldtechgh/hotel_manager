@@ -139,8 +139,8 @@ const Layout = (props) => {
             }}
           >
             <MenuItem
-              active={window.location.pathname === "/"}
-              routerLink={<Link to="/dashboard/dashboard" />}
+              active={window.location.pathname === "/dashboard"}
+              routerLink={<Link to="/dashboard" />}
               icon={<FontAwesomeIcon icon={faDashboard} />}
             >
               Dashboard
