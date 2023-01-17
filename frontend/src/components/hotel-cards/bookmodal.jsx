@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 
-function HotelModal({bookingStatus}) {
+function HotelModal({ bookingStatus }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
-      <>
-          <div className="add-btn">
-      {/* <Button variant="success" onClick={handleShow}>
+    <>
+      <div className="add-btn">
+        {/* <Button variant="success" onClick={handleShow}>
         Book
         </Button> */}
-        {bookingStatus === 'booked' ? <Button variant="success" onClick={handleShow}>Book!</Button> :
-         <Button variant="success" onClick={handleShow}>CheckOut!</Button>}
-            </div>
+        {bookingStatus === "booked" ? (
+          <Button variant="success" onClick={handleShow}>
+            Book!
+          </Button>
+        ) : (
+          <Button variant="success" onClick={handleShow}>
+            Add Something!
+          </Button>
+        )}
+      </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Booking Details</Modal.Title>
@@ -26,26 +33,16 @@ function HotelModal({bookingStatus}) {
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Guest Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Guest Name"
-                autoFocus
-              />
+              <Form.Control type="text" placeholder="Guest Name" autoFocus />
               <Form.Label>From</Form.Label>
-              <Form.Control
-                type="date"
-                autoFocus
-              />
+              <Form.Control type="date" autoFocus />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>To</Form.Label>
-              <Form.Control
-                type="date"
-                autoFocus
-              />
+              <Form.Control type="date" autoFocus />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -53,7 +50,7 @@ function HotelModal({bookingStatus}) {
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
-          <Button  variant="outline-success" onClick={handleClose}>
+          <Button variant="outline-success" onClick={handleClose}>
             Save Booking
           </Button>
         </Modal.Footer>
