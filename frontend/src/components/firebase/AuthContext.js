@@ -17,12 +17,15 @@ export const AuthContextProvider = ({ children }) => {
 
   // !Create google SigninProfile
   const createUserProfileDocument = async (user, additionalData) => {
-    if (!user) return;
+    if (!user) {
+      console.log("Creating");
+    }
 
     const userRef = doc(db, `users/${user.uid}`);
     const snapShot = await getDoc(userRef);
 
     if (!snapShot.exists()) {
+      console.log("Creating User");
       const { displayName, email } = user;
       const createdAt = new Date();
       try {
@@ -49,6 +52,7 @@ export const AuthContextProvider = ({ children }) => {
         // The signed-in user info.
         const user = result.user;
         if (user) {
+          console.log(user);
           await createUserProfileDocument(user).then(async () => {
             const userRef = doc(
               db,
@@ -126,7 +130,7 @@ export const AuthContextProvider = ({ children }) => {
 
   //set user state
   useEffect(() => {
-    localStorage.setItem("userId", JSON.stringify(user.uid));
+    // localStorage.setItem("userId", JSON.stringify(user.uid));
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       // async function GetRoomData() {
