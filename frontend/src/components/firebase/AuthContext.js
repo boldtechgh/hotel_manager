@@ -18,7 +18,7 @@ export const AuthContextProvider = ({ children }) => {
   // !Create google SigninProfile
   const createUserProfileDocument = async (user, additionalData) => {
     if (!user) return;
-
+    console.log(user);
     const userRef = doc(db, `users/${user.uid}`);
     const snapShot = await getDoc(userRef);
 
@@ -68,8 +68,10 @@ export const AuthContextProvider = ({ children }) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log("Error code: " + errorCode);
+        console.log("Error Message: " + errorMessage);
         // The email of the user's account used.
-        const email = error.customData.email;
+        // const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
@@ -79,12 +81,24 @@ export const AuthContextProvider = ({ children }) => {
   //Sign in with email and password
   const passwordSignIn = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
 
         if (user) {
-          document.location.href = "/frontdesk";
+          await createUserProfileDocument(user).then(async () => {
+            const userRef = doc(
+              db,
+              `users/${user.uid}/hotel_chain/${user.uid}`
+            );
+            const snapShot = await getDoc(userRef);
+
+            if (snapShot) {
+              document.location.href = "/frontdesk";
+            } else {
+              document.location.href = "/setup/hotel_chain";
+            }
+          });
         }
         // ...
       })
@@ -96,11 +110,14 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   //signup with username and password
-  const passwordSignUp = (email, password) => {
+  const passwordSignUp = (email, password, fname, lname) => {
+    const displayName = `${fname} ${lname}`;
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         // Signed in
+        console.log(userCredential);
         const user = userCredential.user;
+        user.displayName = displayName;
 
         if (user) {
           await createUserProfileDocument(user).then(() => {

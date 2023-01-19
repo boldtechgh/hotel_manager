@@ -8,7 +8,7 @@ import { UserAuth } from "../../components/firebase/AuthContext";
 export function SignUp() {
   const [formData, setFormData] = useState({
     fistName: "",
-    lastname: "",
+    lastName: "",
     username: "",
     email: "",
     password: "",
@@ -33,7 +33,7 @@ export function SignUp() {
     event.preventDefault();
 
     if (password === passwordVerify) {
-      passwordSignUp(email, password);
+      passwordSignUp(email, password, firstName, lastName);
     } else {
       setPasswordMatch(false);
     }

@@ -45,6 +45,7 @@ const Layout = (props) => {
   const { children } = props;
   const { collapseSidebar, rtl } = useProSidebar();
   const { user, logOut } = UserAuth();
+  console.log(user);
   const navigate = useNavigate();
   const [bookingsSubMenu, setBookingsSubMenu] = useState(() => {
     if (

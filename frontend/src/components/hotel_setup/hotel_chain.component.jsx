@@ -66,7 +66,7 @@ export function HotelChain() {
         await setDoc(userRef2, formData).then(() => {
           console.log("Success");
           setLoading(false);
-          document.location.href = "/dashboard/dashboard";
+          document.location.href = "/frontdesk";
         });
       } catch (error) {
         console.log("error creating user", error.message);

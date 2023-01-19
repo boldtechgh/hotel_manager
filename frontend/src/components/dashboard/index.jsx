@@ -19,32 +19,37 @@ const DashboardComponent = (props) => {
         <h1>Dashboard </h1>
       </ComponentTitle>
       <div className="info-section">
-        <Card />
-        {/* <InfoCard
-          bgColor="#488A99"
-          icon={<FontAwesomeIcon icon={faBuilding} />}
-          name="Rooms"
-          value="200"
+        <Card
+          title="Total Booking"
+          info="11,980"
+          othertitle1="This Month"
+          othertitle2="This Week"
+          otherinfo1="945"
+          otherinfo2="1,890"
         />
-        <InfoCard
-          bgColor="#1C4E80"
-          icon={<FontAwesomeIcon icon={faBuilding} />}
-          name="Occupied"
-          value="200"
+        <Card
+          title="Rooms Available"
+          info="580"
+          othertitle1="Booked (Month)"
+          othertitle2="Booked (Week)"
+          otherinfo1="945"
+          otherinfo2="180"
         />
-        <InfoCard
-          bgColor="#1F3F49"
-          icon={<FontAwesomeIcon icon={faBuilding} />}
-          name="Booked"
-          value="200"
-        /> */}
+        <Card
+          title="Expenses"
+          info="GHs 110,980"
+          othertitle1="This Month"
+          othertitle2="This Week"
+          otherinfo1="GHs 945"
+          otherinfo2="GHs 90"
+        />
       </div>
       <div className="statistics">
         <div className="top-section">
           <div className="chart-section">
             <div className="reservation-chart">
               <div className="chart-title">
-                <h2>Room status</h2>
+                <h2>Room Booking Chart</h2>
                 <Link to="/">View</Link>
               </div>
               <PieChart
@@ -56,7 +61,7 @@ const DashboardComponent = (props) => {
             </div>
             <div className="room-info">
               <div className="chart-title">
-                <h2>Room type</h2>
+                <h2>Sales Revenue</h2>
                 <Link to="/">View</Link>
               </div>
               <div className="room-info-table">
@@ -65,14 +70,46 @@ const DashboardComponent = (props) => {
             </div>
           </div>
           <div className="expected">
-            <ExpectedArrivals />
+            <div className="customers">
+              <div className="chart-title">
+                <h2>New Customers</h2>
+                <Link to="/">View</Link>
+              </div>
+              <div className="activity">
+                <div className="profile-photo">
+                  <img src={LogoImg} alt="test" />
+                </div>
+                <div className="activity-desc">
+                  <p className="desc">John Doe requested a room.</p>
+                  <p className="time">2 hours ago</p>
+                </div>
+              </div>
+              <div className="activity">
+                <div className="profile-photo">
+                  <img src={LogoImg} alt="test" />
+                </div>
+                <div className="activity-desc">
+                  <p className="desc">John Doe requested a room.</p>
+                  <p className="time">2 hours ago</p>
+                </div>
+              </div>
+              <div className="activity">
+                <div className="profile-photo">
+                  <img src={LogoImg} alt="test" />
+                </div>
+                <div className="activity-desc">
+                  <p className="desc">John Doe requested a room.</p>
+                  <p className="time">2 hours ago</p>
+                </div>
+              </div>
+            </div>
             <ExpectedDepartures />
           </div>
         </div>
         <div className="rigth-side-section">
           <div className="hotel-status">
             <div className="chart-title">
-              <h2>Current Status</h2>
+              <h2>Top Selected packages</h2>
               <Link to="/">View</Link>
             </div>
             <div className="current-status">

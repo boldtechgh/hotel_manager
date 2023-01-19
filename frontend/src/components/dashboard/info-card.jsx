@@ -1,21 +1,28 @@
 import React from "react";
 import "./dashboard.styles.scss";
 
-const Card = () => {
+const Card = ({
+  title,
+  info,
+  othertitle1,
+  othertitle2,
+  otherinfo1,
+  otherinfo2,
+}) => {
   return (
     <div className="card-container">
       <div className="card-title">
-        <h2>Total Bookings</h2>
+        <h2>{title}</h2>
       </div>
-      <div className="card-info">11,230</div>
+      <div className="card-info">{info}</div>
       <div className="card-other-info">
-        <div className="other-info-1">
-          <h3>This Month</h3>
-          <p>932</p>
+        <div className="other-info">
+          <h3>{othertitle1}</h3>
+          <p>{otherinfo1}</p>
         </div>
-        <div className="other-info-2">
-          <h3>This Week</h3>
-          <p>932</p>
+        <div className="other-info">
+          <h3>{othertitle2}</h3>
+          <p>{otherinfo2}</p>
         </div>
       </div>
     </div>
