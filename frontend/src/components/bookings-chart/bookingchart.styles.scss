@@ -1,0 +1,36 @@
+.booking-chart {
+  width: 40%;
+  height: 100%;
+  background-color: #ffffff;
+  // color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(200, 200, 200);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  // box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  // -webkit-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  // -moz-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+
+  & .current-status {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    // border-bottom: 1px solid rgb(100, 100, 100);
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 500;
+
+    & h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    & .desc {
+      width: 50%;
+    }
+  }
+}

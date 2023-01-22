@@ -90,52 +90,20 @@
   }
 
   & .top-section {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px;
 
-    & .chart-section {
+    & .charts {
       width: 100%;
-      height: 380px;
+      height: 400px;
       display: flex;
       justify-content: flex-start;
       gap: 30px;
       align-items: flex-start;
       // padding: 20px 0;
       border-radius: 10px;
-
-      & .reservation-chart {
-        width: 40%;
-        height: 100%;
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
-      & .room-info {
-        width: 60%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 10px;
-
-        & .room-info-table {
-          width: 100%;
-          height: 100%;
-          margin: 20px;
-          overflow-y: auto;
-        }
-      }
     }
 
     & .expected {
@@ -146,103 +114,6 @@
       gap: 30px;
       align-items: flex-start;
       border-radius: 10px;
-    }
-  }
-
-  & .rigth-side-section {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-
-    & .hotel-status {
-      width: 100%;
-      background-color: #1f3f49;
-      color: #ffffff;
-      padding: 10px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
-      -webkit-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
-
-      & .current-status {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        // border-bottom: 1px solid rgb(100, 100, 100);
-        padding: 15px;
-        font-size: 18px;
-        font-weight: 500;
-
-        & h3 {
-          font-size: 20px;
-          font-weight: 600;
-        }
-
-        & .desc {
-          width: 50%;
-        }
-      }
-    }
-
-    & .activities {
-      width: 100%;
-      background-color: #1f3f49;
-      color: #ffffff;
-      padding: 10px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      align-items: center;
-      justify-content: center;
-
-      & .activity {
-        width: 100%;
-        // padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-
-        & .profile-photo {
-          width: 20%;
-          height: 90px;
-          // background: #fff;
-          padding: 10px;
-          // border-radius: 50%;
-
-          & img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-          }
-        }
-
-        & .activity-desc {
-          width: 80%;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: center;
-
-          & .desc,
-          .time {
-            text-align: center;
-            margin: 0;
-          }
-
-          & .time {
-            font-size: 12px;
-            color: rgb(200, 200, 200);
-          }
-        }
-      }
     }
   }
 }

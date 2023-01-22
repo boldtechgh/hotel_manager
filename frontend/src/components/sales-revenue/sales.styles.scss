@@ -1,0 +1,19 @@
+.sales-revenue-chart {
+  width: 60%;
+  height: 100%;
+  border: 1px solid rgb(200, 200, 200);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+
+  & .sales-chart {
+    width: 100%;
+    height: 100%;
+    margin: 20px;
+    // overflow-y: auto;
+  }
+}
