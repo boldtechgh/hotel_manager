@@ -11,13 +11,14 @@ const BookingsChart = () => {
         <Link to="/">View</Link>
       </div>
       <DoughNut
-        labels={["Reserved", "Occupied", "Available", "Maintenance"]}
+        labels={["Single", "Delux", "Panaroma", "Suite"]}
         label="Rooms"
         values={[20, 50, 125, 5]}
         colors={["#488A99", "#DBAE58", "#779341", "#EA6A47"]}
         circumference={360}
         radius={100}
       />
+      <div></div>
     </div>
   );
 };

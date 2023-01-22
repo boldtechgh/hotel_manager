@@ -46,7 +46,7 @@ const DashboardComponent = (props) => {
           otherinfo2="GHs 90"
         />
       </div>
-      <div className="statistics">
+      <div className="analytics">
         <div className="top-section">
           <div className="charts">
             <SalesRevenueChart />
