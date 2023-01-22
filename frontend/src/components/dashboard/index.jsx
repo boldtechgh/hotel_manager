@@ -13,6 +13,7 @@ import LogoImg from "../../images/google.png";
 import Card from "./info-card";
 import SalesRevenueChart from "../sales-revenue";
 import BookingsChart from "../bookings-chart";
+import IncomeVsExpense from "../income-vs-expenses";
 
 const DashboardComponent = (props) => {
   return (
@@ -51,6 +52,7 @@ const DashboardComponent = (props) => {
           <div className="charts">
             <SalesRevenueChart />
             <BookingsChart />
+            <IncomeVsExpense />
           </div>
 
           <div className="expected">

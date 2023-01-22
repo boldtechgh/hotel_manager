@@ -1,9 +1,9 @@
 .booking-chart {
-  width: 40%;
+  width: 20%;
   height: 100%;
   background-color: #ffffff;
   // color: #ffffff;
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
   border: 1px solid rgb(200, 200, 200);
   display: flex;
@@ -15,22 +15,27 @@
   // -webkit-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
   // -moz-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
 
-  & .current-status {
+  & .period {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    // border-bottom: 1px solid rgb(100, 100, 100);
-    padding: 15px;
-    font-size: 18px;
-    font-weight: 500;
+    padding-top: 40px;
 
-    & h3 {
-      font-size: 20px;
-      font-weight: 600;
+    & .period-title {
+      font-size: 14px;
+      color: rgb(150, 150, 150);
     }
 
-    & .desc {
-      width: 50%;
+    & .period-revenue {
+      font-size: 23px;
+    }
+
+    & .percent-increase {
+      font-size: 13px;
+      color: #6ab187;
+    }
+
+    & .percent-decrease {
+      font-size: 13px;
+      color: #ac3e31;
     }
   }
 }

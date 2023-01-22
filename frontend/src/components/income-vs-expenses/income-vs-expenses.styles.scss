@@ -1,14 +1,15 @@
-.sales-revenue-chart {
+.balsheet-chart {
   width: 40%;
   height: 100%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
   border: 1px solid rgb(200, 200, 200);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  gap: 10px;
   align-items: center;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
+  justify-content: flex-start;
 
   & .revenue {
     width: 100%;
@@ -21,9 +22,14 @@
       width: 100%;
       padding-top: 40px;
 
-      & .period-title {
+      & .period-title-income {
         font-size: 14px;
-        color: rgb(150, 150, 150);
+        color: #779341;
+      }
+
+      & .period-title-expense {
+        font-size: 14px;
+        color: #ac3e31;
       }
 
       & .period-revenue {
@@ -40,12 +46,5 @@
         color: #ac3e31;
       }
     }
-  }
-
-  & .sales-chart {
-    width: 100%;
-    height: 100%;
-    margin: 20px;
-    // overflow-y: auto;
   }
 }
