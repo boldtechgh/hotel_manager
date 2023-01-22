@@ -4,9 +4,9 @@ import {
   collection,
   doc,
   getDoc,
+  addDoc,
   getDocs,
   query,
-  setDoc,
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -21,7 +21,9 @@ import RoomTypeList from "../../components/rooms-components/room-types";
 const RoomType = (props) => {
   const { user } = UserAuth();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ hotelchainId: user.uid });
+  const [formData, setFormData] = useState({
+    hotelChainId: "QDl07LW72pQqzSowmF65YgbPL292",
+  });
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -45,10 +47,10 @@ const RoomType = (props) => {
 
     if (snapShot.exists()) {
       console.log("Exist");
-      const userRef2 = doc(db, `roomTypes/${user.uid}`);
+      const userRef2 = collection(db, `roomTypes/`);
       const createdAt = new Date();
       try {
-        await setDoc(userRef2, formData).then(() => {
+        await addDoc(userRef2, formData).then(() => {
           console.log("Success");
           setLoading(false);
           document.location.href = "/room-type";
@@ -86,30 +88,29 @@ const RoomType = (props) => {
                 <Form.Label>Rate</Form.Label>
                 <Form.Control
                   type="number"
-                  autoFocus
                   name="typeRate"
                   value={typeRate}
                   onChange={handleChange}
                   required
                 />
-                <Form.Label>shortCode</Form.Label>
+                <Form.Label>Slug</Form.Label>
                 <Form.Control
                   type="text"
-                  autoFocus
                   name="shortCode"
                   value={shortCode}
                   onChange={handleChange}
                   required
                 />
                 <Form.Label>Status</Form.Label>
-                <Form.Control
-                  type="text"
-                  autoFocus
+                <Form.Select
                   name="typeStatus"
                   value={typeStatus}
                   onChange={handleChange}
                   required
-                />
+                >
+                  <option defaultValue>Active</option>
+                  <option>Inactive</option>
+                </Form.Select>
               </Form.Group>
             </Form>
           </ModalComponent>

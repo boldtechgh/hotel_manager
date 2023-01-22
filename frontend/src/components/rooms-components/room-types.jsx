@@ -72,7 +72,7 @@ const RoomTypeList = (props) => {
 
   const q = query(
     collection(db, "roomTypes"),
-    where("hotelchainId", "==", `GgYrGv6FOCYEGDk8qvpZnXmQpTp1`)
+    where("hotelChainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`)
   );
 
   const fetchData = async () => {
