@@ -2,7 +2,16 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import HotelModal from "./bookmodal";
 
-function HotelCard({ description, name1, imageSrc, bookingStatus }) {
+function HotelCard({
+  description,
+  name1,
+  imageSrc,
+  HotelFloorCount,
+  HotelCheckInTime,
+  HotelCheckOutTime,
+  HotelEmail,
+  HotelContact,
+}) {
   return (
     <div className="hotelroom">
       {imageSrc && <Card.Img variant="top" src={`${imageSrc}`} />}
@@ -12,14 +21,16 @@ function HotelCard({ description, name1, imageSrc, bookingStatus }) {
           <Card.Text>{description}</Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroup.Item>AC</ListGroup.Item>
-          <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-          <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+          <ListGroup.Item>{HotelContact}</ListGroup.Item>
+          <ListGroup.Item>{HotelEmail}</ListGroup.Item>
+          <ListGroup.Item>
+            Check-In-Out: {HotelCheckInTime} - {HotelCheckOutTime}
+          </ListGroup.Item>
         </ListGroup>
         <Card.Body>
-          <HotelModal bookingStatus={bookingStatus} />
+          <HotelModal bookingStatus={HotelEmail} />
         </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
+        <Card.Footer className="text-muted"></Card.Footer>
       </Card>
     </div>
   );

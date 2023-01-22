@@ -3,10 +3,19 @@ import ModalComponent from "../modal/modal.component";
 import HotelImage from "./download.svg";
 import Form from "react-bootstrap/Form";
 import { UserAuth } from "../firebase/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../firebase/firebase.utils";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 function HotelsCard() {
+  const [hotelsData, setHotelsData] = useState([]);
   const Hotels = [
     {
       id: "1",
@@ -33,6 +42,30 @@ function HotelsCard() {
     title: "Add Hotel",
   };
 
+  const q = query(
+    collection(db, "hotels"),
+    where("HotelChainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`)
+  );
+
+  const fetchData = async () => {
+    setLoading(true);
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      var data = doc.data();
+      setHotelsData((arr) => [...arr, data]);
+      console.log(doc.id, " => ", doc.data());
+    });
+    console.log(user.uid);
+    console.log("Data Successfully Retrievedd");
+  };
+
+  useEffect(() => {
+    fetchData();
+    console.log("i run once" + user.uid);
+    setLoading(false);
+  }, []);
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     HotelName: "",
@@ -46,6 +79,7 @@ function HotelsCard() {
     HotelCheckOutTime: "",
     HotelImageProfile: "",
     HotelDescription: "",
+    HotelChainId: "QDl07LW72pQqzSowmF65YgbPL292",
   });
 
   const handleChange = (event) => {
@@ -71,16 +105,13 @@ function HotelsCard() {
 
     if (snapShot.exists()) {
       console.log("Submitting");
-      const userRef2 = doc(
-        db,
-        `users/${user.uid}/hotelchain/${user.uid}/hotels/${user.uid}`
-      );
+      const userRef2 = collection(db, "hotels");
       const createdAt = new Date();
       try {
-        await setDoc(userRef2, formData).then(() => {
+        await addDoc(userRef2, formData).then(() => {
           console.log("Success");
           setLoading(false);
-          document.location.href = "/dashboard/hotels";
+          document.location.href = "/hotels";
         });
       } catch (error) {
         console.log("error creating user", error.message);
@@ -103,21 +134,37 @@ function HotelsCard() {
     HotelCheckOutTime,
     HotelImageProfile,
     HotelDescription,
+    HotelChainId,
   } = formData;
 
   return (
     <>
       <div className="hotelrooms">
-        {Hotels.map(({ id, name1, description, imageSrc }) => (
-          <div className="cards">
-            <HotelCard
-              key={id}
-              name1={name1}
-              description={description}
-              imageSrc={imageSrc}
-            />
-          </div>
-        ))}
+        {hotelsData.map(
+          ({
+            index,
+            HotelName,
+            HotelDescription,
+            HotelFloorCount,
+            HotelCheckInTime,
+            HotelCheckOutTime,
+            HotelEmail,
+            HotelContact,
+          }) => (
+            <div className="cards">
+              <HotelCard
+                key={index}
+                name1={HotelName}
+                description={HotelDescription}
+                HotelFloorCount={HotelFloorCount}
+                HotelCheckInTime={HotelCheckInTime}
+                HotelCheckOutTime={HotelCheckOutTime}
+                HotelContact={HotelContact}
+                HotelEmail={HotelEmail}
+              />
+            </div>
+          )
+        )}
         <div className="Add-hotel">
           <ModalComponent
             {...HotelModal}
@@ -132,7 +179,7 @@ function HotelsCard() {
                 <Form.Label>Hotel Name</Form.Label>
                 <Form.Control
                   type="text"
-                  autoFocus
+                  placeholder="Hotel"
                   name="HotelName"
                   value={HotelName}
                   onChange={handleChange}
@@ -141,7 +188,7 @@ function HotelsCard() {
                 <Form.Label>Hotel Contact</Form.Label>
                 <Form.Control
                   type="text"
-                  autoFocus
+                  placeholder="024 000 00000"
                   name="HotelContact"
                   value={HotelContact}
                   onChange={handleChange}
@@ -150,7 +197,7 @@ function HotelsCard() {
                 <Form.Label>"Hotel E-mail Address</Form.Label>
                 <Form.Control
                   type="text"
-                  autoFocus
+                  placeholder="hotel@mail.com"
                   name="HotelEmail"
                   value={HotelEmail}
                   onChange={handleChange}
@@ -159,7 +206,7 @@ function HotelsCard() {
                 <Form.Label>Hotel Password</Form.Label>
                 <Form.Control
                   type="text"
-                  autoFocus
+                  placeholder="********"
                   name="HotelPassword"
                   value={HotelPassword}
                   onChange={handleChange}
@@ -168,7 +215,7 @@ function HotelsCard() {
                 <Form.Label>Hotel Website</Form.Label>
                 <Form.Control
                   type="text"
-                  autoFocus
+                  placeholder="example.com"
                   name="HotelWebsite"
                   value={HotelWebsite}
                   onChange={handleChange}
@@ -176,8 +223,8 @@ function HotelsCard() {
                 />
                 <Form.Label>Hotel Floor Count</Form.Label>
                 <Form.Control
-                  type="text"
-                  autoFocus
+                  type="number"
+                  placeholder="0"
                   name="HotelFloorCount"
                   value={HotelFloorCount}
                   onChange={handleChange}
@@ -185,8 +232,8 @@ function HotelsCard() {
                 />
                 <Form.Label>Hotel Room Capacity</Form.Label>
                 <Form.Control
-                  type="text"
-                  autoFocus
+                  type="number"
+                  placeholder="0"
                   name="HotelCapacity"
                   value={HotelCapacity}
                   onChange={handleChange}
@@ -194,7 +241,7 @@ function HotelsCard() {
                 />
                 <Form.Label>Hotel Check In Time</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="time"
                   autoFocus
                   name="HotelCheckInTime"
                   value={HotelCheckInTime}
@@ -203,7 +250,7 @@ function HotelsCard() {
                 />
                 <Form.Label>Hotel Check Out Time</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="time"
                   autoFocus
                   name="HotelCheckOutTime"
                   value={HotelCheckOutTime}
