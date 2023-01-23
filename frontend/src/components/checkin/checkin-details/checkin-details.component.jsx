@@ -13,22 +13,35 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../../custom-button/custom-button.component";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../firebase/firebase.utils";
+import { UserAuth } from "../../firebase/AuthContext";
+import RoomList from "../../rooms-components/rooms";
 
 export function simulateNetworkRequest() {
   return new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
 const CheckInDetails = ({ onSubmit }) => {
+  const { user } = UserAuth();
+  const [roomTypeList, setRoomTypeList] = useState([]);
+  const [roomListData, setRoomListData] = useState([]);
+  const [roomListId, setRoomListId] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [rooms, setRooms] = useLocalStorage("hm_booking_room_details", []);
   const [note, setNote] = useLocalStorage("hm_booking_note", null);
   const [room, setRoom] = useState({});
   const [sameDate, setSameDate] = useState(true);
+  const [RoomType, setRoomType] = useState();
 
   //set room properties
   const handleChange = (event) => {
     const { value, name } = event.target;
-
+    setRoomType(() => {
+      return {
+        roomType: value,
+      };
+    });
     setRoom((prevState) => {
       return {
         ...prevState,
@@ -36,7 +49,43 @@ const CheckInDetails = ({ onSubmit }) => {
       };
     });
   };
+  const { roomType } = room;
+  console.log(RoomType);
+  const q = query(
+    collection(db, "roomList"),
+    where("hotelChainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`),
+    where("RoomType", "==", `${RoomType}`)
+  );
+  const q1 = query(
+    collection(db, "roomTypes"),
+    where("hotelChainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`),
+    where("typeStatus", "==", `Active`)
+  );
+  const fetchData = async () => {
+    setLoading(true);
+    const querySnapshot = await getDocs(q);
+    const querySnapshot1 = await getDocs(q1);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      var data = doc.data();
+      setRoomListData((arr) => [...arr, data]);
+      console.log(doc.id, " => ", doc.data());
+    });
+    querySnapshot1.forEach((doc1) => {
+      // doc.data() is never undefined for query doc snapshots
+      var data1 = doc1.data();
+      setRoomTypeList((arr) => [...arr, data1]);
+      console.log(doc1.id, " => ", doc1.data());
+    });
+    console.log(user.uid);
+    console.log("Data Successfully Retrieved");
+  };
 
+  useEffect(() => {
+    fetchData();
+    console.log("i run once" + user.uid);
+    setLoading(false);
+  }, [room]);
   //set same/different arrival/departure dates
   const handleChecked = (event) => {
     const { value, checked } = event.target;
@@ -100,8 +149,12 @@ const CheckInDetails = ({ onSubmit }) => {
                 <Col sm="4">
                   <Form.Label>Room Type</Form.Label>
                   <Form.Select size="sm" name="roomType" onInput={handleChange}>
-                    <option value="suite">Suite</option>
-                    <option value="deluxe">Deluxe</option>
+                    <option disabled>Select Room Type</option>
+                    {roomTypeList.map(({ typeName, index }) => (
+                      <option value={typeName} key={index}>
+                        {typeName}
+                      </option>
+                    ))}
                   </Form.Select>
                 </Col>
 
@@ -113,10 +166,12 @@ const CheckInDetails = ({ onSubmit }) => {
                     name="roomNumber"
                     onInput={handleChange}
                   >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                    <option disabled>Select Room</option>
+                    {roomListData.map(({ RoomNo, index }) => (
+                      <option value={RoomNo} key={index}>
+                        {RoomNo}
+                      </option>
+                    ))}
                   </Form.Select>
                 </Col>
 
