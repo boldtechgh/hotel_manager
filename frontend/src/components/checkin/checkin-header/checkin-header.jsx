@@ -14,6 +14,15 @@ import "./checkin-header.styles.scss";
 
 const CheckInHeader = () => {
   const [activeTab, setActiveTab] = useState();
+  const [formData, setFormData] = useState({
+    RoomNo: "",
+    RoomType: "",
+    BedCapacity: "",
+    Description: "",
+    Rate: "",
+    Status: "",
+    hotelChainId: "QDl07LW72pQqzSowmF65YgbPL292",
+  });
 
   const activateTab = (tab) => {
     setActiveTab(tab);
