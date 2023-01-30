@@ -36,10 +36,10 @@ const BookingSummary = () => {
       console.log("Exist");
       const userRef2 = collection(db, "checkInData");
       try {
-        await addDoc(userRef2, rooms).then(() => {
+        await addDoc(userRef2, Object.assign({}, rooms)).then(() => {
           console.log("Success");
           setLoading(false);
-          document.location.href = "/dashboard/room-list";
+          document.location.href = "/bookings";
         });
       } catch (error) {
         console.log("error creating user", error.message);
