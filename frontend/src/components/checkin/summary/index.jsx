@@ -1,14 +1,20 @@
 import {
+  faArrowAltCircleRight,
   faFileInvoice,
   faFileInvoiceDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import CustomButton from "../../custom-button/custom-button.component";
+import { UserAuth } from "../../firebase/AuthContext";
+import { db } from "../../firebase/firebase.utils";
 
 const BookingSummary = () => {
+  const [isLoading, setLoading] = useState(false);
   const [customer, setCustomer] = useLocalStorage("hm_customer_details", {});
   const [rooms, setRooms] = useLocalStorage("hm_booking_room_details", []);
   const [note, setNote] = useLocalStorage("hm_booking_note", null);
@@ -16,6 +22,34 @@ const BookingSummary = () => {
     "hm_billing_address",
     {}
   );
+  const { user } = UserAuth();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(user);
+    console.log("Submitting");
+    console.log(rooms);
+    setLoading(true);
+    const userRef = doc(db, `users/${user.uid}`);
+    const snapShot = await getDoc(userRef);
+
+    if (snapShot.exists()) {
+      console.log("Exist");
+      const userRef2 = collection(db, "checkInData");
+      try {
+        await addDoc(userRef2, rooms).then(() => {
+          console.log("Success");
+          setLoading(false);
+          document.location.href = "/dashboard/room-list";
+        });
+      } catch (error) {
+        console.log("error creating user", error.message);
+        setLoading(false);
+      }
+    }
+
+    // setActive("");
+  };
+
   const [totalCost, setTotalCost] = useState();
   const [nhil, setNhil] = useState();
   const [getFund, setGetFund] = useState();
@@ -187,6 +221,11 @@ const BookingSummary = () => {
           </tr>
         </tfoot>
       </Table>
+      <div className="d-flex">
+        <CustomButton width="10%" onClick={handleSubmit}>
+          {isLoading ? "Loading..." : "Save"}
+        </CustomButton>
+      </div>
     </div>
   );
 };
