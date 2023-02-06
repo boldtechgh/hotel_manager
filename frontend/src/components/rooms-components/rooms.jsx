@@ -16,12 +16,12 @@ const columns = [
   },
   {
     name: "Bed Capacity",
-    selector: (row) => row.RoomType,
+    selector: (row) => row.BedCapacity,
     sortable: true,
   },
   {
     name: "Rate",
-    selector: (row) => row.BedCapacity,
+    selector: (row) => row.Rate,
     sortable: true,
   },
   {

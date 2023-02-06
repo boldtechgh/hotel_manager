@@ -52,7 +52,7 @@ const BookingSummary = () => {
       setVat(vatLevy);
       setGrandTotal(granCost);
     },
-    [rooms],
+    [rooms, setRooms],
     [totalCost]
   );
 

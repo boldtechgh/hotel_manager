@@ -87,10 +87,11 @@ const Layout = (props) => {
       }}
     >
       <Sidebar
-        width="300px"
+        width="270px"
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
             backgroundColor: "#363740",
+            // backgroundColor: "##7E909A",
             // width: "300px",
             display: "flex",
             flexDirection: "column",
@@ -141,7 +142,7 @@ const Layout = (props) => {
           >
             <MenuItem
               active={window.location.pathname === "/dashboard"}
-              routerLink={<Link to="/dashboard" />}
+              routerLink={<Link reloadDocument to="/dashboard" />}
               icon={<FontAwesomeIcon icon={faDashboard} />}
             >
               Dashboard
@@ -149,7 +150,7 @@ const Layout = (props) => {
 
             <MenuItem
               active={window.location.pathname === "/frontdesk"}
-              routerLink={<Link to="/frontdesk" />}
+              routerLink={<Link reloadDocument to="/frontdesk" />}
               icon={<FontAwesomeIcon icon={faTable} />}
             >
               Frontdesk
@@ -162,14 +163,14 @@ const Layout = (props) => {
             >
               <MenuItem
                 active={window.location.pathname === "/bookings"}
-                routerLink={<Link to="/bookings" />}
+                routerLink={<Link reloadDocument to="/bookings" />}
                 icon={<FontAwesomeIcon icon={faDoorOpen} />}
               >
                 All Bookings
               </MenuItem>
               <MenuItem
                 active={window.location.pathname === "/checkin"}
-                routerLink={<Link to="/checkin" />}
+                routerLink={<Link reloadDocument to="/checkin" />}
                 icon={<FontAwesomeIcon icon={faArrowRight} />}
               >
                 Check in
@@ -182,13 +183,13 @@ const Layout = (props) => {
             >
               <MenuItem
                 active={window.location.pathname === "/room-list"}
-                routerLink={<Link to="/room-list" />}
+                routerLink={<Link reloadDocument to="/room-list" />}
               >
                 All rooms
               </MenuItem>
               <MenuItem
                 active={window.location.pathname === "/room-type"}
-                routerLink={<Link to="/room-type" />}
+                routerLink={<Link reloadDocument to="/room-type" />}
               >
                 Room Types
               </MenuItem>
@@ -200,7 +201,7 @@ const Layout = (props) => {
             >
               <MenuItem
                 active={window.location.pathname === "/hotels"}
-                routerLink={<Link to="/hotels" />}
+                routerLink={<Link reloadDocument to="/hotels" />}
                 icon={<FontAwesomeIcon icon={faBuilding} />}
               >
                 Hotels
@@ -208,7 +209,7 @@ const Layout = (props) => {
 
               <MenuItem
                 active={window.location.pathname === "/staff"}
-                routerLink={<Link to="/staff" />}
+                routerLink={<Link reloadDocument to="/staff" />}
                 icon={<FontAwesomeIcon icon={faUsers} />}
               >
                 Staff

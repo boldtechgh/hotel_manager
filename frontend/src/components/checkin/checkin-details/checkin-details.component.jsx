@@ -149,12 +149,16 @@ const CheckInDetails = ({ onSubmit }) => {
                 <Col sm="4">
                   <Form.Label>Room Type</Form.Label>
                   <Form.Select size="sm" name="roomType" onInput={handleChange}>
-                    <option disabled>Select Room Type</option>
-                    {roomTypeList.map(({ typeName, index }) => (
+                    <option>Select Room Type</option>
+                    {/* {roomTypeList.map(({ typeName, index }) => (
                       <option value={typeName} key={index}>
                         {typeName}
                       </option>
-                    ))}
+                    ))} */}
+                    <option value="Delux">Delux</option>
+                    <option value="Panaroma">Panaroma</option>
+                    <option value="SIngle">Single</option>
+                    <option value="DOuble">Double</option>
                   </Form.Select>
                 </Col>
 
@@ -166,12 +170,22 @@ const CheckInDetails = ({ onSubmit }) => {
                     name="roomNumber"
                     onInput={handleChange}
                   >
-                    <option disabled>Select Room</option>
-                    {roomListData.map(({ RoomNo, index }) => (
+                    <option>Select Room</option>
+                    {/* {roomListData.map(({ RoomNo, index }) => (
                       <option value={RoomNo} key={index}>
                         {RoomNo}
                       </option>
-                    ))}
+                    ))} */}
+                    <option value="H1001">H1001</option>
+                    <option value="H1002">H1002</option>
+                    <option value="H1003">H1003</option>
+                    <option value="H1004">H1004</option>
+                    <option value="H1005">H1005</option>
+                    <option value="H1006">H1006</option>
+                    <option value="H1007">H1007</option>
+                    <option value="H1008">H1008</option>
+                    <option value="H1009">H1009</option>
+                    <option value="H1010">H1010</option>
                   </Form.Select>
                 </Col>
 
@@ -206,6 +220,7 @@ const CheckInDetails = ({ onSubmit }) => {
                     size="sm"
                     placeholder="0.00"
                     onInput={handleChange}
+                    value={parseFloat(room.rate) + parseFloat(room.discount)}
                   />
                 </Col>
                 <Col sm="1" className="justify-content-center">
