@@ -32,7 +32,9 @@ const CheckInDetails = ({ onSubmit }) => {
   const [note, setNote] = useLocalStorage("hm_booking_note", null);
   const [room, setRoom] = useState({});
   const [sameDate, setSameDate] = useState(true);
-  const [RoomType, setRoomType] = useState();
+  const [RoomType, setRoomType] = useState({
+    roomType: "",
+  });
 
   //set room properties
   const handleChange = (event) => {
@@ -50,11 +52,11 @@ const CheckInDetails = ({ onSubmit }) => {
     });
   };
   const { roomType } = room;
-  console.log(RoomType);
+  console.log(RoomType.roomType);
   const q = query(
     collection(db, "roomList"),
     where("hotelChainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`),
-    where("RoomType", "==", `${RoomType}`)
+    where("RoomType", "==", `${RoomType.roomType}`)
   );
   const q1 = query(
     collection(db, "roomTypes"),
@@ -85,7 +87,7 @@ const CheckInDetails = ({ onSubmit }) => {
     fetchData();
     console.log("i run once" + user.uid);
     setLoading(false);
-  }, [room]);
+  }, [RoomType]);
   //set same/different arrival/departure dates
   const handleChecked = (event) => {
     const { value, checked } = event.target;
