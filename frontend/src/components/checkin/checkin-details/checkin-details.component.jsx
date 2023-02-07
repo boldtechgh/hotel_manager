@@ -35,23 +35,8 @@ const CheckInDetails = ({ onSubmit }) => {
   const [RoomType, setRoomType] = useState({
     roomType: "",
   });
+  const [roomRate, setRoomRate] = useState();
 
-  //set room properties
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-    setRoomType(() => {
-      return {
-        roomType: value,
-      };
-    });
-    setRoom((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
-    });
-  };
-  const { roomType } = room;
   console.log(RoomType.roomType);
   const q = query(
     collection(db, "roomList"),
@@ -63,31 +48,71 @@ const CheckInDetails = ({ onSubmit }) => {
     where("hotelChainId", "==", `QDl07LW72pQqzSowmF65YgbPL292`),
     where("typeStatus", "==", `Active`)
   );
-  const fetchData = async () => {
-    setLoading(true);
-    const querySnapshot = await getDocs(q);
-    const querySnapshot1 = await getDocs(q1);
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      var data = doc.data();
-      setRoomListData((arr) => [...arr, data]);
-      console.log(doc.id, " => ", doc.data());
+
+  //set room properties
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+
+    if (name === "roomType") {
+      setRoomType(() => {
+        return {
+          roomType: value,
+        };
+      });
+    }
+
+    setRoom((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
     });
+  };
+
+  const fetchRoomTypes = async () => {
+    const querySnapshot1 = await getDocs(q1);
+
     querySnapshot1.forEach((doc1) => {
       // doc.data() is never undefined for query doc snapshots
       var data1 = doc1.data();
       setRoomTypeList((arr) => [...arr, data1]);
-      console.log(doc1.id, " => ", doc1.data());
+      console.log("Room Types", " => ", roomTypeList);
     });
-    console.log(user.uid);
-    console.log("Data Successfully Retrieved");
+  };
+
+  const fetchRooms = async () => {
+    const querySnapshot = await getDocs(q);
+    setRoomListData([]);
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      var data = doc.data();
+      setRoomListData((arr) => [...arr, data]);
+      console.log(doc.id, " => ", data);
+    });
+  };
+
+  const roomPrice = () => {
+    function checkRoomPrice(roomType) {
+      return roomType.typeName === RoomType.roomType;
+    }
+
+    let selroom = roomTypeList.find(checkRoomPrice);
+
+    console.log("Selected", "=>", selroom);
+
+    return selroom;
   };
 
   useEffect(() => {
-    fetchData();
-    console.log("i run once" + user.uid);
-    setLoading(false);
+    fetchRoomTypes();
+  }, []);
+
+  useEffect(() => {
+    fetchRooms();
+    setRoomRate(roomPrice());
   }, [RoomType]);
+
   //set same/different arrival/departure dates
   const handleChecked = (event) => {
     const { value, checked } = event.target;
@@ -121,18 +146,6 @@ const CheckInDetails = ({ onSubmit }) => {
     onSubmit("profile");
   };
 
-  //re-render page to update DOM
-  useEffect(() => {
-    if (isLoading) {
-      simulateNetworkRequest().then(() => {
-        setLoading(false);
-      });
-    }
-  }, [isLoading]);
-
-  console.log(room);
-  console.log(rooms);
-
   return (
     <>
       <div
@@ -150,17 +163,17 @@ const CheckInDetails = ({ onSubmit }) => {
               <Form.Group as={Row} className="mb-4">
                 <Col sm="4">
                   <Form.Label>Room Type</Form.Label>
-                  <Form.Select size="sm" name="roomType" onInput={handleChange}>
+                  <Form.Select
+                    size="sm"
+                    name="roomType"
+                    onChange={handleChange}
+                  >
                     <option>Select Room Type</option>
-                    {/* {roomTypeList.map(({ typeName, index }) => (
+                    {roomTypeList.map(({ typeName, index }) => (
                       <option value={typeName} key={index}>
                         {typeName}
                       </option>
-                    ))} */}
-                    <option value="Delux">Delux</option>
-                    <option value="Panaroma">Panaroma</option>
-                    <option value="SIngle">Single</option>
-                    <option value="DOuble">Double</option>
+                    ))}
                   </Form.Select>
                 </Col>
 
@@ -170,24 +183,14 @@ const CheckInDetails = ({ onSubmit }) => {
                   <Form.Select
                     size="sm"
                     name="roomNumber"
-                    onInput={handleChange}
+                    onChange={handleChange}
                   >
                     <option>Select Room</option>
-                    {/* {roomListData.map(({ RoomNo, index }) => (
+                    {roomListData.map(({ RoomNo, index }) => (
                       <option value={RoomNo} key={index}>
                         {RoomNo}
                       </option>
-                    ))} */}
-                    <option value="H1001">H1001</option>
-                    <option value="H1002">H1002</option>
-                    <option value="H1003">H1003</option>
-                    <option value="H1004">H1004</option>
-                    <option value="H1005">H1005</option>
-                    <option value="H1006">H1006</option>
-                    <option value="H1007">H1007</option>
-                    <option value="H1008">H1008</option>
-                    <option value="H1009">H1009</option>
-                    <option value="H1010">H1010</option>
+                    ))}
                   </Form.Select>
                 </Col>
 
@@ -199,7 +202,8 @@ const CheckInDetails = ({ onSubmit }) => {
                     name="rate"
                     size="sm"
                     placeholder="Room Price"
-                    onInput={handleChange}
+                    onChange={handleChange}
+                    defaultValue={roomRate ? roomRate.typeRate : null}
                   />
                 </Col>
                 <Col sm="1">
@@ -210,19 +214,20 @@ const CheckInDetails = ({ onSubmit }) => {
                     name="discount"
                     size="sm"
                     placeholder="0.00"
-                    onInput={handleChange}
+                    onChange={handleChange}
+                    defaultValue={0}
                   />
                 </Col>
                 <Col sm="1">
                   <Form.Label>Total</Form.Label>
 
                   <Form.Control
-                    type="number"
+                    type="text"
                     name="total"
                     size="sm"
                     placeholder="0.00"
-                    onInput={handleChange}
-                    value={parseFloat(room.rate) + parseFloat(room.discount)}
+                    onChange={handleChange}
+                    value={parseFloat(room.rate) - parseFloat(room.discount)}
                   />
                 </Col>
                 <Col sm="1" className="justify-content-center">
